@@ -6,8 +6,8 @@ function SavedCareers() {
     useSavedCareers();
 
   return (
-    <div className='min-h-screen bg-[var(--bg)]'>
-      <div className='max-w-5xl mx-auto px-4 py-8'>
+    <div className='min-h-screen bg-blue-50 font-sans'>
+      <div className='max-w-5xl mx-auto px-4 py-8 md:py-12'>
         <SavedCareersPage
           entries={savedCareers}
           loading={loading}

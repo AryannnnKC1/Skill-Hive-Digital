@@ -6,72 +6,73 @@ type RecommendationCardProps = {
   rank: number;
 };
 
-function matchColor(percentage: number) {
-  if (percentage >= 80)
-    return 'bg-emerald-50 text-emerald-700 ring-emerald-600/20';
-  if (percentage >= 50) return 'bg-teal-50 text-teal-700 ring-teal-600/20';
-  if (percentage >= 25) return 'bg-amber-50 text-amber-700 ring-amber-600/20';
-  return 'bg-slate-50 text-slate-600 ring-slate-500/20';
-}
-
 export function RecommendationCard({ result, rank }: RecommendationCardProps) {
   const { career, matchPercentage } = result;
 
   return (
-    <article className='group relative flex flex-col items-start justify-between rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-900/5 transition-all hover:shadow-md hover:ring-slate-900/10'>
-      <div className='w-full'>
-        <div className='flex items-center justify-between gap-4'>
-          <div className='flex items-center gap-4'>
-            <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-50 font-bold text-emerald-600 ring-1 ring-inset ring-emerald-500/20'>
+    <article className='group flex flex-col justify-between rounded-xl bg-white border border-slate-200 p-6 shadow-sm transition-shadow duration-200 hover:shadow-md'>
+      <div className='w-full flex-grow flex flex-col'>
+        <div className='flex items-start justify-between gap-4 mb-4'>
+          <div className='flex items-center gap-3'>
+            <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-slate-100 text-sm font-bold text-slate-700'>
               #{rank}
             </span>
             <div>
-              <p className='text-xs font-medium uppercase tracking-wider text-slate-500'>
-                {career.category}
-              </p>
-              <h3 className='mt-1 text-lg font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-emerald-600'>
+              <h3 className='text-lg font-bold text-slate-900 leading-tight'>
                 {career.title}
               </h3>
+              <span className='inline-block mt-1 text-xs font-medium text-slate-500'>
+                {career.category}
+              </span>
             </div>
           </div>
-          <span
-            className={`inline-flex shrink-0 items-center rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ring-inset ${matchColor(matchPercentage)}`}
-          >
-            {matchPercentage}% Match
-          </span>
+        </div>
+        
+        {/* Match progress bar */}
+        <div className="mb-4">
+          <div className="flex justify-between text-sm mb-1.5">
+            <span className="font-medium text-slate-700">Match Score</span>
+            <span className="font-bold text-slate-900">{matchPercentage}%</span>
+          </div>
+          <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
+            <div 
+              className={`h-full rounded-full ${rank === 1 ? 'bg-blue-600' : 'bg-emerald-500'}`}
+              style={{ width: `${matchPercentage}%` }}
+            />
+          </div>
         </div>
 
-        <p className='mt-4 line-clamp-3 text-sm leading-6 text-slate-600'>
+        <p className='mb-6 line-clamp-3 text-sm text-slate-600 flex-grow'>
           {career.description}
         </p>
 
-        <div className='mt-6 flex flex-wrap gap-2'>
-          {career.requiredSkills.slice(0, 4).map(skill => (
+        <div className='flex flex-wrap gap-2 mb-6'>
+          {career.requiredSkills.slice(0, 3).map(skill => (
             <span
               key={skill}
-              className='inline-flex items-center rounded-md bg-slate-50 px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10'
+              className='inline-flex items-center rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-700'
             >
               {skill}
             </span>
           ))}
-          {career.requiredSkills.length > 4 && (
-            <span className='inline-flex items-center rounded-md bg-slate-50 px-2 py-1 text-xs font-medium text-slate-500 ring-1 ring-inset ring-slate-500/10'>
-              +{career.requiredSkills.length - 4} more
+          {career.requiredSkills.length > 3 && (
+            <span className='inline-flex items-center rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-500'>
+              +{career.requiredSkills.length - 3} more
             </span>
           )}
         </div>
       </div>
 
-      <div className='mt-8 flex w-full items-center justify-between border-t border-slate-100 pt-5'>
-        <div>
-          <p className='text-xs font-medium text-slate-500'>Average Salary</p>
-          <p className='mt-1 text-sm font-semibold text-slate-900'>
+      <div className='flex items-center justify-between border-t border-slate-200 pt-4 mt-auto'>
+        <div className="flex flex-col">
+          <p className='text-xs text-slate-500 uppercase tracking-wider mb-0.5'>Average Salary</p>
+          <p className='text-sm font-bold text-slate-900'>
             {career.averageSalary}
           </p>
         </div>
         <Link
           to={`/careers/${career._id}`}
-          className='inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600'
+          className='inline-flex items-center justify-center rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-700'
         >
           View Details
         </Link>
