@@ -106,47 +106,47 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex bg-slate-50">
+    <div className="min-h-screen flex bg-surface">
       <section className="flex-1 flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div className="mx-auto w-full max-w-sm lg:w-96 bg-white border border-slate-200 shadow-sm p-8 rounded-2xl">
+        <div className="mx-auto w-full max-w-sm lg:w-96 bg-surface-raised border border-border shadow-sm p-8 rounded-2xl">
           <div className="mb-8">
-            <span className="text-sm font-semibold tracking-wide text-blue-800 uppercase flex items-center gap-2">
+            <span className="text-sm font-semibold tracking-wide text-accent uppercase flex items-center gap-2">
               SkillHive Digital
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-800" />
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             </span>
           </div>
 
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">Welcome Back</h1>
-          <p className="text-sm text-slate-600 mb-8">Sign in to your account to continue your career journey.</p>
+          <h1 className="text-3xl font-bold text-ink mb-2">Welcome Back</h1>
+          <p className="text-sm text-ink-muted mb-8">Sign in to your account to continue your career journey.</p>
 
           {submitError && (
-            <div className="rounded-lg bg-red-50 p-4 mb-6 flex items-start gap-3 border border-red-200" role="alert">
+            <div className="rounded-lg bg-red-500/10 p-4 mb-6 flex items-start gap-3 border border-red-500/20" role="alert">
               <svg className="h-5 w-5 text-red-500 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
-              <span className="text-sm text-red-700 font-medium">{submitError}</span>
+              <span className="text-sm text-red-500 font-medium">{submitError}</span>
             </div>
           )}
 
           {serverMessage && (
-            <div className="rounded-lg bg-emerald-50 p-4 mb-6 flex items-start gap-3 border border-emerald-200" role="alert">
-              <svg className="h-5 w-5 text-emerald-500 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+            <div className="rounded-lg bg-cta-surface p-4 mb-6 flex items-start gap-3 border border-cta/20" role="alert">
+              <svg className="h-5 w-5 text-cta mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span className="text-sm text-emerald-700 font-medium">{serverMessage}</span>
+              <span className="text-sm text-cta font-medium">{serverMessage}</span>
             </div>
           )}
 
           <form className="space-y-5" onSubmit={handleSubmit} noValidate>
             <div>
-              <label className="block text-sm font-medium text-slate-900 mb-1.5" htmlFor="login-email">Email Address</label>
+              <label className="block text-sm font-medium text-ink mb-1.5" htmlFor="login-email">Email Address</label>
               <div className="relative">
                 <input
                   type="email"
                   id="login-email"
                   name="email"
                   placeholder="name@example.com"
-                  className={`block w-full border-0 ring-1 ring-inset ${errors.email ? 'ring-red-300 focus:ring-red-600' : 'ring-slate-200 focus:ring-blue-600'} rounded-lg py-2.5 px-3 bg-white text-slate-900 shadow-sm focus:ring-2 sm:text-sm sm:leading-6 placeholder:text-slate-400`}
+                  className={`block w-full border-0 ring-1 ring-inset ${errors.email ? 'ring-red-500 focus:ring-red-500' : 'ring-border focus:ring-accent'} rounded-lg py-2.5 px-3 bg-surface text-ink shadow-sm focus:ring-2 sm:text-sm sm:leading-6 placeholder:text-ink-subtle`}
                   value={formData.email}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -158,14 +158,14 @@ function LoginForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-900 mb-1.5" htmlFor="login-password">Password</label>
+              <label className="block text-sm font-medium text-ink mb-1.5" htmlFor="login-password">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="login-password"
                   name="password"
                   placeholder="Enter your password"
-                  className={`block w-full border-0 ring-1 ring-inset ${errors.password ? 'ring-red-300 focus:ring-red-600' : 'ring-slate-200 focus:ring-blue-600'} rounded-lg py-2.5 px-3 pr-10 bg-white text-slate-900 shadow-sm focus:ring-2 sm:text-sm sm:leading-6 placeholder:text-slate-400`}
+                  className={`block w-full border-0 ring-1 ring-inset ${errors.password ? 'ring-red-500 focus:ring-red-500' : 'ring-border focus:ring-accent'} rounded-lg py-2.5 px-3 pr-10 bg-surface text-ink shadow-sm focus:ring-2 sm:text-sm sm:leading-6 placeholder:text-ink-subtle`}
                   value={formData.password}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -174,7 +174,7 @@ function LoginForm() {
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 focus:outline-none transition-colors duration-200"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-ink-subtle hover:text-ink-muted focus:outline-none transition-colors duration-200 cursor-pointer"
                   onClick={() => setShowPassword(prev => !prev)}
                   disabled={isSubmitting}
                 >
@@ -198,17 +198,17 @@ function LoginForm() {
                 <input
                   type="checkbox"
                   id="login-remember"
-                  className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-600"
+                  className="h-4 w-4 rounded border-border text-accent focus:ring-accent"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
                   disabled={isSubmitting}
                 />
-                <label className="ml-2 block text-sm text-slate-600" htmlFor="login-remember">
+                <label className="ml-2 block text-sm text-ink-muted" htmlFor="login-remember">
                   Remember me
                 </label>
               </div>
               <div className="text-sm leading-6">
-                <a href="#forgot" className="font-medium text-blue-800 hover:text-blue-600 transition-colors duration-200" onClick={(e) => { e.preventDefault(); alert("Password recovery flow would launch here."); }}>
+                <a href="#forgot" className="font-medium text-accent hover:text-accent-hover transition-colors duration-200" onClick={(e) => { e.preventDefault(); alert("Password recovery flow would launch here."); }}>
                   Forgot password?
                 </a>
               </div>
@@ -216,7 +216,7 @@ function LoginForm() {
 
             <button
               type="submit"
-              className="flex w-full justify-center items-center rounded-lg bg-emerald-600 px-3 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed mt-6"
+              className="flex w-full justify-center items-center rounded-lg bg-cta px-3 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-cta-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed mt-6 cursor-pointer"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
@@ -233,9 +233,9 @@ function LoginForm() {
             </button>
           </form>
 
-          <p className="mt-8 text-center text-sm text-slate-600">
+          <p className="mt-8 text-center text-sm text-ink-muted">
             Don't have an account?{' '}
-            <a href="/register" className="font-medium text-blue-800 hover:text-blue-600 transition-colors duration-200">
+            <a href="/register" className="font-medium text-accent hover:text-accent-hover transition-colors duration-200">
               Register
             </a>
           </p>
