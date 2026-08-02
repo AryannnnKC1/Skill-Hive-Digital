@@ -209,7 +209,6 @@ function AssessmentPage() {
   const progressPercent = Math.round((answeredCount / totalQuestions) * 100)
   const currentQuestion = assessment.questions[currentIndex]!
   const isLastQuestion  = currentIndex === totalQuestions - 1
-  const allAnswered     = answeredCount === totalQuestions
   const currentCategory = deriveCategory(currentQuestion)
   const currentAnswered = Boolean(answers[currentQuestion.questionId])
 
