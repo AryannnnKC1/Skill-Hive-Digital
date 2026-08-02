@@ -9,7 +9,7 @@ function BackButton() {
     <button
       onClick={() => navigate('/dashboard')}
       aria-label='Back to Dashboard'
-      className='inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50'
+      className='inline-flex items-center gap-2 rounded-lg border border-border bg-surface-raised px-4 py-2 text-sm font-medium text-ink-muted shadow-sm transition-colors hover:bg-surface-inset cursor-pointer'
     >
       <span aria-hidden='true'>←</span>
       Back
@@ -28,18 +28,18 @@ export default function RecommendationsPage() {
   } = useRecommendations();
 
   return (
-    <div className='min-h-screen bg-slate-50 text-slate-600'>
+    <div className='min-h-screen bg-surface-inset text-ink-muted'>
       <div className='mx-auto max-w-5xl px-4 py-8 md:px-6 lg:py-12'>
         <div className='mb-6'>
           <BackButton />
         </div>
-        <div className='mb-10 rounded-xl bg-white border border-slate-200 p-8 shadow-sm md:p-10'>
+        <div className='mb-10 rounded-xl bg-surface-raised border border-border p-8 shadow-sm md:p-10'>
           <div className='flex flex-col gap-6 md:flex-row md:items-end md:justify-between'>
             <div className='max-w-2xl'>
-              <h1 className='mt-4 text-3xl font-bold tracking-tight text-slate-900'>
+              <h1 className='mt-4 text-3xl font-bold tracking-tight text-ink'>
                 Your Personalized Recommendations
               </h1>
-              <p className='mt-3 text-base text-slate-600'>
+              <p className='mt-3 text-base text-ink-muted'>
                 Based on your assessment, we've identified the strongest career
                 paths for you. Review your matches and explore the details of
                 each role.
@@ -48,7 +48,7 @@ export default function RecommendationsPage() {
             <div className='shrink-0'>
               <Link
                 to='/assessment'
-                className='inline-flex items-center justify-center rounded-lg bg-emerald-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-emerald-700'
+                className='inline-flex items-center justify-center rounded-lg bg-cta px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-cta-hover'
               >
                 {hasTakenAssessment ? 'Retake Assessment' : 'Take Assessment'}
               </Link>
@@ -62,28 +62,28 @@ export default function RecommendationsPage() {
             {Array.from({ length: 4 }).map((_, index) => (
               <div
                 key={index}
-                className='h-64 animate-pulse rounded-xl bg-white border border-slate-200 p-6 shadow-sm'
+                className='h-64 animate-pulse rounded-xl bg-surface-raised border border-border p-6 shadow-sm'
               >
                 <div className='flex items-center gap-4'>
-                  <div className='h-12 w-12 rounded-full bg-slate-100' />
+                  <div className='h-12 w-12 rounded-full bg-surface-inset' />
                   <div className='flex-1 space-y-2'>
-                    <div className='h-4 w-1/3 rounded bg-slate-100' />
-                    <div className='h-3 w-1/4 rounded bg-slate-100' />
+                    <div className='h-4 w-1/3 rounded bg-surface-inset' />
+                    <div className='h-3 w-1/4 rounded bg-surface-inset' />
                   </div>
                 </div>
                 <div className='mt-6 space-y-3'>
-                  <div className='h-3 w-full rounded bg-slate-100' />
-                  <div className='h-3 w-full rounded bg-slate-100' />
-                  <div className='h-3 w-2/3 rounded bg-slate-100' />
+                  <div className='h-3 w-full rounded bg-surface-inset' />
+                  <div className='h-3 w-full rounded bg-surface-inset' />
+                  <div className='h-3 w-2/3 rounded bg-surface-inset' />
                 </div>
               </div>
             ))}
           </div>
         ) : error ? (
-          <div className='rounded-xl bg-red-50 p-6 text-red-700 border border-red-200'>
+          <div className='rounded-xl bg-red-500/10 p-6 text-red-500 border border-red-500/20'>
             <div className='flex items-center gap-3'>
               <svg
-                className='h-5 w-5 text-red-600'
+                className='h-5 w-5 text-red-500'
                 fill='none'
                 viewBox='0 0 24 24'
                 stroke='currentColor'
@@ -102,10 +102,10 @@ export default function RecommendationsPage() {
             <p className='mt-2 text-sm'>{error}</p>
           </div>
         ) : !hasTakenAssessment ? (
-          <div className='flex flex-col items-center justify-center rounded-xl bg-white border border-slate-200 px-6 py-16 text-center shadow-sm'>
-            <div className='flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 mb-4'>
+          <div className='flex flex-col items-center justify-center rounded-xl bg-surface-raised border border-border px-6 py-16 text-center shadow-sm'>
+            <div className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset mb-4'>
               <svg
-                className='h-6 w-6 text-slate-500'
+                className='h-6 w-6 text-ink-muted'
                 fill='none'
                 viewBox='0 0 24 24'
                 strokeWidth='1.5'
@@ -118,40 +118,40 @@ export default function RecommendationsPage() {
                 />
               </svg>
             </div>
-            <h2 className='text-2xl font-bold text-slate-900'>
+            <h2 className='text-2xl font-bold text-ink'>
               No Assessment Found
             </h2>
-            <p className='mt-2 max-w-md text-slate-600'>
+            <p className='mt-2 max-w-md text-ink-muted'>
               Discover careers tailored to your unique strengths. Take our short
               assessment to get personalized recommendations.
             </p>
             <Link
               to='/assessment'
-              className='mt-6 inline-flex items-center justify-center rounded-lg bg-emerald-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-emerald-700'
+              className='mt-6 inline-flex items-center justify-center rounded-lg bg-cta px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-cta-hover'
             >
               Start the Assessment
             </Link>
           </div>
         ) : (
           <div className='space-y-6'>
-            <div className='rounded-xl bg-white border border-slate-200 p-6 shadow-sm md:p-8'>
+            <div className='rounded-xl bg-surface-raised border border-border p-6 shadow-sm md:p-8'>
               <div className='flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between'>
                 <div>
-                  <h2 className='text-xl font-bold text-slate-900'>
+                  <h2 className='text-xl font-bold text-ink'>
                     Insights Summary
                   </h2>
-                  <p className='mt-2 max-w-3xl text-sm text-slate-600'>
+                  <p className='mt-2 max-w-3xl text-sm text-ink-muted'>
                     {topCategories.length
                       ? `Your responses show the strongest alignment with ${topCategories.join(' and ')}.`
                       : 'Your responses did not strongly favor a single field, so the list below keeps the options broader.'}{' '}
                     {recommendations.length > 0 && (
                       <span className='block mt-1'>
                         Your top match is{' '}
-                        <span className='font-medium text-slate-900'>
+                        <span className='font-medium text-ink'>
                           {recommendations[0].career.title}
                         </span>{' '}
                         at{' '}
-                        <span className='font-medium text-blue-800'>
+                        <span className='font-medium text-accent'>
                           {recommendations[0].matchPercentage}%
                         </span>
                         .
@@ -161,7 +161,7 @@ export default function RecommendationsPage() {
                 </div>
                 {submittedAt && (
                   <div className='shrink-0'>
-                    <span className='inline-flex items-center rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600'>
+                    <span className='inline-flex items-center rounded-md bg-surface-inset border border-border px-2.5 py-1 text-xs font-medium text-ink-muted'>
                       Taken{' '}
                       {new Date(submittedAt).toLocaleDateString(undefined, {
                         year: 'numeric',
@@ -175,18 +175,18 @@ export default function RecommendationsPage() {
             </div>
 
             {recommendations.length === 0 ? (
-              <div className='rounded-xl border border-slate-200 bg-white p-12 text-center shadow-sm'>
-                <h3 className='text-sm font-medium text-slate-900'>
+              <div className='rounded-xl border border-border bg-surface-raised p-12 text-center shadow-sm'>
+                <h3 className='text-sm font-medium text-ink'>
                   No matches found
                 </h3>
-                <p className='mt-1 text-sm text-slate-500'>
+                <p className='mt-1 text-sm text-ink-muted'>
                   We couldn't generate recommendations from your answers. Please
                   try retaking the assessment.
                 </p>
                 <div className='mt-6'>
                   <Link
                     to='/assessment'
-                    className='inline-flex items-center rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-emerald-700'
+                    className='inline-flex items-center rounded-lg bg-cta px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-cta-hover'
                   >
                     Retake Assessment
                   </Link>

@@ -53,13 +53,13 @@ function InfoIcon({ className = "w-5 h-5" }: { className?: string }) {
 /* ── Confirmation screen ─────────────────────────────────────── */
 function ConfirmationScreen({ onViewResults }: { onViewResults: () => void }) {
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-      <div className="bg-white border border-slate-200 rounded-xl p-8 shadow-sm max-w-lg w-full text-center">
-        <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
-          <CheckIcon className="w-8 h-8 text-emerald-600" />
+    <div className="min-h-screen bg-surface-inset flex items-center justify-center px-4">
+      <div className="bg-surface-raised border border-border rounded-xl p-8 shadow-sm max-w-lg w-full text-center">
+        <div className="w-16 h-16 rounded-full bg-cta-surface flex items-center justify-center mx-auto mb-6">
+          <CheckIcon className="w-8 h-8 text-cta" />
         </div>
-        <h1 className="text-2xl font-bold text-slate-900 mb-3">Assessment Complete</h1>
-        <p className="text-slate-600 leading-relaxed mb-8">
+        <h1 className="text-2xl font-bold text-ink mb-3">Assessment Complete</h1>
+        <p className="text-ink-muted leading-relaxed mb-8">
           Great job! We've analyzed your responses and matched you to careers that align
           with your interests and strengths. Your personalized results are ready.
         </p>
@@ -67,13 +67,13 @@ function ConfirmationScreen({ onViewResults }: { onViewResults: () => void }) {
           <button
             type="button"
             onClick={onViewResults}
-            className="inline-flex items-center justify-center px-6 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium transition-colors"
+            className="inline-flex items-center justify-center px-6 py-2 rounded-lg bg-cta hover:bg-cta-hover text-white font-medium transition-colors cursor-pointer"
           >
             View my career matches
           </button>
           <Link
             to="/dashboard"
-            className="inline-flex items-center justify-center px-6 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 transition-colors"
+            className="inline-flex items-center justify-center px-6 py-2 rounded-lg border border-border text-ink-muted font-medium hover:bg-surface-inset transition-colors"
           >
             Return to dashboard
           </Link>
@@ -174,11 +174,11 @@ function AssessmentPage() {
   /* ── Loading ─────────────────────────────────────────────────── */
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col">
-        <div className="h-16 bg-white border-b border-slate-200 shadow-sm animate-pulse" />
+      <div className="min-h-screen bg-surface-inset flex flex-col">
+        <div className="h-16 bg-surface-raised border-b border-border shadow-sm animate-pulse" />
         <div className="max-w-2xl mx-auto w-full px-4 py-10 space-y-6">
-          <div className="h-28 bg-slate-200 rounded-xl animate-pulse" />
-          <div className="h-80 bg-white rounded-xl border border-slate-200 animate-pulse shadow-sm" />
+          <div className="h-28 bg-surface-inset rounded-xl animate-pulse" />
+          <div className="h-80 bg-surface-raised rounded-xl border border-border animate-pulse shadow-sm" />
         </div>
       </div>
     )
@@ -187,13 +187,13 @@ function AssessmentPage() {
   /* ── Fatal error ─────────────────────────────────────────────── */
   if (error && !assessment) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-        <div className="bg-white border border-slate-200 rounded-xl p-8 max-w-md w-full text-center shadow-sm">
-          <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-4">
-            <WarningIcon className="text-red-600" />
+      <div className="min-h-screen bg-surface-inset flex items-center justify-center px-4">
+        <div className="bg-surface-raised border border-border rounded-xl p-8 max-w-md w-full text-center shadow-sm">
+          <div className="w-14 h-14 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+            <WarningIcon className="text-red-500" />
           </div>
-          <p className="text-red-700 font-medium mb-6">{error}</p>
-          <Link to="/dashboard" className="inline-flex items-center justify-center px-6 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 transition-colors">
+          <p className="text-red-500 font-medium mb-6">{error}</p>
+          <Link to="/dashboard" className="inline-flex items-center justify-center px-6 py-2 rounded-lg border border-border text-ink-muted font-medium hover:bg-surface-inset transition-colors">
             Back to dashboard
           </Link>
         </div>
@@ -213,15 +213,15 @@ function AssessmentPage() {
   const currentAnswered = Boolean(answers[currentQuestion.questionId])
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-surface-inset">
 
       {/* ── Sticky Top Bar ───────────────────────────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200 shadow-sm" role="banner">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-surface-raised border-b border-border shadow-sm" role="banner">
         <div className="max-w-3xl mx-auto px-4 h-16 flex items-center gap-4">
           <Link
             to="/dashboard"
             aria-label="Back to dashboard"
-            className="flex items-center gap-1.5 text-sm font-medium text-blue-800 hover:text-blue-600 transition-colors shrink-0"
+            className="flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-hover transition-colors shrink-0"
           >
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
@@ -230,25 +230,25 @@ function AssessmentPage() {
           </Link>
 
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-slate-900 truncate">{assessment.title}</p>
-            <p className="text-xs text-slate-500">{answeredCount} of {totalQuestions} answered</p>
+            <p className="text-sm font-medium text-ink truncate">{assessment.title}</p>
+            <p className="text-xs text-ink-muted">{answeredCount} of {totalQuestions} answered</p>
           </div>
 
-          <span className="text-sm font-medium text-slate-600 shrink-0" aria-live="polite">
+          <span className="text-sm font-medium text-ink-muted shrink-0" aria-live="polite">
             {currentIndex + 1} / {totalQuestions}
           </span>
         </div>
 
         {/* Progress bar */}
         <div
-          className="h-1 bg-slate-100"
+          className="h-1 bg-surface-inset"
           role="progressbar"
           aria-valuenow={progressPercent}
           aria-valuemin={0}
           aria-valuemax={100}
         >
           <div
-            className="h-full bg-emerald-500 transition-all duration-300 ease-out"
+            className="h-full bg-cta transition-all duration-300 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -259,9 +259,9 @@ function AssessmentPage() {
 
         {/* Hero banner (first question only) */}
         {currentIndex === 0 && (
-          <div className="mb-8 bg-white border border-slate-200 rounded-xl p-8 text-center shadow-sm">
-            <h1 className="text-2xl font-bold text-slate-900 mb-3">Discover Your Ideal Career Path</h1>
-            <p className="text-slate-600">
+          <div className="mb-8 bg-surface-raised border border-border rounded-xl p-8 text-center shadow-sm">
+            <h1 className="text-2xl font-bold text-ink mb-3">Discover Your Ideal Career Path</h1>
+            <p className="text-ink-muted">
               Answer {totalQuestions} quick questions and we'll match you to careers that
               align with your interests, strengths, and personality.
             </p>
@@ -270,11 +270,11 @@ function AssessmentPage() {
 
         {/* Retake banner */}
         {hasSubmittedBefore && currentIndex === 0 && (
-          <div className="mb-6 flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-sm">
-            <InfoIcon className="text-blue-600 shrink-0 mt-0.5" />
+          <div className="mb-6 flex items-start gap-3 bg-accent-surface border border-accent-border rounded-lg px-4 py-3 text-sm">
+            <InfoIcon className="text-accent shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-blue-800">You're retaking the assessment</p>
-              <p className="text-blue-600 mt-0.5">
+              <p className="font-medium text-accent">You're retaking the assessment</p>
+              <p className="text-ink-muted mt-0.5">
                 {previousDate
                   ? `Last completed on ${new Date(previousDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`
                   : 'Your previous results will be updated with your new answers.'}
@@ -286,19 +286,19 @@ function AssessmentPage() {
         {/* Question card */}
         <article
           key={currentQuestion.questionId}
-          className="bg-white border border-slate-200 rounded-xl p-8 mb-6 shadow-sm"
+          className="bg-surface-raised border border-border rounded-xl p-8 mb-6 shadow-sm"
         >
           {/* Category tag */}
-          <div className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 text-xs font-medium px-2 py-1 rounded-md mb-4">
-            <TagIcon className="text-slate-500 w-3 h-3" />
+          <div className="inline-flex items-center gap-1.5 bg-surface-inset text-ink-muted text-xs font-medium px-2 py-1 rounded-md mb-4">
+            <TagIcon className="text-ink-subtle w-3 h-3" />
             {currentCategory}
           </div>
 
-          <p className="text-sm text-slate-400 font-medium mb-2">
+          <p className="text-sm text-ink-subtle font-medium mb-2">
             Question {currentIndex + 1} of {totalQuestions}
           </p>
 
-          <h2 className="text-xl font-bold text-slate-900 mb-6">
+          <h2 className="text-xl font-bold text-ink mb-6">
             {currentQuestion.text}
           </h2>
 
@@ -311,8 +311,8 @@ function AssessmentPage() {
                   key={option.optionId}
                   className={`flex items-center gap-4 p-4 rounded-lg border cursor-pointer transition-colors ${
                     isSelected
-                      ? 'border-blue-600 bg-blue-50 ring-1 ring-blue-600'
-                      : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300'
+                      ? 'border-accent bg-accent-surface ring-1 ring-accent'
+                      : 'border-border bg-surface hover:bg-surface-inset hover:border-border-strong'
                   }`}
                 >
                   <input
@@ -325,15 +325,15 @@ function AssessmentPage() {
                   />
                   {/* Letter badge */}
                   <span className={`flex-shrink-0 w-8 h-8 rounded-md text-sm font-medium flex items-center justify-center transition-colors ${
-                    isSelected ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'
+                    isSelected ? 'bg-accent text-white' : 'bg-surface-inset text-ink-muted'
                   }`}>
                     {LETTERS[idx] ?? String.fromCharCode(65 + idx)}
                   </span>
-                  <span className={`text-sm md:text-base ${isSelected ? 'text-blue-800 font-medium' : 'text-slate-700'}`}>
+                  <span className={`text-sm md:text-base ${isSelected ? 'text-accent font-medium' : 'text-ink-muted'}`}>
                     {option.text}
                   </span>
                   {isSelected && (
-                    <CheckIcon className="ml-auto w-5 h-5 text-blue-600 flex-shrink-0" />
+                    <CheckIcon className="ml-auto w-5 h-5 text-accent flex-shrink-0" />
                   )}
                 </label>
               )
@@ -343,7 +343,7 @@ function AssessmentPage() {
 
         {/* Validation warning */}
         {validationError && !currentAnswered && (
-          <div className="mb-4 flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm font-medium">
+          <div className="mb-4 flex items-center gap-2 bg-red-500/10 border border-red-500/20 text-red-500 rounded-lg px-4 py-3 text-sm font-medium">
             <WarningIcon className="w-4 h-4 shrink-0" />
             Please select an answer before continuing.
           </div>
@@ -351,7 +351,7 @@ function AssessmentPage() {
 
         {/* Submission error */}
         {error && (
-          <div className="mb-4 flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm font-medium">
+          <div className="mb-4 flex items-center gap-2 bg-red-500/10 border border-red-500/20 text-red-500 rounded-lg px-4 py-3 text-sm font-medium">
             <WarningIcon className="w-4 h-4 shrink-0" />
             {error}
           </div>
@@ -363,7 +363,7 @@ function AssessmentPage() {
             type="button"
             onClick={handlePrev}
             disabled={currentIndex === 0}
-            className="flex items-center justify-center px-4 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center justify-center px-4 py-2 rounded-lg border border-border text-ink-muted font-medium hover:bg-surface-inset disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
           >
             Previous
           </button>
@@ -373,7 +373,7 @@ function AssessmentPage() {
               type="button"
               onClick={handleSubmit}
               disabled={submitting}
-              className="flex items-center justify-center px-6 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+              className="flex items-center justify-center px-6 py-2 rounded-lg bg-cta hover:bg-cta-hover text-white font-medium transition-colors disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
             >
               {submitting ? 'Submitting...' : 'Submit Assessment'}
             </button>
@@ -381,7 +381,7 @@ function AssessmentPage() {
             <button
               type="button"
               onClick={handleNext}
-              className="flex items-center justify-center px-6 py-2 rounded-lg bg-blue-800 hover:bg-blue-900 text-white font-medium transition-colors"
+              className="flex items-center justify-center px-6 py-2 rounded-lg bg-accent hover:bg-accent-hover text-white font-medium transition-colors cursor-pointer"
             >
               Next
             </button>

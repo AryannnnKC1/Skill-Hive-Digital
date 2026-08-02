@@ -23,10 +23,10 @@ export function SaveCareerButton({
           ? `Remove ${career.title} from saved careers`
           : `Save ${career.title} to saved careers`
       }
-      className={`cursor-pointer inline-flex items-center justify-center p-2 rounded-lg transition ${
+      className={`cursor-pointer inline-flex items-center justify-center p-2 rounded-lg transition-all duration-200 ${
         isSaved
-          ? 'bg-blue-50 text-blue-600'
-          : 'bg-slate-50 text-slate-400 hover:text-slate-600'
+          ? 'bg-accent-surface text-accent'
+          : 'bg-surface-inset text-ink-subtle hover:text-ink-muted'
       } ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
     >
       <svg
