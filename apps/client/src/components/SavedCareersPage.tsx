@@ -71,7 +71,7 @@ export function SavedCareersPage({ entries, loading, error, onRemove, onToggleSa
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {entries.map(({ career, savedAt }) => (
+        {entries.map(({ career }) => (
           <article key={career._id} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col">
             <div className="mb-4 flex items-start justify-between gap-3">
               <div>
