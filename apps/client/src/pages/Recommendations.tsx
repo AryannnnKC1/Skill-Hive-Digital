@@ -1,8 +1,23 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRecommendations } from '../hooks/useRecommendations';
 import { RecommendationCard } from '../components/RecommendationCard';
 
-function RecommendationsPage() {
+function BackButton() {
+  const navigate = useNavigate();
+
+  return (
+    <button
+      onClick={() => navigate('/dashboard')}
+      aria-label='Back to Dashboard'
+      className='inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50'
+    >
+      <span aria-hidden='true'>←</span>
+      Back
+    </button>
+  );
+}
+
+export default function RecommendationsPage() {
   const {
     recommendations,
     submittedAt,
@@ -15,17 +30,16 @@ function RecommendationsPage() {
   return (
     <div className='min-h-screen bg-slate-50 text-slate-600'>
       <div className='mx-auto max-w-5xl px-4 py-8 md:px-6 lg:py-12'>
-        {/* Header Section */}
-        <div className='mb-10 rounded-3xl bg-slate-900 p-8 text-white shadow-xl md:p-10 lg:p-12'>
+        <div className='mb-6'>
+          <BackButton />
+        </div>
+        <div className='mb-10 rounded-xl bg-white border border-slate-200 p-8 shadow-sm md:p-10'>
           <div className='flex flex-col gap-6 md:flex-row md:items-end md:justify-between'>
             <div className='max-w-2xl'>
-              <span className='inline-flex items-center rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-300 ring-1 ring-inset ring-emerald-500/20'>
-                Career Matches
-              </span>
-              <h1 className='mt-6 text-3xl font-bold tracking-tight text-white md:text-5xl'>
+              <h1 className='mt-4 text-3xl font-bold tracking-tight text-slate-900'>
                 Your Personalized Recommendations
               </h1>
-              <p className='mt-4 text-lg leading-relaxed text-slate-300'>
+              <p className='mt-3 text-base text-slate-600'>
                 Based on your assessment, we've identified the strongest career
                 paths for you. Review your matches and explore the details of
                 each role.
@@ -34,7 +48,7 @@ function RecommendationsPage() {
             <div className='shrink-0'>
               <Link
                 to='/assessment'
-                className='inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
+                className='inline-flex items-center justify-center rounded-lg bg-emerald-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-emerald-700'
               >
                 {hasTakenAssessment ? 'Retake Assessment' : 'Take Assessment'}
               </Link>
@@ -48,35 +62,37 @@ function RecommendationsPage() {
             {Array.from({ length: 4 }).map((_, index) => (
               <div
                 key={index}
-                className='h-64 animate-pulse rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-900/5'
+                className='h-64 animate-pulse rounded-xl bg-white border border-slate-200 p-6 shadow-sm'
               >
                 <div className='flex items-center gap-4'>
-                  <div className='h-12 w-12 rounded-full bg-slate-200' />
+                  <div className='h-12 w-12 rounded-full bg-slate-100' />
                   <div className='flex-1 space-y-2'>
-                    <div className='h-4 w-1/3 rounded bg-slate-200' />
-                    <div className='h-3 w-1/4 rounded bg-slate-200' />
+                    <div className='h-4 w-1/3 rounded bg-slate-100' />
+                    <div className='h-3 w-1/4 rounded bg-slate-100' />
                   </div>
                 </div>
                 <div className='mt-6 space-y-3'>
-                  <div className='h-3 w-full rounded bg-slate-200' />
-                  <div className='h-3 w-full rounded bg-slate-200' />
-                  <div className='h-3 w-2/3 rounded bg-slate-200' />
+                  <div className='h-3 w-full rounded bg-slate-100' />
+                  <div className='h-3 w-full rounded bg-slate-100' />
+                  <div className='h-3 w-2/3 rounded bg-slate-100' />
                 </div>
               </div>
             ))}
           </div>
         ) : error ? (
-          <div className='rounded-2xl bg-red-50 p-6 text-red-700 ring-1 ring-inset ring-red-600/10'>
+          <div className='rounded-xl bg-red-50 p-6 text-red-700 border border-red-200'>
             <div className='flex items-center gap-3'>
               <svg
-                className='h-5 w-5 text-red-400'
-                viewBox='0 0 20 20'
-                fill='currentColor'
+                className='h-5 w-5 text-red-600'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+                strokeWidth={1.5}
               >
                 <path
-                  fillRule='evenodd'
-                  d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z'
-                  clipRule='evenodd'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
                 />
               </svg>
               <h3 className='text-sm font-medium'>
@@ -86,10 +102,10 @@ function RecommendationsPage() {
             <p className='mt-2 text-sm'>{error}</p>
           </div>
         ) : !hasTakenAssessment ? (
-          <div className='flex flex-col items-center justify-center rounded-3xl bg-white px-6 py-16 text-center shadow-sm ring-1 ring-slate-900/5'>
-            <div className='flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50'>
+          <div className='flex flex-col items-center justify-center rounded-xl bg-white border border-slate-200 px-6 py-16 text-center shadow-sm'>
+            <div className='flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 mb-4'>
               <svg
-                className='h-8 w-8 text-emerald-600'
+                className='h-6 w-6 text-slate-500'
                 fill='none'
                 viewBox='0 0 24 24'
                 strokeWidth='1.5'
@@ -98,33 +114,33 @@ function RecommendationsPage() {
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
-                  d='M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z'
+                  d='M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z'
                 />
               </svg>
             </div>
-            <h2 className='mt-6 text-2xl font-bold tracking-tight text-slate-900'>
+            <h2 className='text-2xl font-bold text-slate-900'>
               No Assessment Found
             </h2>
-            <p className='mt-2 max-w-md text-slate-500'>
+            <p className='mt-2 max-w-md text-slate-600'>
               Discover careers tailored to your unique strengths. Take our short
               assessment to get personalized recommendations.
             </p>
             <Link
               to='/assessment'
-              className='mt-8 inline-flex items-center justify-center rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600'
+              className='mt-6 inline-flex items-center justify-center rounded-lg bg-emerald-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-emerald-700'
             >
               Start the Assessment
             </Link>
           </div>
         ) : (
-          <div className='space-y-8'>
-            <div className='rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-900/5 md:p-8'>
+          <div className='space-y-6'>
+            <div className='rounded-xl bg-white border border-slate-200 p-6 shadow-sm md:p-8'>
               <div className='flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between'>
                 <div>
-                  <h2 className='text-lg font-semibold text-slate-900'>
+                  <h2 className='text-xl font-bold text-slate-900'>
                     Insights Summary
                   </h2>
-                  <p className='mt-2 max-w-3xl text-slate-600'>
+                  <p className='mt-2 max-w-3xl text-sm text-slate-600'>
                     {topCategories.length
                       ? `Your responses show the strongest alignment with ${topCategories.join(' and ')}.`
                       : 'Your responses did not strongly favor a single field, so the list below keeps the options broader.'}{' '}
@@ -135,7 +151,7 @@ function RecommendationsPage() {
                           {recommendations[0].career.title}
                         </span>{' '}
                         at{' '}
-                        <span className='font-medium text-emerald-600'>
+                        <span className='font-medium text-blue-800'>
                           {recommendations[0].matchPercentage}%
                         </span>
                         .
@@ -145,7 +161,7 @@ function RecommendationsPage() {
                 </div>
                 {submittedAt && (
                   <div className='shrink-0'>
-                    <span className='inline-flex items-center rounded-md bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10'>
+                    <span className='inline-flex items-center rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600'>
                       Taken{' '}
                       {new Date(submittedAt).toLocaleDateString(undefined, {
                         year: 'numeric',
@@ -159,8 +175,8 @@ function RecommendationsPage() {
             </div>
 
             {recommendations.length === 0 ? (
-              <div className='rounded-2xl border-2 border-dashed border-slate-200 bg-white p-12 text-center'>
-                <h3 className='mt-2 text-sm font-semibold text-slate-900'>
+              <div className='rounded-xl border border-slate-200 bg-white p-12 text-center shadow-sm'>
+                <h3 className='text-sm font-medium text-slate-900'>
                   No matches found
                 </h3>
                 <p className='mt-1 text-sm text-slate-500'>
@@ -170,7 +186,7 @@ function RecommendationsPage() {
                 <div className='mt-6'>
                   <Link
                     to='/assessment'
-                    className='inline-flex items-center rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600'
+                    className='inline-flex items-center rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-emerald-700'
                   >
                     Retake Assessment
                   </Link>
@@ -193,5 +209,3 @@ function RecommendationsPage() {
     </div>
   );
 }
-
-export default RecommendationsPage;

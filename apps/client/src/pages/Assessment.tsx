@@ -2,23 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { fetchActiveAssessment, submitAssessment, fetchAssessmentStatus } from '../api'
 import type { Assessment, AssessmentAnswer } from '../types'
-import '../styles/assessment.css'
 
-/* ── Category emoji map ──────────────────────────────────────── */
-const CATEGORY_ICONS: Record<string, string> = {
-  Technology:      '💻',
-  Healthcare:      '🏥',
-  Engineering:     '⚙️',
-  'Arts & Design': '🎨',
-  Business:        '📊',
-  Science:         '🔬',
-  Marketing:       '📣',
-  Legal:           '⚖️',
-  Education:       '📚',
-  Finance:         '💰',
-}
-
-/* Derive a display category from the question's option weights */
 function deriveCategory(question: Assessment['questions'][0]): string {
   const tallied: Record<string, number> = {}
   for (const opt of question.options) {
@@ -30,41 +14,69 @@ function deriveCategory(question: Assessment['questions'][0]): string {
   return sorted[0]?.[0] ?? 'General'
 }
 
-/* Option letter: A, B, C, D … */
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F']
+
+/* ── Generic Icons ── */
+function TagIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6z" />
+    </svg>
+  )
+}
+
+function CheckIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+    </svg>
+  )
+}
+
+function WarningIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+  )
+}
+
+function InfoIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+    </svg>
+  )
+}
 
 /* ── Confirmation screen ─────────────────────────────────────── */
 function ConfirmationScreen({ onViewResults }: { onViewResults: () => void }) {
   return (
-    <div className="asmnt-page">
-      <div className="asmnt-container">
-        <div className="asmnt-confirm">
-          <div className="asmnt-confirm-icon" aria-hidden="true">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
-          </div>
-          <h1 className="asmnt-confirm-title">Assessment Complete! 🎉</h1>
-          <p className="asmnt-confirm-sub">
-            Great job! We've analysed your responses and matched you to careers that align
-            with your interests and strengths. Your personalised results are ready.
-          </p>
-          <div className="asmnt-confirm-actions">
-            <button
-              id="view-results-btn"
-              type="button"
-              onClick={onViewResults}
-              className="asmnt-btn asmnt-btn--primary"
-            >
-              View my career matches
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </button>
-            <Link to="/dashboard" className="asmnt-btn asmnt-btn--ghost">
-              Return to dashboard
-            </Link>
-          </div>
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
+      <div className="bg-white border border-slate-200 rounded-xl p-8 shadow-sm max-w-lg w-full text-center">
+        <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
+          <CheckIcon className="w-8 h-8 text-emerald-600" />
+        </div>
+        <h1 className="text-2xl font-bold text-slate-900 mb-3">Assessment Complete</h1>
+        <p className="text-slate-600 leading-relaxed mb-8">
+          Great job! We've analyzed your responses and matched you to careers that align
+          with your interests and strengths. Your personalized results are ready.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <button
+            type="button"
+            onClick={onViewResults}
+            className="inline-flex items-center justify-center px-6 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium transition-colors"
+          >
+            View my career matches
+          </button>
+          <Link
+            to="/dashboard"
+            className="inline-flex items-center justify-center px-6 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 transition-colors"
+          >
+            Return to dashboard
+          </Link>
         </div>
       </div>
     </div>
@@ -86,19 +98,15 @@ function AssessmentPage() {
   const [hasSubmittedBefore, setHasSubmittedBefore] = useState(false)
   const [previousDate, setPreviousDate]   = useState<string | null>(null)
 
-  /* ── Fetch assessment + status ─────────────────────────────── */
   useEffect(() => {
     let cancelled = false
-
     async function load() {
       try {
         const token = localStorage.getItem('token')
-
         const [data, status] = await Promise.all([
           fetchActiveAssessment(),
           token ? fetchAssessmentStatus().catch(() => null) : Promise.resolve(null),
         ])
-
         if (!cancelled) {
           setAssessment(data)
           if (status?.hasSubmitted) {
@@ -112,18 +120,15 @@ function AssessmentPage() {
         if (!cancelled) setLoading(false)
       }
     }
-
     void load()
     return () => { cancelled = true }
   }, [])
 
-  /* ── Answer selection ──────────────────────────────────────── */
   const selectAnswer = useCallback((questionId: string, optionId: string) => {
     setAnswers(prev => ({ ...prev, [questionId]: optionId }))
     setValidationError(false)
   }, [])
 
-  /* ── Navigation ────────────────────────────────────────────── */
   const goTo = useCallback((index: number) => {
     if (!assessment) return
     const clamped = Math.max(0, Math.min(index, assessment.questions.length - 1))
@@ -136,181 +141,141 @@ function AssessmentPage() {
     if (!assessment) return
     const question = assessment.questions[currentIndex]
     if (!question) return
-
-    if (!answers[question.questionId]) {
-      setValidationError(true)
-      return
-    }
-
+    if (!answers[question.questionId]) { setValidationError(true); return }
     setValidationError(false)
-    if (currentIndex < assessment.questions.length - 1) {
-      goTo(currentIndex + 1)
-    }
+    if (currentIndex < assessment.questions.length - 1) goTo(currentIndex + 1)
   }, [assessment, currentIndex, answers, goTo])
 
-  const handlePrev = useCallback(() => {
-    goTo(currentIndex - 1)
-  }, [currentIndex, goTo])
+  const handlePrev = useCallback(() => goTo(currentIndex - 1), [currentIndex, goTo])
 
-  /* ── Submission ────────────────────────────────────────────── */
   const handleSubmit = useCallback(async () => {
     if (!assessment) return
-
-    // Validate all questions answered
-    const unanswered = assessment.questions.filter(q => !answers[q.questionId])
-    if (unanswered.length > 0) {
-      // Jump to first unanswered
-      const firstUnansweredIndex = assessment.questions.findIndex(q => !answers[q.questionId])
+    const firstUnansweredIndex = assessment.questions.findIndex(q => !answers[q.questionId])
+    if (firstUnansweredIndex !== -1) {
       goTo(firstUnansweredIndex)
       setValidationError(true)
       setError(`Please answer question ${firstUnansweredIndex + 1} before submitting.`)
       return
     }
-
     setSubmitting(true)
     setError(null)
-
     try {
-      const payload: AssessmentAnswer[] = Object.entries(answers).map(
-        ([questionId, optionId]) => ({ questionId, optionId })
-      )
+      const payload: AssessmentAnswer[] = Object.entries(answers).map(([questionId, optionId]) => ({ questionId, optionId }))
       await submitAssessment(assessment._id, payload)
       setSubmitted(true)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Unable to submit your answers. Please try again.'
-      )
+      setError(err instanceof Error ? err.message : 'Unable to submit your answers. Please try again.')
     } finally {
       setSubmitting(false)
     }
   }, [assessment, answers, goTo])
 
-  /* ── Loading state ─────────────────────────────────────────── */
+  /* ── Loading ─────────────────────────────────────────────────── */
   if (loading) {
     return (
-      <div className="asmnt-page">
-        <div className="asmnt-topbar">
-          <div className="asmnt-topbar-inner">
-            <div className="asmnt-skeleton" style={{ width: 80, height: 32 }} />
-            <div style={{ flex: 1 }}>
-              <div className="asmnt-skeleton" style={{ width: 160, height: 14, marginBottom: 6 }} />
-              <div className="asmnt-skeleton" style={{ width: 100, height: 11 }} />
-            </div>
-          </div>
-        </div>
-        <div className="asmnt-container">
-          <div className="asmnt-skeleton" style={{ height: 120, marginBottom: 24 }} />
-          <div className="asmnt-skeleton" style={{ height: 320 }} />
+      <div className="min-h-screen bg-slate-50 flex flex-col">
+        <div className="h-16 bg-white border-b border-slate-200 shadow-sm animate-pulse" />
+        <div className="max-w-2xl mx-auto w-full px-4 py-10 space-y-6">
+          <div className="h-28 bg-slate-200 rounded-xl animate-pulse" />
+          <div className="h-80 bg-white rounded-xl border border-slate-200 animate-pulse shadow-sm" />
         </div>
       </div>
     )
   }
 
-  /* ── Error (no assessment found) ───────────────────────────── */
+  /* ── Fatal error ─────────────────────────────────────────────── */
   if (error && !assessment) {
     return (
-      <div className="asmnt-page">
-        <div className="asmnt-container" style={{ paddingTop: 60 }}>
-          <div className="asmnt-error" role="alert">
-            <span aria-hidden="true">⚠️</span>
-            {error}
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
+        <div className="bg-white border border-slate-200 rounded-xl p-8 max-w-md w-full text-center shadow-sm">
+          <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-4">
+            <WarningIcon className="text-red-600" />
           </div>
-          <div style={{ marginTop: 24, textAlign: 'center' }}>
-            <Link to="/dashboard" className="asmnt-btn asmnt-btn--ghost">
-              ← Back to dashboard
-            </Link>
-          </div>
+          <p className="text-red-700 font-medium mb-6">{error}</p>
+          <Link to="/dashboard" className="inline-flex items-center justify-center px-6 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 transition-colors">
+            Back to dashboard
+          </Link>
         </div>
       </div>
     )
   }
 
   if (!assessment) return null
+  if (submitted) return <ConfirmationScreen onViewResults={() => navigate('/recommendations')} />
 
-  /* ── Submitted confirmation ────────────────────────────────── */
-  if (submitted) {
-    return <ConfirmationScreen onViewResults={() => navigate('/recommendations')} />
-  }
-
-  /* ── Main assessment UI ────────────────────────────────────── */
-  const totalQuestions    = assessment.questions.length
-  const answeredCount     = Object.keys(answers).length
-  const progressPercent   = Math.round((answeredCount / totalQuestions) * 100)
-  const currentQuestion   = assessment.questions[currentIndex]!
-  const isLastQuestion    = currentIndex === totalQuestions - 1
-  const allAnswered       = answeredCount === totalQuestions
-  const currentCategory   = deriveCategory(currentQuestion)
-  const categoryIcon      = CATEGORY_ICONS[currentCategory] ?? '🎯'
-  const currentAnswered   = Boolean(answers[currentQuestion.questionId])
+  const totalQuestions  = assessment.questions.length
+  const answeredCount   = Object.keys(answers).length
+  const progressPercent = Math.round((answeredCount / totalQuestions) * 100)
+  const currentQuestion = assessment.questions[currentIndex]!
+  const isLastQuestion  = currentIndex === totalQuestions - 1
+  const allAnswered     = answeredCount === totalQuestions
+  const currentCategory = deriveCategory(currentQuestion)
+  const currentAnswered = Boolean(answers[currentQuestion.questionId])
 
   return (
-    <div className="asmnt-page">
-      {/* ── Sticky top bar ─────────────────────────────────── */}
-      <div className="asmnt-topbar" role="banner">
-        <div className="asmnt-topbar-inner">
-          <Link to="/dashboard" className="asmnt-back-btn" aria-label="Back to dashboard">
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+    <div className="min-h-screen bg-slate-50">
+
+      {/* ── Sticky Top Bar ───────────────────────────────────────── */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200 shadow-sm" role="banner">
+        <div className="max-w-3xl mx-auto px-4 h-16 flex items-center gap-4">
+          <Link
+            to="/dashboard"
+            aria-label="Back to dashboard"
+            className="flex items-center gap-1.5 text-sm font-medium text-blue-800 hover:text-blue-600 transition-colors shrink-0"
+          >
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
             </svg>
             Back
           </Link>
 
-          <div className="asmnt-topbar-meta">
-            <p className="asmnt-topbar-title">{assessment.title}</p>
-            <p className="asmnt-topbar-sub">
-              {answeredCount} of {totalQuestions} answered · {progressPercent}% complete
-            </p>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-slate-900 truncate">{assessment.title}</p>
+            <p className="text-xs text-slate-500">{answeredCount} of {totalQuestions} answered</p>
           </div>
 
-          <span className="asmnt-question-counter" aria-live="polite">
+          <span className="text-sm font-medium text-slate-600 shrink-0" aria-live="polite">
             {currentIndex + 1} / {totalQuestions}
           </span>
         </div>
 
-        {/* ── Progress bar ──────────────────────────────────── */}
+        {/* Progress bar */}
         <div
-          className="asmnt-progress-wrap"
+          className="h-1 bg-slate-100"
           role="progressbar"
           aria-valuenow={progressPercent}
           aria-valuemin={0}
           aria-valuemax={100}
-          aria-label={`${progressPercent}% of assessment completed`}
         >
           <div
-            className="asmnt-progress-fill"
+            className="h-full bg-emerald-500 transition-all duration-300 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
-      </div>
+      </header>
 
-      {/* ── Main content ───────────────────────────────────── */}
-      <div className="asmnt-container">
+      {/* ── Main Content ─────────────────────────────────────────── */}
+      <main className="max-w-3xl mx-auto px-4 pt-28 pb-16">
 
-        {/* ── Hero (shown only on first question) ──────────── */}
+        {/* Hero banner (first question only) */}
         {currentIndex === 0 && (
-          <div className="asmnt-hero" aria-label="Assessment introduction">
-            <div className="asmnt-hero-badge">
-              <span aria-hidden="true">✦</span>
-              Career Interest Assessment
-            </div>
-            <h1 className="asmnt-hero-title">Discover Your Ideal Career Path</h1>
-            <p className="asmnt-hero-desc">
+          <div className="mb-8 bg-white border border-slate-200 rounded-xl p-8 text-center shadow-sm">
+            <h1 className="text-2xl font-bold text-slate-900 mb-3">Discover Your Ideal Career Path</h1>
+            <p className="text-slate-600">
               Answer {totalQuestions} quick questions and we'll match you to careers that
               align with your interests, strengths, and personality.
             </p>
           </div>
         )}
 
-        {/* ── Retake banner ─────────────────────────────────── */}
+        {/* Retake banner */}
         {hasSubmittedBefore && currentIndex === 0 && (
-          <div className="asmnt-retake-banner" role="status">
-            <div className="asmnt-retake-banner-icon" aria-hidden="true">⚡</div>
-            <div className="asmnt-retake-banner-text">
-              <p className="asmnt-retake-banner-title">You're retaking the assessment</p>
-              <p className="asmnt-retake-banner-sub">
+          <div className="mb-6 flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-sm">
+            <InfoIcon className="text-blue-600 shrink-0 mt-0.5" />
+            <div>
+              <p className="font-medium text-blue-800">You're retaking the assessment</p>
+              <p className="text-blue-600 mt-0.5">
                 {previousDate
                   ? `Last completed on ${new Date(previousDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`
                   : 'Your previous results will be updated with your new answers.'}
@@ -319,178 +284,111 @@ function AssessmentPage() {
           </div>
         )}
 
-        {/* ── Question card ─────────────────────────────────── */}
+        {/* Question card */}
         <article
           key={currentQuestion.questionId}
-          className="asmnt-question-card"
-          aria-label={`Question ${currentIndex + 1}`}
+          className="bg-white border border-slate-200 rounded-xl p-8 mb-6 shadow-sm"
         >
           {/* Category tag */}
-          <div className="asmnt-category-label" aria-label={`Category: ${currentCategory}`}>
-            <span aria-hidden="true">{categoryIcon}</span>
+          <div className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 text-xs font-medium px-2 py-1 rounded-md mb-4">
+            <TagIcon className="text-slate-500 w-3 h-3" />
             {currentCategory}
           </div>
 
-          <p className="asmnt-question-num" aria-hidden="true">
+          <p className="text-sm text-slate-400 font-medium mb-2">
             Question {currentIndex + 1} of {totalQuestions}
           </p>
 
-          <h2 className="asmnt-question-text" id={`q-label-${currentQuestion.questionId}`}>
+          <h2 className="text-xl font-bold text-slate-900 mb-6">
             {currentQuestion.text}
           </h2>
 
           {/* Options */}
-          <div
-            className="asmnt-options"
-            role="radiogroup"
-            aria-labelledby={`q-label-${currentQuestion.questionId}`}
-          >
+          <div className="space-y-3" role="radiogroup">
             {currentQuestion.options.map((option, idx) => {
               const isSelected = answers[currentQuestion.questionId] === option.optionId
               return (
                 <label
                   key={option.optionId}
-                  className={`asmnt-option${isSelected ? ' selected' : ''}`}
-                  htmlFor={`opt-${option.optionId}`}
+                  className={`flex items-center gap-4 p-4 rounded-lg border cursor-pointer transition-colors ${
+                    isSelected
+                      ? 'border-blue-600 bg-blue-50 ring-1 ring-blue-600'
+                      : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300'
+                  }`}
                 >
                   <input
                     type="radio"
-                    id={`opt-${option.optionId}`}
                     name={currentQuestion.questionId}
                     value={option.optionId}
                     checked={isSelected}
                     onChange={() => selectAnswer(currentQuestion.questionId, option.optionId)}
-                    aria-label={option.text}
+                    className="sr-only"
                   />
-                  {/* Custom radio indicator */}
-                  <span className="asmnt-radio-indicator" aria-hidden="true">
-                    <span className="asmnt-radio-dot" />
-                  </span>
                   {/* Letter badge */}
-                  <span className="asmnt-option-letter" aria-hidden="true">
+                  <span className={`flex-shrink-0 w-8 h-8 rounded-md text-sm font-medium flex items-center justify-center transition-colors ${
+                    isSelected ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'
+                  }`}>
                     {LETTERS[idx] ?? String.fromCharCode(65 + idx)}
                   </span>
-                  <span className="asmnt-option-text">{option.text}</span>
+                  <span className={`text-sm md:text-base ${isSelected ? 'text-blue-800 font-medium' : 'text-slate-700'}`}>
+                    {option.text}
+                  </span>
+                  {isSelected && (
+                    <CheckIcon className="ml-auto w-5 h-5 text-blue-600 flex-shrink-0" />
+                  )}
                 </label>
               )
             })}
           </div>
         </article>
 
-        {/* ── Validation warning ────────────────────────────── */}
+        {/* Validation warning */}
         {validationError && !currentAnswered && (
-          <div className="asmnt-validation-warning" role="alert" aria-live="assertive">
-            <span aria-hidden="true" style={{ fontSize: 16 }}>⚠️</span>
-            <span>Please select an answer before continuing.</span>
+          <div className="mb-4 flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm font-medium">
+            <WarningIcon className="w-4 h-4 shrink-0" />
+            Please select an answer before continuing.
           </div>
         )}
 
-        {/* ── Submission error ──────────────────────────────── */}
+        {/* Submission error */}
         {error && (
-          <div className="asmnt-error" role="alert">
-            <span aria-hidden="true">⚠️</span>
+          <div className="mb-4 flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm font-medium">
+            <WarningIcon className="w-4 h-4 shrink-0" />
             {error}
           </div>
         )}
 
-        {/* ── Prev / Next / Submit navigation ──────────────── */}
-        <nav className="asmnt-nav" aria-label="Question navigation">
-          {/* Previous */}
+        {/* Navigation */}
+        <nav className="flex items-center justify-between gap-4">
           <button
-            id="prev-question-btn"
             type="button"
             onClick={handlePrev}
             disabled={currentIndex === 0}
-            className="asmnt-btn asmnt-btn--ghost"
-            aria-label="Previous question"
+            className="flex items-center justify-center px-4 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-            </svg>
             Previous
           </button>
 
-          {/* Next OR Submit */}
           {isLastQuestion ? (
             <button
-              id="submit-assessment-btn"
               type="button"
               onClick={handleSubmit}
               disabled={submitting}
-              className="asmnt-btn asmnt-btn--submit"
-              aria-label="Submit assessment and get results"
+              className="flex items-center justify-center px-6 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {submitting ? (
-                <>
-                  <svg
-                    style={{ animation: 'spin 1s linear infinite' }}
-                    width="16"
-                    height="16"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2.5}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                  Analysing your answers…
-                </>
-              ) : (
-                <>
-                  {allAnswered ? '✓ Get My Career Matches' : 'Submit Assessment'}
-                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </>
-              )}
+              {submitting ? 'Submitting...' : 'Submit Assessment'}
             </button>
           ) : (
             <button
-              id="next-question-btn"
               type="button"
               onClick={handleNext}
-              className="asmnt-btn asmnt-btn--primary"
-              aria-label="Next question"
+              className="flex items-center justify-center px-6 py-2 rounded-lg bg-blue-800 hover:bg-blue-900 text-white font-medium transition-colors"
             >
               Next
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
             </button>
           )}
         </nav>
-
-        {/* ── Progress dots ──────────────────────────────────── */}
-        <div className="asmnt-dot-row" role="list" aria-label="Question progress">
-          {assessment.questions.map((q, idx) => {
-            const isAnswered = Boolean(answers[q.questionId])
-            const isCurrent  = idx === currentIndex
-            return (
-              <button
-                key={q.questionId}
-                type="button"
-                role="listitem"
-                className={`asmnt-dot${isAnswered ? ' answered' : ''}${isCurrent ? ' current' : ''}`}
-                onClick={() => goTo(idx)}
-                aria-label={`Go to question ${idx + 1}${isAnswered ? ' (answered)' : ''}`}
-                aria-current={isCurrent ? 'step' : undefined}
-                title={`Question ${idx + 1}${isAnswered ? ' ✓' : ''}`}
-              />
-            )
-          })}
-        </div>
-
-        {/* ── Skip hint ─────────────────────────────────────── */}
-        <p className="asmnt-skip-hint">
-          Click a dot to jump to any question •{' '}
-          {allAnswered
-            ? '✓ All questions answered — ready to submit!'
-            : `${totalQuestions - answeredCount} question${totalQuestions - answeredCount !== 1 ? 's' : ''} remaining`}
-        </p>
-      </div>
-
-      {/* Inline spin animation */}
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </main>
     </div>
   )
 }

@@ -23,19 +23,25 @@ export function SaveCareerButton({
           ? `Remove ${career.title} from saved careers`
           : `Save ${career.title} to saved careers`
       }
-      className={` cursor-pointer inline-flex items-center justify-center gap-2 rounded-full border px-3 py-2 text-sm font-semibold transition ${
+      className={`cursor-pointer inline-flex items-center justify-center p-2 rounded-lg transition ${
         isSaved
-          ? 'border-emerald-600 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-          : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+          ? 'bg-blue-50 text-blue-600'
+          : 'bg-slate-50 text-slate-400 hover:text-slate-600'
       } ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
     >
-      <span
-        aria-hidden='true'
-        className={isSaved ? 'text-emerald-600' : 'text-slate-400'}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill={isSaved ? "currentColor" : "none"}
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="w-5 h-5"
+        aria-hidden="true"
       >
-        {isSaved ? '♥' : '♡'}
-      </span>
-      {isSaved ? 'Saved' : 'Save'}
+        <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+      </svg>
     </button>
   );
 }

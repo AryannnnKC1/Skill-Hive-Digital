@@ -3,7 +3,6 @@ import ProfileForm from "../components/ProfileForm";
 import ProfileProgress from "../components/ProfileProgress";
 import { calculateCompletion } from "../utils/profileCompletion";
 import type { Profile } from "../types/profile";
-import "../styles/Profile.css";
 
 const emptyProfile: Profile = {
   fullName: "",
@@ -22,22 +21,26 @@ export default function Profile() {
   const [profile, setProfile] = useState<Profile>(emptyProfile);
 
   return (
-    <div className="profile-container">
+    <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
+      <div className="mb-12">
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">
+          Student Profile
+        </h1>
+        <p className="text-slate-600 text-lg max-w-2xl">
+          Complete your profile to receive personalized career recommendations.
+        </p>
+      </div>
 
-      <h1 className="page-title">
-        Student Profile
-      </h1>
-
-      <p className="page-subtitle">
-        Complete your profile to receive personalized career recommendations.
-      </p>
-
-      <ProfileForm onProfileChange={setProfile} />
-
-      <ProfileProgress
-        completion={calculateCompletion(profile)}
-      />
-
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div className="lg:col-span-2">
+          <ProfileForm onProfileChange={setProfile} />
+        </div>
+        <div className="lg:col-span-1">
+          <div className="sticky top-8">
+            <ProfileProgress completion={calculateCompletion(profile)} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
