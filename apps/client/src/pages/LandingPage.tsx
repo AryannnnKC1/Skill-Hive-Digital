@@ -15,7 +15,7 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="min-h-screen bg-surface text-ink">
       <Navbar />
       <main>
         <Hero />

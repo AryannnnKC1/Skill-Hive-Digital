@@ -18,19 +18,19 @@ export function DashboardSavedCareersWidget({
   const recent = savedCareers.slice(0, 3);
 
   return (
-    <article className='bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'>
+    <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'>
       <div className='flex items-center justify-between mb-6'>
         <div>
-          <p className='text-xs font-semibold uppercase tracking-wider text-slate-400'>
+          <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
             Saved careers
           </p>
-          <h2 className='mt-1 text-lg font-bold text-slate-900'>
+          <h2 className='mt-1 text-lg font-bold text-ink'>
             Your favorites
           </h2>
         </div>
         <Link
           to='/saved-careers'
-          className='text-sm font-medium text-blue-800 hover:text-blue-600 transition-colors'
+          className='text-sm font-medium text-accent hover:text-accent-hover transition-colors'
         >
           View all
         </Link>
@@ -41,7 +41,7 @@ export function DashboardSavedCareersWidget({
           {Array.from({ length: 2 }).map((_, index) => (
             <div
               key={index}
-              className='h-16 animate-pulse rounded-lg bg-slate-100 w-full'
+              className='h-16 animate-pulse rounded-lg bg-surface-inset w-full'
             />
           ))}
         </div>
@@ -50,13 +50,13 @@ export function DashboardSavedCareersWidget({
           {recent.map(entry => (
             <div
               key={entry._id}
-              className='flex flex-wrap items-center justify-between gap-4 rounded-lg border border-slate-200 bg-white p-4 transition hover:bg-slate-50'
+              className='flex flex-wrap items-center justify-between gap-4 rounded-lg border border-border bg-surface p-4 transition hover:bg-surface-inset'
             >
               <div>
-                <p className='text-sm font-semibold text-slate-900'>
+                <p className='text-sm font-semibold text-ink'>
                   {entry.career?.title ?? 'Career'}
                 </p>
-                <p className='text-xs text-slate-600'>
+                <p className='text-xs text-ink-muted'>
                   {entry.career?.category ?? 'Saved career'}
                 </p>
               </div>
@@ -69,13 +69,13 @@ export function DashboardSavedCareersWidget({
               ) : null}
             </div>
           ))}
-          <div className='pt-2 text-center text-xs text-slate-400'>
+          <div className='pt-2 text-center text-xs text-ink-subtle'>
             {savedCareers.length} saved career{savedCareers.length === 1 ? '' : 's'}
           </div>
         </div>
       ) : (
-        <div className='rounded-lg bg-slate-50 p-6 text-center border border-slate-200'>
-          <p className='text-sm text-slate-600'>
+        <div className='rounded-lg bg-surface-inset p-6 text-center border border-border'>
+          <p className='text-sm text-ink-muted'>
             You have no saved careers yet. Save one from the careers list to see
             it here.
           </p>

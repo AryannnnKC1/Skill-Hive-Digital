@@ -23,10 +23,10 @@ export default function Profile() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
       <div className="mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">
+        <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
           Student Profile
         </h1>
-        <p className="text-slate-600 text-lg max-w-2xl">
+        <p className="text-ink-muted text-lg max-w-2xl">
           Complete your profile to receive personalized career recommendations.
         </p>
       </div>
