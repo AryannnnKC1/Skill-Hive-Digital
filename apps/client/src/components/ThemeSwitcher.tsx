@@ -1,5 +1,5 @@
 import { useTheme, type Theme } from '../context/ThemeContext';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, type JSX } from 'react';
 
 const options: { value: Theme; label: string; icon: JSX.Element }[] = [
   {
@@ -16,7 +16,6 @@ const options: { value: Theme; label: string; icon: JSX.Element }[] = [
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        aria-hidden="true"
       >
         <circle cx="12" cy="12" r="4" />
         <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
@@ -37,9 +36,8 @@ const options: { value: Theme; label: string; icon: JSX.Element }[] = [
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        aria-hidden="true"
       >
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        <path d="M12 3a6 6 0 0 0 9 9A9 9 0 1 1 12 3z" />
       </svg>
     ),
   },
@@ -57,11 +55,10 @@ const options: { value: Theme; label: string; icon: JSX.Element }[] = [
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        aria-hidden="true"
       >
-        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
+        <rect x="3" y="4" width="18" height="12" rx="2" />
+        <path d="M8 20h8" />
+        <path d="M12 16v4" />
       </svg>
     ),
   },
