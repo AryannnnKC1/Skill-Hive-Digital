@@ -34,8 +34,19 @@ export default function Dashboard() {
       value: savedCareers.length.toString(),
       trend: 'Shortlisted',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ink-muted">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          className='text-ink-muted'
+        >
+          <polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'></polygon>
         </svg>
       ),
     },
@@ -44,8 +55,21 @@ export default function Dashboard() {
       value: assessmentScoreStr,
       trend: assessmentTrend,
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ink-muted">
-          <circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          className='text-ink-muted'
+        >
+          <circle cx='12' cy='12' r='10'></circle>
+          <circle cx='12' cy='12' r='6'></circle>
+          <circle cx='12' cy='12' r='2'></circle>
         </svg>
       ),
     },
@@ -54,8 +78,19 @@ export default function Dashboard() {
       value: hasTakenAssessment ? '12' : '0',
       trend: 'Based on profile',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ink-muted">
-          <polyline points="20 6 9 17 4 12"></polyline>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          className='text-ink-muted'
+        >
+          <polyline points='20 6 9 17 4 12'></polyline>
         </svg>
       ),
     },
@@ -64,8 +99,22 @@ export default function Dashboard() {
       value: '0',
       trend: 'Not booked yet',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ink-muted">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          className='text-ink-muted'
+        >
+          <path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'></path>
+          <circle cx='9' cy='7' r='4'></circle>
+          <path d='M23 21v-2a4 4 0 0 0-3-3.87'></path>
+          <path d='M16 3.13a4 4 0 0 1 0 7.75'></path>
         </svg>
       ),
     },
@@ -92,66 +141,99 @@ export default function Dashboard() {
           </div>
           <div className='flex items-center gap-4'>
             <button
-  onClick={() => {
-    import('../utils/exportPdf').then(({ generatePdf }) => {
-      generatePdf(
-        userName,
-        savedCareers,
-        recommendations,
-        hasTakenAssessment
-      );
-    });
-  }}
-  className='flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200'
-  title='Export Report as PDF'
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-    <polyline points="7 10 12 15 17 10"></polyline>
-    <line x1="12" y1="15" x2="12" y2="3"></line>
-  </svg>
-  Export
-</button>
-
-<button className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-lg font-bold text-ink-muted transition hover:bg-border cursor-pointer'>
-  {userName.slice(0, 1).toUpperCase()}
-</button><button
-              onClick={() => {
-                import('../utils/exportPdf').then(({ generatePdf }) => {
-                  generatePdf(userName, savedCareers, recommendations, hasTakenAssessment);
-                });
+              onClick={async () => {
+                try {
+                  const mod = (await import('../utils/exportPdf')) as any;
+                  // support named export, default export, or module itself
+                  const generate = (mod &&
+                    (mod.generatePdf ?? mod.default ?? mod)) as any;
+                  if (typeof generate === 'function') {
+                    generate(
+                      userName,
+                      savedCareers,
+                      recommendations,
+                      hasTakenAssessment
+                    );
+                  } else {
+                    console.error(
+                      'exportPdf module does not export a function',
+                      mod
+                    );
+                    // give quick user feedback
+                    alert(
+                      'Export failed: export function not found. See console for details.'
+                    );
+                  }
+                } catch (err) {
+                  console.error('Failed to generate PDF', err);
+                  alert('Export failed. See console for details.');
+                }
               }}
-              className='flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200'
+              className='flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition cursor-pointer hover:bg-slate-200'
               title='Export Report as PDF'
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='16'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              >
+                <path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'></path>
+                <polyline points='7 10 12 15 17 10'></polyline>
+                <line x1='12' y1='15' x2='12' y2='3'></line>
               </svg>
               Export
             </button>
-            <button className='flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-lg font-bold text-slate-600 transition hover:bg-slate-200'>
-=======
-            <button className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-lg font-bold text-ink-muted transition hover:bg-border cursor-pointer'>
->>>>>>> a004c8c2a6f17b3ec8d2e9783769c04570da71b4
+
+            <button
+              className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-lg font-bold text-ink-muted transition hover:bg-border cursor-pointer'
+              aria-label='Profile'
+            >
               {userName.slice(0, 1).toUpperCase()}
             </button>
-            <button className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-ink-muted transition hover:bg-border cursor-pointer'>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+
+            <button
+              className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-ink-muted transition hover:bg-border cursor-pointer'
+              aria-label='Highlights'
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='20'
+                height='20'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              >
+                <polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'></polygon>
+              </svg>
             </button>
-            <button className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-ink-muted transition hover:bg-border cursor-pointer'>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+
+            <button
+              className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-ink-muted transition hover:bg-border cursor-pointer'
+              aria-label='Settings'
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='20'
+                height='20'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              >
+                <circle cx='12' cy='12' r='3'></circle>
+                <path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z'></path>
+              </svg>
             </button>
           </div>
         </header>
