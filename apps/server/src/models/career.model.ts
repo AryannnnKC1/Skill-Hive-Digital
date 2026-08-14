@@ -49,6 +49,44 @@ const careerSchema = new mongoose.Schema(
       enum: ['Remote', 'Office', 'Hybrid', 'Field', 'Lab', 'Variable'],
       default: 'Office',
     },
+    roadmap: {
+      type: {
+        summary: {
+          type: String,
+          default: '',
+        },
+        stages: [
+          {
+            title: {
+              type: String,
+              required: true,
+            },
+            duration: {
+              type: String,
+              default: '',
+            },
+            description: {
+              type: String,
+              default: '',
+            },
+            items: [
+              {
+                label: {
+                  type: String,
+                  required: true,
+                },
+                type: {
+                  type: String,
+                  enum: ['education', 'skill', 'experience'],
+                  default: 'skill',
+                },
+              },
+            ],
+          },
+        ],
+      },
+      default: undefined,
+    },
     isActive: {
       type: Boolean,
       default: true,

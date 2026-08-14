@@ -3,6 +3,7 @@ import type {
   Assessment,
   AssessmentAnswer,
   Career,
+  CareerRoadmap,
   RecommendationsResponse,
   SavedCareerRecord,
 } from './types'
@@ -45,6 +46,11 @@ export async function removeSavedCareer(careerId: string) {
 export async function fetchCareerById(careerId: string) {
   const response = await api.get<{ career: Career }>(`/careers/${careerId}`)
   return response.data.career
+}
+
+export async function fetchCareerRoadmap(careerId: string): Promise<CareerRoadmap | null> {
+  const career = await fetchCareerById(careerId)
+  return career.roadmap ?? null
 }
 
 export async function fetchActiveAssessment() {

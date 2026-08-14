@@ -1,3 +1,22 @@
+export type RoadmapItemType = 'education' | 'skill' | 'experience';
+
+export type RoadmapItem = {
+  label: string;
+  type: RoadmapItemType;
+};
+
+export type RoadmapStage = {
+  title: string;
+  duration: string;
+  description: string;
+  items: RoadmapItem[];
+};
+
+export type CareerRoadmap = {
+  summary: string;
+  stages: RoadmapStage[];
+};
+
 export type Career = {
   _id: string;
   title: string;
@@ -8,6 +27,7 @@ export type Career = {
   averageSalary: string;
   growthOutlook: string;
   workEnvironment: string;
+  roadmap?: CareerRoadmap;
 };
 
 export type SavedCareerRecord = {

@@ -64,6 +64,7 @@ Beyond the assessment, users can browse a curated career library, save careers t
 | 🤖  | **Gemini AI Recommendations** | Google Gemini generates top career matches with a match score and detailed reasoning                  |
 | 🔍  | **Career Search & Filter**    | Full-text search across the career library, filterable by category                                    |
 | 📖  | **Career Detail Pages**       | Each career includes description, required skills, salary range, growth outlook, and work environment |
+| 🗺️  | **Career Roadmaps**           | Step-by-step learning paths showing the education, skills, and experience required for each career     |
 | ⭐  | **Save Careers**              | Bookmark careers and revisit them from a dedicated saved careers page                                 |
 | 📊  | **Personalized Dashboard**    | Overview of profile, latest AI recommendations, and saved careers                                     |
 | 🕓  | **Assessment History**        | All past assessments and AI recommendations are stored and viewable                                   |
@@ -432,7 +433,7 @@ The application uses **MongoDB** with the following Mongoose collections:
 - [x] Save / bookmark careers
 - [x] Personalized dashboard
 - [x] Assessment submission history
-- [ ] Career roadmap generation (step-by-step learning path via Gemini)
+- [x] Career roadmap generation (step-by-step learning path covering education, skills, and experience)
 - [ ] Human counsellor booking & availability management
 - [ ] In-app messaging between students and counsellors
 - [ ] Email verification & password reset
