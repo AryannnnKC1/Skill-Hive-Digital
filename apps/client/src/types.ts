@@ -85,3 +85,19 @@ export type DashboardSavedCareersSummary = {
   recent: SavedCareerRecord[];
   count: number;
 };
+
+export type Resource = {
+  _id: string
+  title: string
+  description: string
+  type: 'Course' | 'Article' | 'Video' | 'Certification'
+  provider: string
+  url: string
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced'
+  careerFields: string[]
+  skills: string[]
+  careerIds: string[]
+  isActive: boolean
+  createdAt?: string
+  updatedAt?: string
+}

@@ -5,6 +5,7 @@ import type {
   Career,
   CareerRoadmap,
   RecommendationsResponse,
+  Resource,
   SavedCareerRecord,
 } from './types'
 
@@ -51,6 +52,28 @@ export async function fetchCareerById(careerId: string) {
 export async function fetchCareerRoadmap(careerId: string): Promise<CareerRoadmap | null> {
   const career = await fetchCareerById(careerId)
   return career.roadmap ?? null
+}
+
+export async function fetchResources(params?: {
+  careerField?: string
+  skill?: string
+  type?: string
+  difficulty?: string
+  search?: string
+}) {
+  const response = await api.get<{ resources: Resource[] }>('/resources', {
+    params,
+  })
+
+  return response.data.resources
+}
+
+export async function fetchResourceById(resourceId: string) {
+  const response = await api.get<{ resource: Resource }>(
+    `/resources/${resourceId}`
+  )
+
+  return response.data.resource
 }
 
 export async function fetchActiveAssessment() {
