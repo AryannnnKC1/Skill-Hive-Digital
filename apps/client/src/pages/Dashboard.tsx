@@ -129,9 +129,12 @@ export default function Dashboard() {
         {/* Header / Hero */}
         <header className='mb-8 flex flex-col justify-between gap-6 bg-surface-raised border border-border p-8 rounded-2xl shadow-sm md:flex-row md:items-center'>
           <div>
-            <p className='text-sm font-semibold tracking-wide text-ink-subtle uppercase'>
-              SkillHive Digital
-            </p>
+            <div className='flex items-center gap-3 mb-2'>
+              <img src="/logo.png" alt="Career Counselling Application Logo" className="h-8 w-auto object-contain" />
+              <p className='text-sm font-semibold tracking-wide text-ink-subtle uppercase'>
+                SkillHive Digital
+              </p>
+            </div>
             <h1 className='mt-2 text-3xl font-bold text-ink sm:text-4xl'>
               Welcome Back, {userName}
             </h1>

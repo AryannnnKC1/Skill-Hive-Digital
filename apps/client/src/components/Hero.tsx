@@ -7,6 +7,7 @@ const Hero: React.FC = () => {
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         
         <div className="flex flex-col items-center text-center">
+          <img src="/logo.png" alt="Career Counselling Application Logo" className="h-20 w-auto object-contain mb-6" />
           <h2 className="text-sm font-semibold uppercase tracking-wider text-accent mb-6">
             Career Guidance, Reimagined
           </h2>

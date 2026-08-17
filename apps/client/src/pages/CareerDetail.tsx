@@ -70,6 +70,9 @@ function CareerDetailPage() {
           <Link to="/careers" className="text-sm font-medium text-accent hover:text-accent-hover transition-colors flex items-center gap-2">
             <span>&larr;</span> Back to careers
           </Link>
+          <Link to="/dashboard" className="text-sm font-medium text-accent hover:text-accent-hover transition-colors flex items-center gap-2">
+            Dashboard <span>&rarr;</span>
+          </Link>
         </div>
       </nav>
 

@@ -135,7 +135,16 @@ export default function CareerSearch() {
 
   return (
     <div className='min-h-screen bg-surface-inset text-ink-muted pb-12'>
-      <div className='max-w-6xl mx-auto px-4 py-12'>
+      {/* Top Navigation Bar */}
+      <nav className="bg-surface-raised border-b border-border sticky top-0 z-40 px-6 py-4 shadow-sm">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <Link to="/dashboard" className="text-sm font-medium text-accent hover:text-accent-hover transition-colors flex items-center gap-2">
+            <span>&larr;</span> Back to Dashboard
+          </Link>
+        </div>
+      </nav>
+
+      <div className='max-w-6xl mx-auto px-4 py-8'>
         <div className="mb-10 text-center">
           <h1 className='text-4xl md:text-5xl font-bold text-ink mb-4'>
             Explore Careers

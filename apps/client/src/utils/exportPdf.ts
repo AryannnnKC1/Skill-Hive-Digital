@@ -2,7 +2,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import type { SavedCareerRecord, RecommendationResult } from '../types';
 
-export const generatePdf = (
+export const generatePdf = async (
   userName: string,
   savedCareers: SavedCareerRecord[],
   recommendations: RecommendationResult[],
@@ -12,10 +12,30 @@ export const generatePdf = (
 
   const assessmentScoreStr = hasTakenAssessment ? '100%' : '0%';
 
+  let logoBase64 = '';
+  try {
+    const response = await fetch('/logo.png');
+    const blob = await response.blob();
+    logoBase64 = await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.readAsDataURL(blob);
+    });
+  } catch (err) {
+    console.error('Could not load logo for PDF', err);
+  }
+
   // Add Title
-  doc.setFontSize(22);
-  doc.setTextColor(30, 41, 59); // slate-800
-  doc.text('SkillHive Digital', 14, 22);
+  if (logoBase64) {
+    doc.addImage(logoBase64, 'PNG', 14, 12, 12, 12);
+    doc.setFontSize(22);
+    doc.setTextColor(30, 41, 59); // slate-800
+    doc.text('SkillHive Digital', 30, 22);
+  } else {
+    doc.setFontSize(22);
+    doc.setTextColor(30, 41, 59); // slate-800
+    doc.text('SkillHive Digital', 14, 22);
+  }
 
   doc.setFontSize(16);
   doc.setTextColor(71, 85, 105); // slate-600

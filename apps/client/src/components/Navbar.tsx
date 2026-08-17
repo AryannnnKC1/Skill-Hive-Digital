@@ -35,7 +35,8 @@ const Navbar: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link to="/" className="font-bold text-lg text-ink cursor-pointer">
+            <Link to="/" className="flex items-center gap-2 font-bold text-lg text-ink cursor-pointer">
+              <img src="/logo.png" alt="Career Counselling Application Logo" className="h-8 w-auto object-contain" />
               SkillHive
             </Link>
 
