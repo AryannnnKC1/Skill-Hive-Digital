@@ -43,8 +43,12 @@ export async function removeSavedCareer(careerId: string) {
 }
 
 export async function fetchCareerById(careerId: string) {
-  const response = await api.get<{ career: Career }>(`/careers/${careerId}`)
-  return response.data.career
+  const response = await api.get<{
+    career: Career
+    relatedCareers: Career[]
+  }>(`/careers/${careerId}`)
+
+  return response.data
 }
 
 export async function fetchActiveAssessment() {

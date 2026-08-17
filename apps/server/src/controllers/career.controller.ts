@@ -114,13 +114,28 @@ export const getCareerById = async (
   try {
     const { id } = req.params;
 
-    const career = await Career.findOne({ _id: id, isActive: true }).lean();
-
+    const career = await Career.findOne({
+      _id: id,
+      isActive: true,
+    }).lean();
+    
     if (!career) {
       return res.status(404).json({ message: 'Career not found' });
     }
-
-    return res.status(200).json({ career });
+    
+    const relatedCareers = await Career.find({
+      category: career.category,
+      isActive: true,
+      _id: { $ne: career._id },
+    })
+      .select('title category averageSalary')
+      .limit(4)
+      .lean();
+    
+    return res.status(200).json({
+      career,
+      relatedCareers,
+    });
   } catch (err: unknown) {
     console.error(err);
     return res.status(500).json({ message: 'Internal server error' });
