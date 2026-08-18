@@ -53,13 +53,13 @@ function InfoIcon({ className = "w-5 h-5" }: { className?: string }) {
 /* ── Confirmation screen ─────────────────────────────────────── */
 function ConfirmationScreen({ onViewResults }: { onViewResults: () => void }) {
   return (
-    <div className="min-h-screen bg-surface-inset flex items-center justify-center px-4">
-      <div className="bg-surface-raised border border-border rounded-xl p-8 shadow-sm max-w-lg w-full text-center">
-        <div className="w-16 h-16 rounded-full bg-cta-surface flex items-center justify-center mx-auto mb-6">
-          <CheckIcon className="w-8 h-8 text-cta" />
+    <div className="min-h-screen bg-gradient-dashboard flex items-center justify-center px-4">
+      <div className="glass-card rounded-[20px] p-8 max-w-lg w-full text-center">
+        <div className="w-16 h-16 rounded-full bg-green-alpha-08 flex items-center justify-center mx-auto mb-6">
+          <CheckIcon className="w-8 h-8 text-brand-green" />
         </div>
-        <h1 className="text-2xl font-bold text-ink mb-3">Assessment Complete</h1>
-        <p className="text-ink-muted leading-relaxed mb-8">
+        <h1 className="text-2xl font-bold text-text-primary mb-3 display-heading">Assessment Complete</h1>
+        <p className="text-text-secondary leading-relaxed mb-8">
           Great job! We've analyzed your responses and matched you to careers that align
           with your interests and strengths. Your personalized results are ready.
         </p>
@@ -67,13 +67,13 @@ function ConfirmationScreen({ onViewResults }: { onViewResults: () => void }) {
           <button
             type="button"
             onClick={onViewResults}
-            className="inline-flex items-center justify-center px-6 py-2 rounded-lg bg-cta hover:bg-cta-hover text-white font-medium transition-colors cursor-pointer"
+            className="inline-flex items-center justify-center px-6 py-2 rounded-lg btn-primary text-white font-medium"
           >
             View my career matches
           </button>
           <Link
             to="/dashboard"
-            className="inline-flex items-center justify-center px-6 py-2 rounded-lg border border-border text-ink-muted font-medium hover:bg-surface-inset transition-colors"
+            className="inline-flex items-center justify-center px-6 py-2 rounded-lg glass-button text-text-primary font-medium hover:border-green-alpha-18"
           >
             Return to dashboard
           </Link>
@@ -174,11 +174,11 @@ function AssessmentPage() {
   /* ── Loading ─────────────────────────────────────────────────── */
   if (loading) {
     return (
-      <div className="min-h-screen bg-surface-inset flex flex-col">
-        <div className="h-16 bg-surface-raised border-b border-border shadow-sm animate-pulse" />
+      <div className="min-h-screen bg-gradient-dashboard flex flex-col">
+        <div className="h-16 glass-dark border-b border-green-alpha-18 shadow-sm animate-pulse" />
         <div className="max-w-2xl mx-auto w-full px-4 py-10 space-y-6">
-          <div className="h-28 bg-surface-inset rounded-xl animate-pulse" />
-          <div className="h-80 bg-surface-raised rounded-xl border border-border animate-pulse shadow-sm" />
+          <div className="h-28 bg-green-alpha-08 rounded-[20px] animate-pulse" />
+          <div className="h-80 glass-card rounded-[20px] animate-pulse" />
         </div>
       </div>
     )
@@ -187,13 +187,13 @@ function AssessmentPage() {
   /* ── Fatal error ─────────────────────────────────────────────── */
   if (error && !assessment) {
     return (
-      <div className="min-h-screen bg-surface-inset flex items-center justify-center px-4">
-        <div className="bg-surface-raised border border-border rounded-xl p-8 max-w-md w-full text-center shadow-sm">
+      <div className="min-h-screen bg-gradient-dashboard flex items-center justify-center px-4">
+        <div className="glass-card rounded-[20px] p-8 max-w-md w-full text-center">
           <div className="w-14 h-14 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
             <WarningIcon className="text-red-500" />
           </div>
           <p className="text-red-500 font-medium mb-6">{error}</p>
-          <Link to="/dashboard" className="inline-flex items-center justify-center px-6 py-2 rounded-lg border border-border text-ink-muted font-medium hover:bg-surface-inset transition-colors">
+          <Link to="/dashboard" className="inline-flex items-center justify-center px-6 py-2 rounded-lg glass-button text-text-primary font-medium hover:border-green-alpha-18">
             Back to dashboard
           </Link>
         </div>
@@ -213,10 +213,10 @@ function AssessmentPage() {
   const currentAnswered = Boolean(answers[currentQuestion.questionId])
 
   return (
-    <div className="min-h-screen bg-surface-inset">
+    <div className="min-h-screen bg-gradient-dashboard">
 
       {/* ── Sticky Top Bar ───────────────────────────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-surface-raised border-b border-border shadow-sm" role="banner">
+      <header className="fixed top-0 left-0 right-0 z-50 glass-dark border-b border-green-alpha-18" role="banner">
         <div className="max-w-3xl mx-auto px-4 h-16 flex items-center gap-4">
           <Link
             to="/dashboard"
@@ -230,18 +230,18 @@ function AssessmentPage() {
           </Link>
 
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-ink truncate">{assessment.title}</p>
-            <p className="text-xs text-ink-muted">{answeredCount} of {totalQuestions} answered</p>
+            <p className="text-sm font-medium text-text-primary truncate">{assessment.title}</p>
+            <p className="text-xs text-text-secondary">{answeredCount} of {totalQuestions} answered</p>
           </div>
 
-          <span className="text-sm font-medium text-ink-muted shrink-0" aria-live="polite">
+          <span className="text-sm font-medium text-text-secondary shrink-0" aria-live="polite">
             {currentIndex + 1} / {totalQuestions}
           </span>
         </div>
 
         {/* Progress bar */}
         <div
-          className="h-1 bg-surface-inset"
+          className="h-1 bg-green-alpha-08"
           role="progressbar"
           aria-valuenow={progressPercent}
           aria-valuemin={0}

@@ -6,7 +6,7 @@ function SavedCareers() {
     useSavedCareers();
 
   return (
-    <div className='min-h-screen bg-surface-inset font-sans'>
+    <div className='min-h-screen bg-gradient-dashboard font-sans text-text-primary'>
       <div className='max-w-5xl mx-auto px-4 py-8 md:py-12'>
         <SavedCareersPage
           entries={savedCareers}

@@ -124,25 +124,23 @@ export default function Dashboard() {
   const topRecommendations = recommendations.slice(0, 3).map(r => r.career);
 
   return (
-    <main className='min-h-screen bg-surface-inset text-ink' spellCheck={false}>
+    <main className='min-h-screen bg-gradient-dashboard text-text-primary' spellCheck={false}>
       <div className='mx-auto max-w-7xl px-4 py-8 md:px-8 lg:py-12'>
         {/* Header / Hero */}
-        <header className='mb-8 flex flex-col justify-between gap-6 bg-surface-raised border border-border p-8 rounded-2xl shadow-sm md:flex-row md:items-center'>
+        <header className='mb-8 flex flex-col justify-between gap-6 glass-card p-8 rounded-[28px] md:flex-row md:items-center'>
           <div>
             <div className='flex items-center gap-3 mb-2'>
               <img
-                src='/logo.png'
+                src='/logogsh.png'
                 alt='Career Counselling Application Logo'
-                className='h-8 w-auto object-contain'
+                className='h-35 w-auto object-contain -ml-8'
               />
-              <p className='text-sm font-semibold tracking-wide text-ink-subtle uppercase'>
-                SkillHive Digital
-              </p>
+             
             </div>
-            <h1 className='mt-2 text-3xl font-bold text-ink sm:text-4xl'>
-              Welcome Back, {userName}
+            <h1 className='mt-2 text-3xl font-normal tracking-[0.01em] text-text-primary sm:text-4xl display-heading'>
+              Welcome, {userName}
             </h1>
-            <p className='mt-2 text-lg text-ink-muted'>
+            <p className='mt-2 text-lg text-text-secondary'>
               Continue building your future today.
             </p>
           </div>
@@ -176,7 +174,7 @@ export default function Dashboard() {
                   alert('Export failed. See console for details.');
                 }
               }}
-              className='flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition cursor-pointer hover:bg-slate-200'
+              className='flex items-center gap-2 glass-button rounded-full hover:border-green-alpha-18'
               title='Export Report as PDF'
             >
               <svg
@@ -198,14 +196,14 @@ export default function Dashboard() {
             </button>
 
             <button
-              className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-lg font-bold text-ink-muted transition hover:bg-border cursor-pointer'
+              className='flex h-12 w-12 items-center justify-center rounded-full glass-button text-lg font-bold text-text-primary hover:border-green-alpha-18'
               aria-label='Profile'
             >
               {userName.slice(0, 1).toUpperCase()}
             </button>
 
             <button
-              className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-ink-muted transition hover:bg-border cursor-pointer'
+              className='flex h-12 w-12 items-center justify-center rounded-full glass-button text-text-secondary hover:text-text-primary hover:border-green-alpha-18'
               aria-label='Highlights'
             >
               <svg
@@ -224,7 +222,7 @@ export default function Dashboard() {
             </button>
 
             <button
-              className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-ink-muted transition hover:bg-border cursor-pointer'
+              className='flex h-12 w-12 items-center justify-center rounded-full glass-button text-text-secondary hover:text-text-primary hover:border-green-alpha-18'
               aria-label='Settings'
             >
               <svg
@@ -250,21 +248,21 @@ export default function Dashboard() {
           {metrics.map(metric => (
             <article
               key={metric.label}
-              className='flex flex-col justify-between bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'
+              className='flex flex-col justify-between glass-card rounded-[20px] p-6 hover:shadow-lg'
             >
               <div className='flex items-center justify-between'>
-                <div className='flex h-10 w-10 items-center justify-center rounded-lg bg-surface-inset'>
+                <div className='flex h-10 w-10 items-center justify-center rounded-lg icon-box'>
                   {metric.icon}
                 </div>
-                <span className='text-xs font-medium text-ink-muted bg-surface-inset px-2 py-1 rounded-md border border-border'>
+                <span className='text-xs font-medium text-text-secondary bg-green-alpha-08 px-2 py-1 rounded-md border border-green-alpha-18'>
                   {metric.trend}
                 </span>
               </div>
               <div className='mt-6'>
-                <p className='text-sm font-medium text-ink-muted'>
+                <p className='text-sm font-medium text-text-secondary'>
                   {metric.label}
                 </p>
-                <p className='mt-1 text-3xl font-bold text-ink'>
+                <p className='mt-1 text-3xl font-bold text-text-primary'>
                   {metric.value}
                 </p>
               </div>
@@ -276,32 +274,32 @@ export default function Dashboard() {
         <div className='grid gap-8 lg:grid-cols-3'>
           <div className='lg:col-span-2 space-y-8'>
             {/* Progress Panel */}
-            <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 md:p-8'>
+            <article className='glass-card rounded-[20px] p-6 md:p-8 hover:shadow-lg'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
+                  <p className='text-xs font-semibold uppercase tracking-wider text-text-tertiary'>
                     Career Progress
                   </p>
-                  <h2 className='mt-1 text-xl font-bold text-ink'>
+                  <h2 className='mt-1 text-xl font-bold text-text-primary'>
                     Career Readiness
                   </h2>
                 </div>
-                <span className='inline-flex items-center rounded-full bg-surface-inset px-3 py-1 text-sm font-medium text-ink-muted border border-border'>
+                <span className='inline-flex items-center rounded-full bg-green-alpha-08 px-3 py-1 text-sm font-medium text-text-secondary border border-green-alpha-18'>
                   {hasTakenAssessment ? '100% Complete' : '50% Complete'}
                 </span>
               </div>
-              <p className='mt-4 text-sm text-ink-muted leading-relaxed max-w-2xl'>
+              <p className='mt-4 text-sm text-text-secondary leading-relaxed max-w-2xl'>
                 {hasTakenAssessment
                   ? 'Your profile is fully ready! Explore your tailored recommendations below.'
                   : 'Your profile is nearly ready. Finish the assessment to unlock stronger recommendations.'}
               </p>
               <div className='mt-6'>
-                <div className='h-3 w-full overflow-hidden rounded-full bg-surface-inset'>
+                <div className='h-3 w-full overflow-hidden rounded-full bg-green-alpha-08'>
                   <div
-                    className={`h-full rounded-full bg-cta transition-all duration-1000 ${hasTakenAssessment ? 'w-full' : 'w-1/2'}`}
+                    className={`h-full rounded-full bg-brand-green transition-all duration-1000 ${hasTakenAssessment ? 'w-full' : 'w-1/2'}`}
                   />
                 </div>
-                <div className='mt-2 flex justify-between text-xs font-medium text-ink-muted'>
+                <div className='mt-2 flex justify-between text-xs font-medium text-text-secondary'>
                   <span>Profile readiness</span>
                   <span>{hasTakenAssessment ? '100%' : '50%'}</span>
                 </div>
@@ -309,13 +307,13 @@ export default function Dashboard() {
             </article>
 
             {/* Recommended Careers Panel */}
-            <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 md:p-8'>
+            <article className='glass-card rounded-[20px] p-6 md:p-8 hover:shadow-lg'>
               <div className='flex items-center justify-between mb-6'>
                 <div>
-                  <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
+                  <p className='text-xs font-semibold uppercase tracking-wider text-text-tertiary'>
                     Recommended Careers
                   </p>
-                  <h2 className='mt-1 text-xl font-bold text-ink'>
+                  <h2 className='mt-1 text-xl font-bold text-text-primary'>
                     Matches for your journey
                   </h2>
                 </div>
@@ -329,28 +327,28 @@ export default function Dashboard() {
 
               <div className='space-y-6'>
                 {loadingRecs ? (
-                  <div className='animate-pulse h-32 bg-surface-inset rounded-lg w-full' />
+                  <div className='animate-pulse h-32 bg-green-alpha-08 rounded-lg w-full' />
                 ) : topRecommendations.length > 0 ? (
                   topRecommendations.map(career => (
                     <div
                       key={career._id}
-                      className='group flex flex-col gap-4 rounded-lg border border-border bg-surface p-5 transition hover:bg-surface-raised sm:flex-row sm:items-center sm:justify-between'
+                      className='group flex flex-col gap-4 rounded-lg glass-card p-5 transition sm:flex-row sm:items-center sm:justify-between'
                     >
                       <div className='flex-1'>
-                        <p className='text-xs font-medium text-ink-muted'>
+                        <p className='text-xs font-medium text-text-secondary'>
                           {career.category}
                         </p>
-                        <h3 className='text-lg font-bold text-ink transition-colors group-hover:text-accent'>
+                        <h3 className='text-lg font-bold text-text-primary transition-colors group-hover:text-accent'>
                           {career.title}
                         </h3>
-                        <p className='mt-1 text-sm text-ink-muted line-clamp-2'>
+                        <p className='mt-1 text-sm text-text-secondary line-clamp-2'>
                           {career.description}
                         </p>
                         <div className='mt-3 flex flex-wrap gap-2'>
                           {career.requiredSkills.slice(0, 3).map(skill => (
                             <span
                               key={skill}
-                              className='inline-flex items-center rounded-md bg-surface-inset border border-border px-2 py-1 text-xs font-medium text-ink-muted'
+                              className='inline-flex items-center rounded-md bg-green-alpha-08 border border-green-alpha-18 px-2 py-1 text-xs font-medium text-text-secondary'
                             >
                               {skill}
                             </span>
@@ -360,7 +358,7 @@ export default function Dashboard() {
                       <div className='flex items-center gap-3 sm:flex-col sm:items-end'>
                         <Link
                           to={`/careers/${career._id}`}
-                          className='rounded-lg bg-cta px-4 py-2 text-sm font-medium text-white transition hover:bg-cta-hover'
+                          className='rounded-lg btn-primary text-sm font-medium'
                         >
                           View path
                         </Link>
@@ -373,14 +371,14 @@ export default function Dashboard() {
                     </div>
                   ))
                 ) : (
-                  <div className='rounded-lg bg-surface-inset p-6 text-center border border-border'>
-                    <p className='text-sm text-ink-muted mb-4'>
+                  <div className='rounded-lg glass-card p-6'>
+                    <p className='text-sm text-text-secondary mb-4'>
                       Take the assessment to see your personalized
                       recommendations.
                     </p>
                     <Link
                       to='/assessment'
-                      className='inline-flex items-center justify-center rounded-lg bg-cta px-4 py-2 text-sm font-medium text-white transition hover:bg-cta-hover'
+                      className='inline-flex items-center justify-center rounded-lg btn-primary text-sm font-medium'
                     >
                       Start Assessment
                     </Link>
@@ -399,26 +397,26 @@ export default function Dashboard() {
             />
 
             {/* Tasks Panel */}
-            <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'>
+            <article className='glass-card rounded-[20px] p-6 hover:shadow-lg'>
               <div className='mb-6'>
-                <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
+                <p className='text-xs font-semibold uppercase tracking-wider text-text-tertiary'>
                   Upcoming tasks
                 </p>
-                <h2 className='mt-1 text-lg font-bold text-ink'>
+                <h2 className='mt-1 text-lg font-bold text-text-primary'>
                   Keep momentum going
                 </h2>
               </div>
               <div className='space-y-4'>
                 {!hasTakenAssessment && (
                   <div className='flex items-start gap-4'>
-                    <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-inset text-xs font-bold text-ink-muted'>
+                    <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-alpha-08 text-xs font-bold text-text-secondary'>
                       01
                     </div>
                     <div>
-                      <h3 className='text-sm font-bold text-ink'>
+                      <h3 className='text-sm font-bold text-text-primary'>
                         Complete Assessment
                       </h3>
-                      <p className='mt-1 text-xs text-ink-muted'>
+                      <p className='mt-1 text-xs text-text-secondary'>
                         Unlock a sharper career match score.
                       </p>
                       <Link
@@ -431,14 +429,14 @@ export default function Dashboard() {
                   </div>
                 )}
                 <div className='flex items-start gap-4'>
-                  <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-inset text-xs font-bold text-ink-muted'>
+                  <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-alpha-08 text-xs font-bold text-text-secondary'>
                     02
                   </div>
                   <div>
-                    <h3 className='text-sm font-bold text-ink'>
+                    <h3 className='text-sm font-bold text-text-primary'>
                       Explore Careers
                     </h3>
-                    <p className='mt-1 text-xs text-ink-muted'>
+                    <p className='mt-1 text-xs text-text-secondary'>
                       Review paths aligned to your strengths.
                     </p>
                     <Link
@@ -453,12 +451,12 @@ export default function Dashboard() {
             </article>
 
             {/* Recent Activity Panel */}
-            <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'>
+            <article className='glass-card rounded-[20px] p-6 hover:shadow-lg'>
               <div className='mb-6'>
-                <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
+                <p className='text-xs font-semibold uppercase tracking-wider text-text-tertiary'>
                   Recent activity
                 </p>
-                <h2 className='mt-1 text-lg font-bold text-ink'>
+                <h2 className='mt-1 text-lg font-bold text-text-primary'>
                   Latest progress
                 </h2>
               </div>
@@ -488,19 +486,19 @@ export default function Dashboard() {
                   .map((item, idx, arr) => (
                     <div key={idx} className='relative flex gap-4'>
                       {idx !== arr.length - 1 && (
-                        <div className='absolute left-3 top-6 h-full w-[1px] bg-border' />
+                        <div className='absolute left-3 top-6 h-full w-[1px] bg-green-alpha-08' />
                       )}
-                      <div className='relative mt-1 h-6 w-6 shrink-0 rounded-full bg-surface-inset flex items-center justify-center border border-border'>
-                        <div className='h-2 w-2 rounded-full bg-ink-subtle' />
+                      <div className='relative mt-1 h-6 w-6 shrink-0 rounded-full bg-green-alpha-08 flex items-center justify-center border border-green-alpha-18'>
+                        <div className='h-2 w-2 rounded-full bg-brand-green' />
                       </div>
                       <div>
-                        <h3 className='text-sm font-bold text-ink'>
+                        <h3 className='text-sm font-bold text-text-primary'>
                           {item!.title}
                         </h3>
-                        <p className='mt-0.5 text-xs text-ink-muted'>
+                        <p className='mt-0.5 text-xs text-text-secondary'>
                           {item!.note}
                         </p>
-                        <span className='mt-1 block text-xs font-medium text-ink-subtle'>
+                        <span className='mt-1 block text-xs font-medium text-text-tertiary'>
                           {item!.time}
                         </span>
                       </div>
@@ -514,3 +512,4 @@ export default function Dashboard() {
     </main>
   );
 }
+

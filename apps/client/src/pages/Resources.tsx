@@ -39,7 +39,7 @@ function Resources() {
   }, [search, type, difficulty, careerField])
 
   return (
-    <main className="min-h-screen bg-surface-inset text-ink">
+    <main className="min-h-screen bg-gradient-dashboard text-text-primary">
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-8 lg:py-12">
 
         {/* Header */}
@@ -51,18 +51,18 @@ function Resources() {
             ← Back
           </Link>
 
-          <h1 className="mt-4 text-3xl font-bold">
+          <h1 className="mt-4 text-3xl font-bold display-heading">
             Career Resources
           </h1>
 
-          <p className="mt-2 max-w-2xl text-ink-muted">
+          <p className="mt-2 max-w-2xl text-text-secondary">
             Explore courses, articles, videos, and certifications to build
             the skills needed for your career.
           </p>
         </div>
 
         {/* Filters */}
-        <section className="mb-8 rounded-xl border border-border bg-surface-raised p-6 shadow-sm">
+        <section className="mb-8 glass-card rounded-[20px] p-6">
           <div className="grid gap-4 md:grid-cols-4">
 
             {/* Search */}
@@ -71,14 +71,14 @@ function Resources() {
               placeholder="Search resources..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="rounded-lg border border-border bg-surface px-4 py-2 text-sm outline-none focus:border-accent"
+              className="glass-input rounded-lg text-sm"
             />
 
             {/* Type */}
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              className="rounded-lg border border-border bg-surface px-4 py-2 text-sm outline-none"
+              className="glass-input rounded-lg text-sm"
             >
               <option value="">All Types</option>
               <option value="Course">Course</option>
@@ -91,7 +91,7 @@ function Resources() {
             <select
               value={difficulty}
               onChange={(e) => setDifficulty(e.target.value)}
-              className="rounded-lg border border-border bg-surface px-4 py-2 text-sm outline-none"
+              className="glass-input rounded-lg text-sm"
             >
               <option value="">All Levels</option>
               <option value="Beginner">Beginner</option>
@@ -105,7 +105,7 @@ function Resources() {
               placeholder="Career field..."
               value={careerField}
               onChange={(e) => setCareerField(e.target.value)}
-              className="rounded-lg border border-border bg-surface px-4 py-2 text-sm outline-none"
+              className="glass-input rounded-lg text-sm"
             />
 
           </div>
@@ -113,8 +113,8 @@ function Resources() {
 
         {/* Loading */}
         {loading && (
-          <div className="rounded-xl border border-border bg-surface-raised p-8 text-center">
-            <p className="text-ink-muted">
+          <div className="glass-card rounded-[20px] p-8 text-center">
+            <p className="text-text-secondary">
               Loading resources...
             </p>
           </div>
@@ -122,7 +122,7 @@ function Resources() {
 
         {/* Error */}
         {!loading && error && (
-          <div className="rounded-xl border border-border bg-surface-raised p-8 text-center">
+          <div className="glass-card rounded-[20px] p-8 text-center">
             <p className="text-red-500">
               {error}
             </p>
@@ -131,11 +131,11 @@ function Resources() {
 
         {/* Empty */}
         {!loading && !error && resources.length === 0 && (
-          <div className="rounded-xl border border-border bg-surface-raised p-8 text-center">
-            <p className="font-medium">
+          <div className="glass-card rounded-[20px] p-8 text-center">
+            <p className="font-medium text-text-primary">
               No resources found.
             </p>
-            <p className="mt-2 text-sm text-ink-muted">
+            <p className="mt-2 text-sm text-text-secondary">
               Try changing your search or filters.
             </p>
           </div>
@@ -147,27 +147,27 @@ function Resources() {
             {resources.map((resource) => (
               <article
                 key={resource._id}
-                className="flex flex-col rounded-xl border border-border bg-surface-raised p-6 shadow-sm transition hover:shadow-md"
+                className="flex flex-col glass-card rounded-[20px] p-6"
               >
                 <div className="mb-4 flex items-center justify-between gap-3">
-                  <span className="rounded-full bg-surface-inset px-3 py-1 text-xs font-medium text-ink-muted">
+                  <span className="rounded-full bg-green-alpha-08 px-3 py-1 text-xs font-medium text-text-secondary">
                     {resource.type}
                   </span>
 
-                  <span className="text-xs font-medium text-ink-muted">
+                  <span className="text-xs font-medium text-text-secondary">
                     {resource.difficulty}
                   </span>
                 </div>
 
-                <h2 className="text-lg font-bold text-ink">
+                <h2 className="text-lg font-bold text-text-primary">
                   {resource.title}
                 </h2>
 
-                <p className="mt-2 text-sm text-ink-muted line-clamp-3">
+                <p className="mt-2 text-sm text-text-secondary line-clamp-3">
                   {resource.description}
                 </p>
 
-                <p className="mt-4 text-xs font-medium text-ink-subtle">
+                <p className="mt-4 text-xs font-medium text-text-tertiary">
                   Provider: {resource.provider}
                 </p>
 
@@ -177,7 +177,7 @@ function Resources() {
                     {resource.skills.slice(0, 4).map((skill) => (
                       <span
                         key={skill}
-                        className="rounded-md border border-border bg-surface-inset px-2 py-1 text-xs text-ink-muted"
+                        className="rounded-md border border-green-alpha-18 bg-green-alpha-08 px-2 py-1 text-xs text-text-secondary"
                       >
                         {skill}
                       </span>
@@ -188,7 +188,7 @@ function Resources() {
                 <div className="mt-auto pt-6">
                   <Link
                     to={`/resources/${resource._id}`}
-                    className="inline-flex w-full items-center justify-center rounded-lg bg-cta px-4 py-2 text-sm font-medium text-white transition hover:bg-cta-hover"
+                    className="inline-flex w-full items-center justify-center btn-primary px-4 py-2 text-sm font-medium text-white rounded-lg"
                   >
                     View Resource
                   </Link>

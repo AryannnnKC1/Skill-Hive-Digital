@@ -9,7 +9,7 @@ function BackButton() {
     <button
       onClick={() => navigate('/dashboard')}
       aria-label='Back to Dashboard'
-      className='inline-flex items-center gap-2 rounded-lg border border-border bg-surface-raised px-4 py-2 text-sm font-medium text-ink-muted shadow-sm transition-colors hover:bg-surface-inset cursor-pointer'
+      className='inline-flex items-center gap-2 glass-button rounded-lg px-4 py-2 text-sm font-medium text-text-primary hover:border-green-alpha-18'
     >
       <span aria-hidden='true'>←</span>
       Back
@@ -28,18 +28,18 @@ export default function RecommendationsPage() {
   } = useRecommendations();
 
   return (
-    <div className='min-h-screen bg-surface-inset text-ink-muted'>
+    <div className='min-h-screen bg-gradient-dashboard text-text-primary'>
       <div className='mx-auto max-w-5xl px-4 py-8 md:px-6 lg:py-12'>
         <div className='mb-6'>
           <BackButton />
         </div>
-        <div className='mb-10 rounded-xl bg-surface-raised border border-border p-8 shadow-sm md:p-10'>
+        <div className='mb-10 glass-card rounded-[20px] p-8 md:p-10'>
           <div className='flex flex-col gap-6 md:flex-row md:items-end md:justify-between'>
             <div className='max-w-2xl'>
-              <h1 className='mt-4 text-3xl font-bold tracking-tight text-ink'>
+              <h1 className='mt-4 text-3xl font-bold tracking-tight text-text-primary display-heading'>
                 Your Personalized Recommendations
               </h1>
-              <p className='mt-3 text-base text-ink-muted'>
+              <p className='mt-3 text-base text-text-secondary'>
                 Based on your assessment, we've identified the strongest career
                 paths for you. Review your matches and explore the details of
                 each role.

@@ -134,9 +134,9 @@ export default function CareerSearch() {
   }, []);
 
   return (
-    <div className='min-h-screen bg-surface-inset text-ink-muted pb-12'>
+    <div className='min-h-screen bg-gradient-dashboard text-text-primary pb-12'>
       {/* Top Navigation Bar */}
-      <nav className="bg-surface-raised border-b border-border sticky top-0 z-40 px-6 py-4 shadow-sm">
+      <nav className="glass-dark border-b border-green-alpha-18 sticky top-0 z-40 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link to="/dashboard" className="text-sm font-medium text-accent hover:text-accent-hover transition-colors flex items-center gap-2">
             <span>&larr;</span> Back to Dashboard
@@ -146,19 +146,19 @@ export default function CareerSearch() {
 
       <div className='max-w-6xl mx-auto px-4 py-8'>
         <div className="mb-10 text-center">
-          <h1 className='text-4xl md:text-5xl font-bold text-ink mb-4'>
+          <h1 className='text-4xl md:text-5xl font-bold text-text-primary mb-4 display-heading'>
             Explore Careers
           </h1>
-          <p className='text-lg text-ink-muted max-w-2xl mx-auto'>
+          <p className='text-lg text-text-secondary max-w-2xl mx-auto'>
             Search, filter, and discover career paths that match your interests
           </p>
         </div>
 
-        <div ref={searchRef} className='relative mb-8 bg-surface-raised border border-border rounded-xl p-6 shadow-sm'>
+        <div ref={searchRef} className='relative mb-8 glass-card rounded-[20px] p-6'>
           <div className='flex flex-col md:flex-row gap-4'>
             <div className='relative flex-1'>
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-ink-subtle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-text-tertiary">
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
@@ -168,21 +168,21 @@ export default function CareerSearch() {
                 placeholder='Search careers...'
                 value={query}
                 onChange={e => handleQueryChange(e.target.value)}
-                className='w-full pl-10 pr-3 py-2.5 border border-border rounded-lg bg-surface text-ink placeholder-ink-subtle focus:outline-none focus:ring-2 focus:ring-accent transition-all'
+                className='glass-input w-full pl-10 pr-3 py-2.5 rounded-lg text-sm'
                 onFocus={() => {
                   if (suggestions.length > 0) setShowSuggestions(true);
                 }}
               />
               {showSuggestions && suggestions.length > 0 && (
-                <ul className='absolute z-20 top-full left-0 right-0 mt-2 bg-surface-raised border border-border rounded-lg shadow-lg overflow-hidden'>
+                <ul className='absolute z-20 top-full left-0 right-0 mt-2 glass-card rounded-[12px] shadow-lg overflow-hidden'>
                   {suggestions.map(s => (
                     <li
                       key={s._id}
                       onClick={() => selectSuggestion(s)}
-                      className='px-4 py-2.5 cursor-pointer hover:bg-surface-inset text-ink flex justify-between items-center transition-colors'
+                      className='px-4 py-2.5 cursor-pointer hover:bg-green-alpha-08 text-text-primary flex justify-between items-center transition-colors'
                     >
                       <span className="font-medium">{s.title}</span>
-                      <span className='text-xs font-medium text-ink-muted uppercase tracking-wider'>
+                      <span className='text-xs font-medium text-text-secondary uppercase tracking-wider'>
                         {s.category}
                       </span>
                     </li>
@@ -197,7 +197,7 @@ export default function CareerSearch() {
                 setCategory(e.target.value);
                 setPage(1);
               }}
-              className='px-3 py-2.5 border border-border rounded-lg bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-accent appearance-none cursor-pointer min-w-[200px] transition-all'
+              className='glass-input px-3 py-2.5 rounded-lg text-sm appearance-none cursor-pointer min-w-[200px]'
             >
               <option value=''>All Categories</option>
               {categories.map(c => (
@@ -213,7 +213,7 @@ export default function CareerSearch() {
                 setSort(e.target.value);
                 setPage(1);
               }}
-              className='px-3 py-2.5 border border-border rounded-lg bg-surface text-ink focus:outline-none focus:ring-2 focus:ring-accent appearance-none cursor-pointer min-w-[200px] transition-all'
+              className='glass-input px-3 py-2.5 rounded-lg text-sm appearance-none cursor-pointer min-w-[200px]'
             >
               <option value='name_asc'>Name A-Z</option>
               <option value='name_desc'>Name Z-A</option>
@@ -225,11 +225,11 @@ export default function CareerSearch() {
         </div>
 
         {statusMessage && (
-          <div className='mb-6 flex items-center justify-between gap-3 rounded-lg border border-border bg-surface-raised px-4 py-3 text-sm text-ink shadow-sm'>
+          <div className='mb-6 flex items-center justify-between gap-3 glass-card rounded-[12px] px-4 py-3 text-sm text-text-primary'>
             <span className="font-medium">{statusMessage}</span>
             <button
               onClick={clearStatus}
-              className='text-ink-subtle hover:text-ink-muted transition-colors cursor-pointer'
+              className='text-text-tertiary hover:text-text-secondary transition-colors cursor-pointer'
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -241,10 +241,10 @@ export default function CareerSearch() {
 
         {category && (
           <div className='flex items-center gap-3 mb-6'>
-            <span className='text-sm text-ink-muted font-medium'>Active filter:</span>
-            <span className='inline-flex items-center gap-1.5 bg-ink text-surface border border-ink rounded-full px-4 py-1.5 text-sm font-medium'>
+            <span className='text-sm text-text-secondary font-medium'>Active filter:</span>
+            <span className='inline-flex items-center gap-1.5 bg-brand-green text-brand-dark-deep border border-brand-green rounded-full px-4 py-1.5 text-sm font-medium'>
               {category}
-              <button onClick={clearCategory} className='text-surface/70 hover:text-surface transition-colors ml-1 focus:outline-none cursor-pointer'>
+              <button onClick={clearCategory} className='text-brand-dark-deep/70 hover:text-brand-dark-deep transition-colors ml-1 focus:outline-none cursor-pointer'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -256,28 +256,28 @@ export default function CareerSearch() {
 
         {loading ? (
           <div className='text-center py-20 flex flex-col items-center justify-center'>
-            <svg className="animate-spin h-8 w-8 text-ink-subtle mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <svg className="animate-spin h-8 w-8 text-text-tertiary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <p className="text-ink-muted font-medium">Searching careers...</p>
+            <p className="text-text-secondary font-medium">Searching careers...</p>
           </div>
         ) : careers.length === 0 ? (
-          <div className='text-center py-20 bg-surface-raised border border-border rounded-xl shadow-sm'>
-            <div className="w-16 h-16 rounded-full bg-surface-inset flex items-center justify-center mx-auto mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-ink-subtle w-8 h-8">
+          <div className='text-center py-20 glass-card rounded-[20px]'>
+            <div className="w-16 h-16 rounded-full bg-green-alpha-08 flex items-center justify-center mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-text-tertiary w-8 h-8">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
             </div>
-            <p className='text-ink font-bold text-xl mb-2'>No careers found</p>
-            <p className='text-ink-muted'>
+            <p className='text-text-primary font-bold text-xl mb-2'>No careers found</p>
+            <p className='text-text-secondary'>
               Try adjusting your search or filter
             </p>
           </div>
         ) : (
           <>
-            <p className='text-sm text-ink-muted font-medium mb-6 px-2'>
+            <p className='text-sm text-text-secondary font-medium mb-6 px-2'>
               {pagination?.total} career{pagination?.total !== 1 ? 's' : ''}{' '}
               found
             </p>
@@ -285,12 +285,12 @@ export default function CareerSearch() {
               {careers.map(career => (
                 <div
                   key={career._id}
-                  className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full'
+                  className='glass-card rounded-[20px] p-6 flex flex-col h-full'
                 >
                   <div className='flex items-start justify-between mb-4 gap-2'>
                     <div>
-                      <p className="text-xs font-medium uppercase tracking-wider text-ink-subtle mb-1">{career.category}</p>
-                      <h3 className='text-lg font-bold text-ink'>
+                      <p className="text-xs font-medium uppercase tracking-wider text-text-tertiary mb-1">{career.category}</p>
+                      <h3 className='text-lg font-bold text-text-primary'>
                         {career.title}
                       </h3>
                     </div>
@@ -301,7 +301,7 @@ export default function CareerSearch() {
                     />
                   </div>
 
-                  <p className='text-sm text-ink-muted mb-6 line-clamp-3 leading-relaxed flex-grow'>
+                  <p className='text-sm text-text-secondary mb-6 line-clamp-3 leading-relaxed flex-grow'>
                     {career.description}
                   </p>
 
@@ -309,33 +309,33 @@ export default function CareerSearch() {
                     {career.requiredSkills.slice(0, 3).map(skill => (
                       <span
                         key={skill}
-                        className='text-xs font-medium px-3 py-1 rounded-full bg-surface-inset border border-border text-ink-muted'
+                        className='text-xs font-medium px-3 py-1 rounded-full bg-green-alpha-08 border border-green-alpha-18 text-text-secondary'
                       >
                         {skill}
                       </span>
                     ))}
                     {career.requiredSkills.length > 3 && (
-                      <span className='text-xs font-medium px-3 py-1 rounded-full bg-surface-inset border border-border text-ink-subtle'>
+                      <span className='text-xs font-medium px-3 py-1 rounded-full bg-green-alpha-08 border border-green-alpha-18 text-text-tertiary'>
                         +{career.requiredSkills.length - 3}
                       </span>
                     )}
                   </div>
 
-                  <div className="mt-auto pt-4 border-t border-border flex items-center justify-between text-sm text-ink-muted">
+                  <div className="mt-auto pt-4 border-t border-green-alpha-18 flex items-center justify-between text-sm text-text-secondary">
                     <div className="flex flex-col gap-1.5">
                       <div className="flex items-center gap-1.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-ink-subtle w-4 h-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-text-tertiary w-4 h-4">
                           <line x1="12" y1="1" x2="12" y2="23"></line>
                           <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                         </svg>
-                        <span className="font-medium text-ink">{career.averageSalary}</span>
+                        <span className="font-medium text-text-primary">{career.averageSalary}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-ink-subtle w-4 h-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-text-tertiary w-4 h-4">
                           <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
                           <polyline points="16 7 22 7 22 13"></polyline>
                         </svg>
-                        <span className="text-ink-muted">{career.growthOutlook}</span>
+                        <span className="text-text-secondary">{career.growthOutlook}</span>
                       </div>
                     </div>
                     <Link to={`/careers/${career._id}`} className="font-medium text-accent hover:text-accent-hover transition-colors">

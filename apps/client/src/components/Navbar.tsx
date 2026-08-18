@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
@@ -8,151 +8,299 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 24);
     };
+
+    handleScroll();
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
     e.preventDefault();
+
     setMobileMenuOpen(false);
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+
+    document
+      .getElementById(targetId)
+      ?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const links = [
+    ['Home', 'home'],
+    ['Features', 'features'],
+    ['Careers', 'careers'],
+    ['How It Works', 'how-it-works'],
+    ['About Us', 'about'],
+  ];
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
-          scrolled
-            ? 'bg-surface/95 backdrop-blur-sm border-b border-border shadow-sm'
-            : 'bg-transparent'
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 font-bold text-lg text-ink cursor-pointer">
-              <img src="/logo.png" alt="Career Counselling Application Logo" className="h-8 w-auto object-contain" />
-              SkillHive
+      <nav className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4">
+
+        <div
+          className={`mx-auto max-w-7xl rounded-2xl border transition-all duration-300 ${
+            scrolled
+              ? 'glass-dark shadow-dark border-white/15'
+              : 'glass-dark border-white/10'
+          }`}
+        >
+
+          <div className="h-[72px] px-5 sm:px-7 flex items-center justify-between">
+
+            {/* LOGO */}
+            <Link
+              to="/"
+              className="flex items-center shrink-0"
+              aria-label="SkillHive Digital home"
+            >
+              <img
+                src="/logogsh.png"
+                alt="SkillHive Digital"
+                className="h-11 sm:h-30 w-auto object-contain"
+              />
             </Link>
 
-            {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center gap-8">
-              <a
-                href="#how-it-works"
-                onClick={(e) => handleNavClick(e, 'how-it-works')}
-                className="text-ink-muted hover:text-ink transition-colors duration-200 font-medium cursor-pointer text-sm"
-              >
-                How It Works
-              </a>
-              <a
-                href="#features"
-                onClick={(e) => handleNavClick(e, 'features')}
-                className="text-ink-muted hover:text-ink transition-colors duration-200 font-medium cursor-pointer text-sm"
-              >
-                Features
-              </a>
-              <a
-                href="#careers"
-                onClick={(e) => handleNavClick(e, 'careers')}
-                className="text-ink-muted hover:text-ink transition-colors duration-200 font-medium cursor-pointer text-sm"
-              >
-                Careers
-              </a>
+
+            {/* DESKTOP NAVIGATION */}
+            <div className="hidden lg:flex items-center gap-7 xl:gap-9">
+
+              {links.map(([label, id]) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={(e) => handleNavClick(e, id)}
+                  className={`relative text-sm transition-colors duration-200 cursor-pointer ${
+                    id === 'home'
+                      ? 'text-white'
+                      : 'text-white/70 hover:text-white'
+                  }`}
+                >
+                  {label}
+
+                  {id === 'home' && (
+                    <span
+                      className="
+                        absolute
+                        -bottom-3
+                        left-1/2
+                        -translate-x-1/2
+                        h-1
+                        w-1
+                        rounded-full
+                        bg-[#1EC957]
+                        shadow-[0_0_10px_rgba(30,201,87,.8)]
+                      "
+                    />
+                  )}
+                </a>
+              ))}
+
             </div>
 
-            {/* Desktop Right side CTA + Theme Switcher */}
-            <div className="hidden md:flex items-center gap-3">
+
+            {/* RIGHT SIDE */}
+            <div className="hidden lg:flex items-center gap-2.5">
+
               <ThemeSwitcher />
+
               <Link
                 to="/login"
-                className="text-ink-muted hover:text-ink transition-colors duration-200 font-medium cursor-pointer text-sm"
+                className="
+                  px-4
+                  py-2.5
+                  rounded-xl
+                  border
+                  border-green-alpha-18
+                  text-text-primary
+                  text-sm
+                  hover:border-brand-green
+                  transition-colors
+                  glass-button
+                "
               >
-                Log in
+                Login
               </Link>
+
               <Link
                 to="/register"
-                className="bg-ink text-surface px-5 py-2 rounded-lg hover:opacity-90 transition-all duration-200 font-medium cursor-pointer text-sm"
+                className="btn-primary px-5 py-2.5 text-sm rounded-xl"
               >
                 Get Started
               </Link>
+
             </div>
 
-            {/* Mobile right: theme switcher + hamburger */}
-            <div className="md:hidden flex items-center gap-2">
+
+            {/* MOBILE */}
+            <div className="lg:hidden flex items-center gap-2">
+
               <ThemeSwitcher />
+
               <button
-                className="p-2 text-ink-muted hover:text-ink focus:outline-none cursor-pointer"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Toggle menu"
+                type="button"
+                onClick={() =>
+                  setMobileMenuOpen((open) => !open)
+                }
+                className="
+                  h-10
+                  w-10
+                  rounded-xl
+                  border
+                  border-white/10
+                  text-white
+                  flex
+                  items-center
+                  justify-center
+                "
+                aria-label="Toggle navigation menu"
+                aria-expanded={mobileMenuOpen}
               >
-                <div className="relative w-6 h-5 flex flex-col justify-between">
+                <span className="relative block w-5 h-4">
+
                   <span
-                    className={`w-full h-0.5 bg-current transform transition-all duration-300 ${
-                      mobileMenuOpen ? 'rotate-45 translate-y-2.5' : ''
-                    }`}
+                    className={`
+                      absolute
+                      left-0
+                      top-0
+                      w-5
+                      h-px
+                      bg-current
+                      transition-transform
+                      ${
+                        mobileMenuOpen
+                          ? 'translate-y-2 rotate-45'
+                          : ''
+                      }
+                    `}
                   />
+
                   <span
-                    className={`w-full h-0.5 bg-current transition-opacity duration-300 ${
-                      mobileMenuOpen ? 'opacity-0' : ''
-                    }`}
+                    className={`
+                      absolute
+                      left-0
+                      top-2
+                      w-5
+                      h-px
+                      bg-current
+                      transition-opacity
+                      ${
+                        mobileMenuOpen
+                          ? 'opacity-0'
+                          : 'opacity-100'
+                      }
+                    `}
                   />
+
                   <span
-                    className={`w-full h-0.5 bg-current transform transition-all duration-300 ${
-                      mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
-                    }`}
+                    className={`
+                      absolute
+                      left-0
+                      top-4
+                      w-5
+                      h-px
+                      bg-current
+                      transition-transform
+                      ${
+                        mobileMenuOpen
+                          ? '-translate-y-2 -rotate-45'
+                          : ''
+                      }
+                    `}
                   />
-                </div>
+
+                </span>
               </button>
+
             </div>
+
           </div>
         </div>
       </nav>
 
-      {/* Mobile Fullscreen Overlay */}
+
+      {/* MOBILE MENU */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-surface pt-24 px-6 md:hidden">
-          <div className="flex flex-col gap-6 text-center">
-            <a
-              href="#how-it-works"
-              onClick={(e) => handleNavClick(e, 'how-it-works')}
-              className="text-2xl font-semibold text-ink hover:text-ink-muted transition-colors duration-200 cursor-pointer"
-            >
-              How It Works
-            </a>
-            <a
-              href="#features"
-              onClick={(e) => handleNavClick(e, 'features')}
-              className="text-2xl font-semibold text-ink hover:text-ink-muted transition-colors duration-200 cursor-pointer"
-            >
-              Features
-            </a>
-            <a
-              href="#careers"
-              onClick={(e) => handleNavClick(e, 'careers')}
-              className="text-2xl font-semibold text-ink hover:text-ink-muted transition-colors duration-200 cursor-pointer"
-            >
-              Careers
-            </a>
-            <div className="h-px bg-border my-4" />
-            <Link
-              to="/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-xl font-medium text-ink-muted hover:text-ink transition-colors duration-200 cursor-pointer"
-            >
-              Log in
-            </Link>
-            <Link
-              to="/register"
-              onClick={() => setMobileMenuOpen(false)}
-              className="mt-4 bg-ink text-surface px-6 py-3 rounded-xl text-lg font-medium hover:opacity-90 transition-all duration-200 cursor-pointer"
-            >
-              Get Started
-            </Link>
+        <div
+          className="
+            fixed
+            inset-0
+            z-40
+            bg-[#061719]/95
+            backdrop-blur-2xl
+            lg:hidden
+            pt-28
+            px-6
+          "
+        >
+
+          <div
+            className="
+              max-w-md
+              mx-auto
+              glass-dark
+              rounded-3xl
+              p-7
+              border-white/10
+            "
+          >
+
+            <div className="flex flex-col gap-5">
+
+              {links.map(([label, id]) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={(e) =>
+                    handleNavClick(e, id)
+                  }
+                  className="
+                    text-xl
+                    text-white/85
+                    hover:text-[#1EC957]
+                    transition-colors
+                  "
+                >
+                  {label}
+                </a>
+              ))}
+
+              <div className="h-px bg-white/10 my-1" />
+
+              <Link
+                to="/login"
+                onClick={() =>
+                  setMobileMenuOpen(false)
+                }
+                className="text-lg text-white/70"
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/register"
+                onClick={() =>
+                  setMobileMenuOpen(false)
+                }
+                className="
+                  btn-primary
+                  px-6
+                  py-3.5
+                  text-center
+                "
+              >
+                Get Started
+              </Link>
+
+            </div>
+
           </div>
         </div>
       )}

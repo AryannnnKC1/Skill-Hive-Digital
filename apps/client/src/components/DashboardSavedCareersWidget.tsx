@@ -18,13 +18,13 @@ export function DashboardSavedCareersWidget({
   const recent = savedCareers.slice(0, 3);
 
   return (
-    <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'>
+    <article className='glass-card rounded-[20px] p-6 hover:shadow-lg'>
       <div className='flex items-center justify-between mb-6'>
         <div>
-          <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
+          <p className='text-xs font-semibold uppercase tracking-wider text-text-tertiary'>
             Saved careers
           </p>
-          <h2 className='mt-1 text-lg font-bold text-ink'>
+          <h2 className='mt-1 text-lg font-bold text-text-primary'>
             Your favorites
           </h2>
         </div>
@@ -41,7 +41,7 @@ export function DashboardSavedCareersWidget({
           {Array.from({ length: 2 }).map((_, index) => (
             <div
               key={index}
-              className='h-16 animate-pulse rounded-lg bg-surface-inset w-full'
+              className='h-16 animate-pulse rounded-lg bg-green-alpha-08 w-full'
             />
           ))}
         </div>
@@ -50,13 +50,13 @@ export function DashboardSavedCareersWidget({
           {recent.map(entry => (
             <div
               key={entry._id}
-              className='flex flex-wrap items-center justify-between gap-4 rounded-lg border border-border bg-surface p-4 transition hover:bg-surface-inset'
+              className='flex flex-wrap items-center justify-between gap-4 rounded-lg glass-card p-4'
             >
               <div>
-                <p className='text-sm font-semibold text-ink'>
+                <p className='text-sm font-semibold text-text-primary'>
                   {entry.career?.title ?? 'Career'}
                 </p>
-                <p className='text-xs text-ink-muted'>
+                <p className='text-xs text-text-secondary'>
                   {entry.career?.category ?? 'Saved career'}
                 </p>
               </div>
@@ -69,13 +69,13 @@ export function DashboardSavedCareersWidget({
               ) : null}
             </div>
           ))}
-          <div className='pt-2 text-center text-xs text-ink-subtle'>
+          <div className='pt-2 text-center text-xs text-text-tertiary'>
             {savedCareers.length} saved career{savedCareers.length === 1 ? '' : 's'}
           </div>
         </div>
       ) : (
-        <div className='rounded-lg bg-surface-inset p-6 text-center border border-border'>
-          <p className='text-sm text-ink-muted'>
+        <div className='rounded-lg glass-card p-6 text-center'>
+          <p className='text-sm text-text-secondary'>
             You have no saved careers yet. Save one from the careers list to see
             it here.
           </p>

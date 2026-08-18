@@ -36,10 +36,10 @@ function CareerDetailPage() {
 
   if (loading) {
     return (
-      <div className='min-h-screen bg-surface-inset flex items-center justify-center'>
-        <div className='text-ink-muted font-medium flex items-center gap-2'>
+      <div className='min-h-screen bg-gradient-dashboard flex items-center justify-center'>
+        <div className='text-text-secondary font-medium flex items-center gap-2'>
           <svg
-            className='animate-spin h-5 w-5 text-ink-subtle'
+            className='animate-spin h-5 w-5 text-text-tertiary'
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
             viewBox='0 0 24 24'
@@ -66,9 +66,9 @@ function CareerDetailPage() {
 
   if (error || !career) {
     return (
-      <div className='min-h-screen bg-surface-inset p-6'>
-        <div className='max-w-3xl mx-auto mt-12 bg-surface-raised border border-border p-8 rounded-xl shadow-sm text-center'>
-          <div className='text-ink font-medium mb-6'>
+      <div className='min-h-screen bg-gradient-dashboard p-6'>
+        <div className='max-w-3xl mx-auto mt-12 glass-card rounded-[20px] p-8 text-center'>
+          <div className='text-text-primary font-medium mb-6'>
             {error ?? 'Career not found.'}
           </div>
           <Link
@@ -83,9 +83,9 @@ function CareerDetailPage() {
   }
 
   return (
-    <div className='min-h-screen bg-surface-inset pb-12'>
+    <div className='min-h-screen bg-gradient-dashboard pb-12 text-text-primary'>
       {/* Top Navigation Bar */}
-      <nav className='bg-surface-raised border-b border-border sticky top-0 z-50 px-6 py-4 mb-8 shadow-sm'>
+      <nav className='glass-dark border-b border-green-alpha-18 sticky top-0 z-50 px-6 py-4 mb-8'>
         <div className='max-w-4xl mx-auto flex items-center justify-between'>
           <Link
             to='/careers'
@@ -104,13 +104,13 @@ function CareerDetailPage() {
 
       <div className='max-w-4xl mx-auto px-4'>
         {/* Header Section */}
-        <div className='bg-surface-raised border border-border p-8 rounded-xl mb-8 shadow-sm'>
+        <div className='glass-card rounded-[20px] p-8 mb-8'>
           <div className='flex flex-col md:flex-row md:items-start justify-between gap-6'>
             <div>
-              <span className='inline-block px-3 py-1 rounded-full bg-surface-inset border border-border text-ink-muted text-xs font-medium uppercase tracking-wider mb-4'>
+              <span className='inline-block px-3 py-1 rounded-full bg-green-alpha-08 border border-green-alpha-18 text-text-secondary text-xs font-medium uppercase tracking-wider mb-4'>
                 {career.category}
               </span>
-              <h1 className='text-3xl md:text-4xl font-bold text-ink mb-4'>
+              <h1 className='text-3xl md:text-4xl font-bold text-text-primary mb-4 display-heading'>
                 {career.title}
               </h1>
             </div>
@@ -122,14 +122,14 @@ function CareerDetailPage() {
               />
             </div>
           </div>
-          <p className='text-lg text-ink-muted leading-relaxed max-w-3xl mt-4'>
+          <p className='text-lg text-text-secondary leading-relaxed max-w-3xl mt-4'>
             {career.description}
           </p>
         </div>
 
         {/* Stats Grid */}
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
-          <div className='bg-surface-raised border border-border p-6 rounded-xl shadow-sm'>
+          <div className='glass-card rounded-[20px] p-6'>
             <div className='flex items-center gap-2 mb-2'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -141,18 +141,18 @@ function CareerDetailPage() {
                 strokeWidth='1.5'
                 strokeLinecap='round'
                 strokeLinejoin='round'
-                className='text-ink-subtle w-4 h-4'
+                className='text-text-tertiary w-4 h-4'
               >
                 <line x1='12' y1='1' x2='12' y2='23'></line>
                 <path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'></path>
               </svg>
-              <p className='text-xs font-medium uppercase tracking-wider text-ink-muted'>
+              <p className='text-xs font-medium uppercase tracking-wider text-text-secondary'>
                 Salary
               </p>
             </div>
-            <p className='text-xl font-bold text-ink'>{career.averageSalary}</p>
+            <p className='text-xl font-bold text-text-primary'>{career.averageSalary}</p>
           </div>
-          <div className='bg-surface-raised border border-border p-6 rounded-xl shadow-sm'>
+          <div className='glass-card rounded-[20px] p-6'>
             <div className='flex items-center gap-2 mb-2'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -164,20 +164,20 @@ function CareerDetailPage() {
                 strokeWidth='1.5'
                 strokeLinecap='round'
                 strokeLinejoin='round'
-                className='text-ink-subtle w-4 h-4'
+                className='text-text-tertiary w-4 h-4'
               >
                 <path d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'></path>
                 <path d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'></path>
               </svg>
-              <p className='text-xs font-medium uppercase tracking-wider text-ink-muted'>
+              <p className='text-xs font-medium uppercase tracking-wider text-text-secondary'>
                 Education
               </p>
             </div>
-            <p className='text-lg font-bold text-ink'>
+            <p className='text-lg font-bold text-text-primary'>
               {career.educationRequired}
             </p>
           </div>
-          <div className='bg-surface-raised border border-border p-6 rounded-xl shadow-sm'>
+          <div className='glass-card rounded-[20px] p-6'>
             <div className='flex items-center gap-2 mb-2'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -189,12 +189,12 @@ function CareerDetailPage() {
                 strokeWidth='1.5'
                 strokeLinecap='round'
                 strokeLinejoin='round'
-                className='text-ink-subtle w-4 h-4'
+                className='text-text-tertiary w-4 h-4'
               >
                 <polyline points='22 7 13.5 15.5 8.5 10.5 2 17'></polyline>
                 <polyline points='16 7 22 7 22 13'></polyline>
               </svg>
-              <p className='text-xs font-medium uppercase tracking-wider text-ink-muted'>
+              <p className='text-xs font-medium uppercase tracking-wider text-text-secondary'>
                 Growth
               </p>
             </div>

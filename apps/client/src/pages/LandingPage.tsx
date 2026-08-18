@@ -15,8 +15,9 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-surface text-ink">
+    <div className="min-h-screen bg-gradient-dashboard text-text-primary overflow-x-hidden">
       <Navbar />
+
       <main>
         <Hero />
         <HowItWorks />
@@ -25,6 +26,7 @@ const LandingPage = () => {
         <SocialProof />
         <CTA />
       </main>
+
       <Footer />
     </div>
   );

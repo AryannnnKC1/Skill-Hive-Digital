@@ -106,19 +106,17 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex bg-surface">
+    <div className="min-h-screen flex bg-gradient-dashboard text-text-primary">
       <section className="flex-1 flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div className="mx-auto w-full max-w-sm lg:w-96 bg-surface-raised border border-border shadow-sm p-8 rounded-2xl">
-          <div className="mb-8 flex flex-col items-center sm:items-start">
-            <img src="/logo.png" alt="Career Counselling Application Logo" className="h-10 w-auto object-contain mb-4" />
+        <div className="mx-auto w-full max-w-sm lg:w-96 glass-card p-8 rounded-[28px]">
+          <div className="-ml-10 flex flex-col sm:items-start">
+            <img src="/logogsh.png" alt="Career Counselling Application Logo" className="h-40 w-auto object-contain -mb-6" />
             <span className="text-sm font-semibold tracking-wide text-accent uppercase flex items-center gap-2">
-              SkillHive Digital
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             </span>
           </div>
 
-          <h1 className="text-3xl font-bold text-ink mb-2">Welcome Back</h1>
-          <p className="text-sm text-ink-muted mb-8">Sign in to your account to continue your career journey.</p>
+          <h1 className="text-3xl font-normal tracking-[0.01em] text-text-primary mb-4 display-heading">Welcome Back</h1>
+          <p className="text-sm text-text-secondary mb-4">Sign in to your account to continue your career journey.</p>
 
           {submitError && (
             <div className="rounded-lg bg-red-500/10 p-4 mb-6 flex items-start gap-3 border border-red-500/20" role="alert">
@@ -140,14 +138,14 @@ function LoginForm() {
 
           <form className="space-y-5" onSubmit={handleSubmit} noValidate>
             <div>
-              <label className="block text-sm font-medium text-ink mb-1.5" htmlFor="login-email">Email Address</label>
+              <label className="block text-sm font-medium text-text-primary mb-1.5" htmlFor="login-email">Email Address</label>
               <div className="relative">
                 <input
                   type="email"
                   id="login-email"
                   name="email"
                   placeholder="name@example.com"
-                  className={`block w-full border-0 ring-1 ring-inset ${errors.email ? 'ring-red-500 focus:ring-red-500' : 'ring-border focus:ring-accent'} rounded-lg py-2.5 px-3 bg-surface text-ink shadow-sm focus:ring-2 sm:text-sm sm:leading-6 placeholder:text-ink-subtle`}
+                  className={`glass-input w-full ${errors.email ? 'border-red-500/50' : ''}`}
                   value={formData.email}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -159,14 +157,14 @@ function LoginForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink mb-1.5" htmlFor="login-password">Password</label>
+              <label className="block text-sm font-medium text-text-primary mb-1.5" htmlFor="login-password">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="login-password"
                   name="password"
                   placeholder="Enter your password"
-                  className={`block w-full border-0 ring-1 ring-inset ${errors.password ? 'ring-red-500 focus:ring-red-500' : 'ring-border focus:ring-accent'} rounded-lg py-2.5 px-3 pr-10 bg-surface text-ink shadow-sm focus:ring-2 sm:text-sm sm:leading-6 placeholder:text-ink-subtle`}
+                  className={`glass-input w-full ${errors.password ? 'border-red-500/50' : ''}`}
                   value={formData.password}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -175,7 +173,7 @@ function LoginForm() {
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-ink-subtle hover:text-ink-muted focus:outline-none transition-colors duration-200 cursor-pointer"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-text-tertiary hover:text-text-secondary focus:outline-none transition-colors duration-200 cursor-pointer"
                   onClick={() => setShowPassword(prev => !prev)}
                   disabled={isSubmitting}
                 >

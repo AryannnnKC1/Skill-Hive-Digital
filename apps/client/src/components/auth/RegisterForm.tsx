@@ -134,23 +134,21 @@ function RegisterForm() {
   };
 
   return (
-    <div className='min-h-screen flex bg-surface'>
+    <div className='min-h-screen flex bg-gradient-dashboard'>
       <section className='flex-1 flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24'>
-        <div className='mx-auto w-full max-w-sm lg:w-96 bg-surface-raised border border-border shadow-sm p-8 rounded-2xl'>
-          <div className='mb-8 flex flex-col items-center sm:items-start'>
+        <div className='mx-auto w-full max-w-sm lg:w-96 glass-card p-8 rounded-[28px]'>
+          <div className='-mb-6 flex flex-col sm:items-start'>
             <img
-              src='/logo.png'
+              src='/logogsh.png'
               alt='Career Counselling Application Logo'
-              className='h-10 w-auto object-contain mb-4'
+              className='h-40 w-auto object-contain -ml-10'
             />
             <span className='text-sm font-semibold tracking-wide text-accent uppercase flex items-center gap-2'>
-              SkillHive Digital
-              <span className='h-1.5 w-1.5 rounded-full bg-accent' />
             </span>
           </div>
 
-          <h1 className='text-3xl font-bold text-ink mb-2'>Create Account</h1>
-          <p className='text-sm text-ink-muted mb-8'>
+          <h1 className='text-3xl font-normal tracking-[0.01em] text-text-primary mb-2 display-heading'>Create Account</h1>
+          <p className='text-sm text-text-secondary mb-4'>
             Join us to start planning and navigating your professional pathways.
           </p>
 
@@ -205,7 +203,7 @@ function RegisterForm() {
           <form className='space-y-5' onSubmit={handleSubmit} noValidate>
             <div>
               <label
-                className='block text-sm font-medium text-ink mb-1.5'
+                className='block text-sm font-medium text-text-primary mb-1.5'
                 htmlFor='register-name'
               >
                 Full Name
@@ -215,7 +213,7 @@ function RegisterForm() {
                 id='register-name'
                 name='name'
                 placeholder='John Doe'
-                className={`block w-full border-0 ring-1 ring-inset ${errors.name ? 'ring-red-500 focus:ring-red-500' : 'ring-border focus:ring-accent'} rounded-lg py-2.5 px-3 bg-surface text-ink shadow-sm focus:ring-2 sm:text-sm sm:leading-6 placeholder:text-ink-subtle`}
+                className={`glass-input w-full ${errors.name ? 'border-red-500/50' : ''}`}
                 value={formData.name}
                 onChange={handleChange}
                 disabled={isSubmitting}
@@ -231,7 +229,7 @@ function RegisterForm() {
 
             <div>
               <label
-                className='block text-sm font-medium text-ink mb-1.5'
+                className='block text-sm font-medium text-text-primary mb-1.5'
                 htmlFor='register-email'
               >
                 Email Address
@@ -241,7 +239,7 @@ function RegisterForm() {
                 id='register-email'
                 name='email'
                 placeholder='name@example.com'
-                className={`block w-full border-0 ring-1 ring-inset ${errors.email ? 'ring-red-500 focus:ring-red-500' : 'ring-border focus:ring-accent'} rounded-lg py-2.5 px-3 bg-surface text-ink shadow-sm focus:ring-2 sm:text-sm sm:leading-6 placeholder:text-ink-subtle`}
+                className={`glass-input w-full ${errors.email ? 'border-red-500/50' : ''}`}
                 value={formData.email}
                 onChange={handleChange}
                 disabled={isSubmitting}
@@ -257,7 +255,7 @@ function RegisterForm() {
 
             <div>
               <label
-                className='block text-sm font-medium text-ink mb-1.5'
+                className='block text-sm font-medium text-text-primary mb-1.5'
                 htmlFor='register-password'
               >
                 Password
@@ -268,7 +266,7 @@ function RegisterForm() {
                   id='register-password'
                   name='password'
                   placeholder='Create password'
-                  className={`block w-full border-0 ring-1 ring-inset ${errors.password ? 'ring-red-500 focus:ring-red-500' : 'ring-border focus:ring-accent'} rounded-lg py-2.5 px-3 pr-10 bg-surface text-ink shadow-sm focus:ring-2 sm:text-sm sm:leading-6 placeholder:text-ink-subtle`}
+                  className={`glass-input w-full ${errors.password ? 'border-red-500/50' : ''}`}
                   value={formData.password}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -277,7 +275,7 @@ function RegisterForm() {
                 />
                 <button
                   type='button'
-                  className='absolute inset-y-0 right-0 flex items-center pr-3 text-ink-subtle hover:text-ink-muted focus:outline-none transition-colors duration-200 cursor-pointer'
+                  className='absolute inset-y-0 right-0 flex items-center pr-3 text-text-tertiary hover:text-text-secondary focus:outline-none transition-colors duration-200 cursor-pointer'
                   onClick={() => setShowPassword(prev => !prev)}
                   disabled={isSubmitting}
                 >
@@ -326,7 +324,7 @@ function RegisterForm() {
 
             <div>
               <label
-                className='block text-sm font-medium text-ink mb-1.5'
+                className='block text-sm font-medium text-text-primary mb-1.5'
                 htmlFor='register-confirm-password'
               >
                 Confirm Password
@@ -337,7 +335,7 @@ function RegisterForm() {
                   id='register-confirm-password'
                   name='confirmPassword'
                   placeholder='Repeat password'
-                  className={`block w-full border-0 ring-1 ring-inset ${errors.confirmPassword ? 'ring-red-500 focus:ring-red-500' : 'ring-border focus:ring-accent'} rounded-lg py-2.5 px-3 pr-10 bg-surface text-ink shadow-sm focus:ring-2 sm:text-sm sm:leading-6 placeholder:text-ink-subtle`}
+                  className={`glass-input w-full ${errors.confirmPassword ? 'border-red-500/50' : ''}`}
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -346,7 +344,7 @@ function RegisterForm() {
                 />
                 <button
                   type='button'
-                  className='absolute inset-y-0 right-0 flex items-center pr-3 text-ink-subtle hover:text-ink-muted focus:outline-none transition-colors duration-200 cursor-pointer'
+                  className='absolute inset-y-0 right-0 flex items-center pr-3 text-text-tertiary hover:text-text-secondary focus:outline-none transition-colors duration-200 cursor-pointer'
                   onClick={() => setShowConfirmPassword(prev => !prev)}
                   disabled={isSubmitting}
                 >
@@ -395,7 +393,7 @@ function RegisterForm() {
 
             <div className='flex flex-col gap-1.5 mt-4'>
               <label
-                className='flex items-start text-sm text-ink'
+                className='flex items-start text-sm text-text-primary'
                 htmlFor='register-terms'
               >
                 <div className='flex h-6 items-center'>
@@ -413,7 +411,7 @@ function RegisterForm() {
                     disabled={isSubmitting}
                   />
                 </div>
-                <div className='ml-2 text-sm leading-6 text-ink-muted'>
+                <div className='ml-2 text-sm leading-6 text-text-secondary'>
                   I agree to the{' '}
                   <a
                     href='#terms'

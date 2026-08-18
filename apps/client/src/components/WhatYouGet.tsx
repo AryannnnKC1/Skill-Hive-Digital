@@ -1,109 +1,171 @@
 import React from 'react';
 
+const features = [
+  [
+    'Cognitive Assessment',
+    'Scientifically-backed questions that map your strengths, thinking style, and personality traits.',
+    '✓',
+  ],
+  [
+    'Smart Career Matching',
+    'Personalized recommendations based on your interests, strengths, and goals.',
+    '◎',
+  ],
+  [
+    'Personalized Roadmaps',
+    'Clear next steps with skills, milestones, and resources for your chosen direction.',
+    '↗',
+  ],
+  [
+    'Market Insights',
+    'Salary data, growth projections, and demand trends for the careers you explore.',
+    '⌁',
+  ],
+  [
+    'Career Library',
+    'Browse and compare careers across technology, business, healthcare, and creative fields.',
+    '▣',
+  ],
+  [
+    'Progress Tracking',
+    'Keep track of your development, milestones, and movement toward your career goals.',
+    '◫',
+  ],
+];
+
 const WhatYouGet: React.FC = () => {
   return (
-    <section id="features" className="py-24 lg:py-32 bg-surface-inset">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8">
-        <div className="text-center">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-accent mb-4">
+    <section
+      id="features"
+      className="
+        relative
+        py-24
+        lg:py-32
+        bg-white
+        overflow-hidden
+      "
+    >
+
+      <div
+        className="
+          absolute
+          left-0
+          top-1/3
+          w-80
+          h-80
+          rounded-full
+          bg-[#1EC957]/4
+          blur-3xl
+          pointer-events-none
+        "
+      />
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
+
+        <div className="max-w-3xl">
+
+          <div className="section-label text-[#148C48]">
             Features
-          </h2>
-          <h3 className="text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-4">
+          </div>
+
+          <h2
+            className="
+              mt-4
+              text-3xl
+              sm:text-4xl
+              lg:text-5xl
+              font-normal
+              tracking-[0.01em]
+              text-[#0B2023]
+              display-heading
+            "
+          >
             Everything you need to make a confident career decision
-          </h3>
-          <p className="text-lg text-ink-muted max-w-2xl mx-auto mb-16">
-            Not just recommendations — a complete system for career development.
+          </h2>
+
+          <p
+            className="
+              mt-4
+              text-base
+              sm:text-lg
+              text-[#52676A]
+              leading-7
+            "
+          >
+            Not just recommendations — a complete system for
+            discovering, comparing, and planning your next move.
           </p>
+
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {/* Feature 1 */}
-          <div className="bg-surface border border-border rounded-2xl p-7 hover:shadow-md transition-shadow duration-200 cursor-pointer">
-            <div className="w-11 h-11 rounded-xl bg-accent-surface flex items-center justify-center mb-5">
-              <svg xmlns="http://www.w3.org/2000/svg" className="text-accent w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 11l3 3L22 4" />
-                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-              </svg>
-            </div>
-            <h4 className="text-lg font-semibold text-ink mb-2">Cognitive Assessment</h4>
-            <p className="text-ink-muted text-sm leading-relaxed">
-              Scientifically-backed questions that map your natural strengths, thinking style, and personality traits.
-            </p>
-          </div>
 
-          {/* Feature 2 */}
-          <div className="bg-surface border border-border rounded-2xl p-7 hover:shadow-md transition-shadow duration-200 cursor-pointer">
-            <div className="w-11 h-11 rounded-xl bg-accent-surface flex items-center justify-center mb-5">
-              <svg xmlns="http://www.w3.org/2000/svg" className="text-accent w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <circle cx="12" cy="12" r="6" />
-                <circle cx="12" cy="12" r="2" />
-              </svg>
-            </div>
-            <h4 className="text-lg font-semibold text-ink mb-2">Smart Career Matching</h4>
-            <p className="text-ink-muted text-sm leading-relaxed">
-              Your profile is compared against real career data to find paths where you'd genuinely thrive.
-            </p>
-          </div>
+        <div
+          className="
+            mt-12
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-3
+            gap-5
+            lg:gap-6
+          "
+        >
 
-          {/* Feature 3 */}
-          <div className="bg-surface border border-border rounded-2xl p-7 hover:shadow-md transition-shadow duration-200 cursor-pointer">
-            <div className="w-11 h-11 rounded-xl bg-accent-surface flex items-center justify-center mb-5">
-              <svg xmlns="http://www.w3.org/2000/svg" className="text-accent w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 18v-6a9 9 0 0118 0v6" />
-                <path d="M21 19a2 2 0 01-2 2h-1c-1.1 0-2-.9-2-2v-3c0-1.1.9-2 2-2h3zM3 19a2 2 0 002 2h1c1.1 0 2-.9 2-2v-3c0-1.1-.9-2-2-2H3z" />
-                <path d="M12 9v2" />
-                <path d="M12 15v2" />
-              </svg>
-            </div>
-            <h4 className="text-lg font-semibold text-ink mb-2">Personalized Roadmaps</h4>
-            <p className="text-ink-muted text-sm leading-relaxed">
-              Step-by-step plans with specific skills, courses, and projects tailored to your target career.
-            </p>
-          </div>
+          {features.map(([title, description, icon], index) => (
+            <div
+              key={title}
+              className={`
+                glass-light
+                glass-hover
+                rounded-2xl
+                p-7
+                ${
+                  index === 0
+                    ? 'border-[#1EC957]/25'
+                    : ''
+                }
+              `}
+            >
 
-          {/* Feature 4 */}
-          <div className="bg-surface border border-border rounded-2xl p-7 hover:shadow-md transition-shadow duration-200 cursor-pointer">
-            <div className="w-11 h-11 rounded-xl bg-accent-surface flex items-center justify-center mb-5">
-              <svg xmlns="http://www.w3.org/2000/svg" className="text-accent w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                <polyline points="16 7 22 7 22 13" />
-              </svg>
-            </div>
-            <h4 className="text-lg font-semibold text-ink mb-2">Market Insights</h4>
-            <p className="text-ink-muted text-sm leading-relaxed">
-              Real salary data, growth projections, and demand trends for every career path we recommend.
-            </p>
-          </div>
+              <div className="icon-box mb-5 text-lg font-semibold">
+                {icon}
+              </div>
 
-          {/* Feature 5 */}
-          <div className="bg-surface border border-border rounded-2xl p-7 hover:shadow-md transition-shadow duration-200 cursor-pointer">
-            <div className="w-11 h-11 rounded-xl bg-accent-surface flex items-center justify-center mb-5">
-              <svg xmlns="http://www.w3.org/2000/svg" className="text-accent w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
-              </svg>
-            </div>
-            <h4 className="text-lg font-semibold text-ink mb-2">Career Library</h4>
-            <p className="text-ink-muted text-sm leading-relaxed">
-              Browse and save careers across industries. Compare requirements, salaries, and day-to-day responsibilities.
-            </p>
-          </div>
+              <h3
+                className="
+                  text-lg
+                  font-semibold
+                  text-[#0B2023]
+                "
+              >
+                {title}
+              </h3>
 
-          {/* Feature 6 */}
-          <div className="bg-surface border border-border rounded-2xl p-7 hover:shadow-md transition-shadow duration-200 cursor-pointer">
-            <div className="w-11 h-11 rounded-xl bg-accent-surface flex items-center justify-center mb-5">
-              <svg xmlns="http://www.w3.org/2000/svg" className="text-accent w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="20" x2="12" y2="10" />
-                <line x1="18" y1="20" x2="18" y2="4" />
-                <line x1="6" y1="20" x2="6" y2="16" />
-              </svg>
+              <p
+                className="
+                  mt-2.5
+                  text-sm
+                  text-[#52676A]
+                  leading-6
+                "
+              >
+                {description}
+              </p>
+
+              <div
+                className="
+                  mt-6
+                  h-px
+                  w-10
+                  bg-[#1EC957]/35
+                "
+              />
+
             </div>
-            <h4 className="text-lg font-semibold text-ink mb-2">Progress Tracking</h4>
-            <p className="text-ink-muted text-sm leading-relaxed">
-              Monitor your skill development, completed milestones, and how you're trending toward your career goals.
-            </p>
-          </div>
+          ))}
+
         </div>
+
       </div>
     </section>
   );
