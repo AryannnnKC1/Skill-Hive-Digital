@@ -1,15 +1,8 @@
-/**
- * useChat hook
- * Manages chat state, localStorage persistence, and Gemini API communication.
- */
-
 import { useState, useCallback, useEffect } from 'react';
 import {
   sendMessageToGemini,
   type GeminiMessage,
 } from '../services/gemini.service';
-
-// ── Types ──────────────────────────────────────────────────────────────────
 
 export interface ChatMessage {
   id: string;
@@ -27,8 +20,6 @@ export interface StudentContext {
 
 const STORAGE_KEY = 'skillhive-chat-history';
 const MAX_HISTORY = 50; // Keep last 50 messages in localStorage
-
-// ── Helpers ────────────────────────────────────────────────────────────────
 
 function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
@@ -60,8 +51,8 @@ function saveToStorage(messages: ChatMessage[]) {
 
 function toGeminiHistory(messages: ChatMessage[]): GeminiMessage[] {
   return messages
-    .filter((m) => !m.isError)
-    .map((m) => ({
+    .filter(m => !m.isError)
+    .map(m => ({
       role: m.role === 'user' ? 'user' : 'model',
       parts: [{ text: m.content }],
     }));
@@ -71,7 +62,8 @@ function buildStudentContextString(ctx?: StudentContext): string | undefined {
   if (!ctx) return undefined;
   const parts: string[] = [];
   if (ctx.name) parts.push(`Student Name: ${ctx.name}`);
-  if (ctx.assessmentData) parts.push(`Assessment Results: ${ctx.assessmentData}`);
+  if (ctx.assessmentData)
+    parts.push(`Assessment Results: ${ctx.assessmentData}`);
   if (ctx.savedCareers) parts.push(`Saved Careers: ${ctx.savedCareers}`);
   return parts.length > 0 ? parts.join('\n') : undefined;
 }
@@ -98,7 +90,7 @@ export function useChat(studentContext?: StudentContext) {
         timestamp: new Date(),
       };
 
-      setMessages((prev) => [...prev, userMessage]);
+      setMessages(prev => [...prev, userMessage]);
       setIsTyping(true);
 
       try {
@@ -115,7 +107,7 @@ export function useChat(studentContext?: StudentContext) {
           timestamp: new Date(),
         };
 
-        setMessages((prev) => [...prev, assistantMessage]);
+        setMessages(prev => [...prev, assistantMessage]);
       } catch (err) {
         const errorMessage: ChatMessage = {
           id: generateId(),
@@ -127,10 +119,9 @@ export function useChat(studentContext?: StudentContext) {
           timestamp: new Date(),
           isError: true,
         };
-        setMessages((prev) => [...prev, errorMessage]);
+        setMessages(prev => [...prev, errorMessage]);
       } finally {
         setIsTyping(false);
-        abortRef.current = null;
       }
     },
     [messages, isTyping, studentContext]
