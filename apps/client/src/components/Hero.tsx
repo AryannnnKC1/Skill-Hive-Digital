@@ -5,17 +5,16 @@ const Hero: React.FC = () => {
   return (
     <section className="pt-32 lg:pt-40 pb-20 lg:pb-28">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
-        
         <div className="flex flex-col items-center text-center">
           <img src="/logo.png" alt="Career Counselling Application Logo" className="h-20 w-auto object-contain mb-6" />
           <h2 className="text-sm font-semibold uppercase tracking-wider text-accent mb-6">
             Career Guidance, Reimagined
           </h2>
-          
+
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-ink">
             Find clarity in your career.<br />Not just another quiz.
           </h1>
-          
+
           <p className="text-lg lg:text-xl text-ink-muted max-w-2xl mx-auto mt-6 leading-relaxed">
             SkillHive maps your strengths, interests, and personality to real career paths — then gives you a concrete plan to get there.
           </p>
@@ -50,7 +49,7 @@ const Hero: React.FC = () => {
           <div className="mt-16 lg:mt-20 w-full max-w-3xl mx-auto">
             <div className="bg-surface-raised border border-border rounded-2xl shadow-lg p-6 text-left hover:shadow-xl transition-shadow duration-200">
               <h3 className="font-semibold text-lg text-ink mb-6">Your Career Matches</h3>
-              
+
               <div className="space-y-5">
                 <div>
                   <div className="flex justify-between text-sm font-medium mb-2">
@@ -85,7 +84,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
         </div>
-        
+
       </div>
     </section>
   );
