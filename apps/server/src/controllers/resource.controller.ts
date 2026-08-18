@@ -60,6 +60,117 @@ export const getResources = async (
   }
 }
 
+// Create a new resource (Admin only)
+export const createResource = async (
+  req: Request,
+  res: Response
+): Promise<Response | void> => {
+  try {
+    const { title, description, type, provider, url, difficulty, careerFields, skills, careerIds } = req.body;
+
+    if (!title || !description || !type || !provider || !url || !difficulty) {
+      return res.status(400).json({
+        message: 'Missing required fields: title, description, type, provider, url, difficulty',
+      });
+    }
+
+    const resource = await Resource.create({
+      title,
+      description,
+      type,
+      provider,
+      url,
+      difficulty,
+      careerFields: careerFields || [],
+      skills: skills || [],
+      careerIds: careerIds || [],
+      isActive: true,
+    });
+
+    return res.status(201).json({
+      resource,
+      message: 'Resource created successfully',
+    });
+  } catch (err: unknown) {
+    console.error(err);
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
+  }
+};
+
+// Update a resource (Admin only)
+export const updateResource = async (
+  req: Request,
+  res: Response
+): Promise<Response | void> => {
+  try {
+    const { id } = req.params;
+    const { title, description, type, provider, url, difficulty, careerFields, skills, careerIds, isActive } = req.body;
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        message: 'Invalid resource ID',
+      });
+    }
+
+    const resource = await Resource.findByIdAndUpdate(
+      id,
+      { title, description, type, provider, url, difficulty, careerFields, skills, careerIds, isActive },
+      { new: true, runValidators: true }
+    );
+
+    if (!resource) {
+      return res.status(404).json({
+        message: 'Resource not found',
+      });
+    }
+
+    return res.status(200).json({
+      resource,
+      message: 'Resource updated successfully',
+    });
+  } catch (err: unknown) {
+    console.error(err);
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
+  }
+};
+
+// Delete a resource (Admin only)
+export const deleteResource = async (
+  req: Request,
+  res: Response
+): Promise<Response | void> => {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        message: 'Invalid resource ID',
+      });
+    }
+
+    const resource = await Resource.findByIdAndDelete(id);
+
+    if (!resource) {
+      return res.status(404).json({
+        message: 'Resource not found',
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Resource deleted successfully',
+    });
+  } catch (err: unknown) {
+    console.error(err);
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
+  }
+};
+
 // Get one resource by ID
 export const getResourceById = async (
   req: Request,

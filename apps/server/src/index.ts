@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.route";
 import careerRoutes from "./routes/career.route";
 import assessmentRoutes from "./routes/assessment.route";
 import resourceRoutes from "./routes/resource.route";
+import adminRoutes from "./routes/admin.route";
 
 // Load .env from project root
 dotenv.config({
@@ -22,6 +23,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/careers", careerRoutes);
 app.use("/api/assessments", assessmentRoutes);
 app.use("/api/resources", resourceRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Error handling middleware
 app.use((err: any, _req: any, res: any, _next: any) => {

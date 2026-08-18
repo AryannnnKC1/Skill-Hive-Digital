@@ -42,8 +42,9 @@ test('registerController accepts name payloads and returns 201', async () => {
   );
 
   assert.equal(statusCalls[0], 201);
-  assert.equal(jsonCalls[0].message, 'User registered successfully');
-  assert.equal((jsonCalls[0] as any).user.email, 'jane@example.com');
+  const response = jsonCalls[0] as { message: string; user: { email: string } };
+  assert.equal(response.message, 'User registered successfully');
+  assert.equal(response.user.email, 'jane@example.com');
 });
 
 test.after(() => {
