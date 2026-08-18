@@ -594,6 +594,36 @@ export default function Dashboard() {
             </article>
           </div>
         </div>
+
+        {hasTakenAssessment && (
+          <section className='mt-10'>
+            <article className='card flex flex-col items-center justify-between gap-6 p-6 text-center sm:flex-row sm:text-left md:p-8'>
+              <div>
+                <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
+                  Assessment
+                </p>
+                <h2 className='mt-1 text-xl font-bold text-ink'>
+                  Want updated recommendations?
+                </h2>
+                <p className='mt-2 max-w-xl text-sm text-ink-muted'>
+                  Your interests and goals can change over time. Retake the
+                  assessment to refresh your career matches
+                  {submittedAt
+                    ? ` — last completed ${new Date(submittedAt).toLocaleDateString()}`
+                    : ''}
+                  .
+                </p>
+              </div>
+
+              <Link
+                to='/assessment'
+                className='inline-flex shrink-0 items-center justify-center rounded-lg border border-border bg-surface px-5 py-2.5 text-sm font-medium text-ink transition hover:bg-surface-inset'
+              >
+                Retake Assessment
+              </Link>
+            </article>
+          </section>
+        )}
       </div>
     </main>
   );
