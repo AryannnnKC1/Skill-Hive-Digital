@@ -226,7 +226,7 @@ function AssessmentPage() {
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
             </svg>
-            Back
+            Dashboard
           </Link>
 
           <div className="flex-1 min-w-0">

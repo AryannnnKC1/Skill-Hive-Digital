@@ -109,7 +109,8 @@ function LoginForm() {
     <div className="min-h-screen flex bg-surface">
       <section className="flex-1 flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:w-96 bg-surface-raised border border-border shadow-sm p-8 rounded-2xl">
-          <div className="mb-8">
+          <div className="mb-8 flex flex-col items-center sm:items-start">
+            <img src="/logo.png" alt="Career Counselling Application Logo" className="h-10 w-auto object-contain mb-4" />
             <span className="text-sm font-semibold tracking-wide text-accent uppercase flex items-center gap-2">
               SkillHive Digital
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />

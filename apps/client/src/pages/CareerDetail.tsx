@@ -1,161 +1,241 @@
-import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { fetchCareerById } from '../api'
-import type { Career } from '../types'
-import { SaveCareerButton } from '../components/SaveCareerButton'
-import { useSavedCareers } from '../hooks/useSavedCareers'
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { fetchCareerById } from '../api';
+import type { Career } from '../types';
+import { SaveCareerButton } from '../components/SaveCareerButton';
+import { useSavedCareers } from '../hooks/useSavedCareers';
 
 function CareerDetailPage() {
-  const { id } = useParams<{ id: string }>()
-  const [career, setCareer] = useState<Career | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const { isSaved, toggleSave } = useSavedCareers()
+  const { id } = useParams<{ id: string }>();
+  const [career, setCareer] = useState<Career | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const { isSaved, toggleSave } = useSavedCareers();
 
+  // Fetch career details when the component mounts or when the id changes
   useEffect(() => {
-    if (!id) return
-    let cancelled = false
+    if (!id) return;
+    let cancelled = false;
 
-    setLoading(true)
+    setLoading(true);
     fetchCareerById(id)
-      .then((data) => {
-        if (!cancelled) setCareer(data)
+      .then(data => {
+        if (!cancelled) setCareer(data);
       })
       .catch(() => {
-        if (!cancelled) setError('Career not found.')
+        if (!cancelled) setError('Career not found.');
       })
       .finally(() => {
-        if (!cancelled) setLoading(false)
-      })
+        if (!cancelled) setLoading(false);
+      });
 
     return () => {
-      cancelled = true
-    }
-  }, [id])
+      cancelled = true;
+    };
+  }, [id]);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-surface-inset flex items-center justify-center">
-        <div className="text-ink-muted font-medium flex items-center gap-2">
-          <svg className="animate-spin h-5 w-5 text-ink-subtle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      <div className='min-h-screen bg-surface-inset flex items-center justify-center'>
+        <div className='text-ink-muted font-medium flex items-center gap-2'>
+          <svg
+            className='animate-spin h-5 w-5 text-ink-subtle'
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+          >
+            <circle
+              className='opacity-25'
+              cx='12'
+              cy='12'
+              r='10'
+              stroke='currentColor'
+              strokeWidth='4'
+            ></circle>
+            <path
+              className='opacity-75'
+              fill='currentColor'
+              d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+            ></path>
           </svg>
           Loading...
         </div>
       </div>
-    )
+    );
   }
 
   if (error || !career) {
     return (
-      <div className="min-h-screen bg-surface-inset p-6">
-        <div className="max-w-3xl mx-auto mt-12 bg-surface-raised border border-border p-8 rounded-xl shadow-sm text-center">
-          <div className="text-ink font-medium mb-6">
+      <div className='min-h-screen bg-surface-inset p-6'>
+        <div className='max-w-3xl mx-auto mt-12 bg-surface-raised border border-border p-8 rounded-xl shadow-sm text-center'>
+          <div className='text-ink font-medium mb-6'>
             {error ?? 'Career not found.'}
           </div>
-          <Link to="/careers" className="text-sm font-medium text-accent hover:text-accent-hover transition-colors">
+          <Link
+            to='/careers'
+            className='text-sm font-medium text-accent hover:text-accent-hover transition-colors'
+          >
             &larr; Back to careers
           </Link>
         </div>
       </div>
-    )
+    );
   }
 
   return (
-    <div className="min-h-screen bg-surface-inset pb-12">
+    <div className='min-h-screen bg-surface-inset pb-12'>
       {/* Top Navigation Bar */}
-      <nav className="bg-surface-raised border-b border-border sticky top-0 z-50 px-6 py-4 mb-8 shadow-sm">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Link to="/careers" className="text-sm font-medium text-accent hover:text-accent-hover transition-colors flex items-center gap-2">
+      <nav className='bg-surface-raised border-b border-border sticky top-0 z-50 px-6 py-4 mb-8 shadow-sm'>
+        <div className='max-w-4xl mx-auto flex items-center justify-between'>
+          <Link
+            to='/careers'
+            className='text-sm font-medium text-accent hover:text-accent-hover transition-colors flex items-center gap-2'
+          >
             <span>&larr;</span> Back to careers
+          </Link>
+          <Link
+            to='/dashboard'
+            className='text-sm font-medium text-accent hover:text-accent-hover transition-colors flex items-center gap-2'
+          >
+            Dashboard <span>&rarr;</span>
           </Link>
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto px-4">
+      <div className='max-w-4xl mx-auto px-4'>
         {/* Header Section */}
-        <div className="bg-surface-raised border border-border p-8 rounded-xl mb-8 shadow-sm">
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+        <div className='bg-surface-raised border border-border p-8 rounded-xl mb-8 shadow-sm'>
+          <div className='flex flex-col md:flex-row md:items-start justify-between gap-6'>
             <div>
-              <span className="inline-block px-3 py-1 rounded-full bg-surface-inset border border-border text-ink-muted text-xs font-medium uppercase tracking-wider mb-4">
+              <span className='inline-block px-3 py-1 rounded-full bg-surface-inset border border-border text-ink-muted text-xs font-medium uppercase tracking-wider mb-4'>
                 {career.category}
               </span>
-              <h1 className="text-3xl md:text-4xl font-bold text-ink mb-4">
+              <h1 className='text-3xl md:text-4xl font-bold text-ink mb-4'>
                 {career.title}
               </h1>
             </div>
-            <div className="shrink-0">
-              <div className="flex flex-col items-stretch gap-3">
-                <Link
-                  to={`/careers/${career._id}/roadmap`}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-cta-hover"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                  </svg>
-                  View Career Roadmap
-                </Link>
-                <SaveCareerButton career={career} isSaved={isSaved(career._id)} onToggle={toggleSave} />
-              </div>
+            <div className='shrink-0'>
+              <SaveCareerButton
+                career={career}
+                isSaved={isSaved(career._id)}
+                onToggle={toggleSave}
+              />
             </div>
           </div>
-          <p className="text-lg text-ink-muted leading-relaxed max-w-3xl mt-4">
+          <p className='text-lg text-ink-muted leading-relaxed max-w-3xl mt-4'>
             {career.description}
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-surface-raised border border-border p-6 rounded-xl shadow-sm">
-            <div className="flex items-center gap-2 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-ink-subtle w-4 h-4">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
+          <div className='bg-surface-raised border border-border p-6 rounded-xl shadow-sm'>
+            <div className='flex items-center gap-2 mb-2'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                className='text-ink-subtle w-4 h-4'
+              >
+                <line x1='12' y1='1' x2='12' y2='23'></line>
+                <path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'></path>
               </svg>
-              <p className="text-xs font-medium uppercase tracking-wider text-ink-muted">Salary</p>
+              <p className='text-xs font-medium uppercase tracking-wider text-ink-muted'>
+                Salary
+              </p>
             </div>
-            <p className="text-xl font-bold text-ink">{career.averageSalary}</p>
+            <p className='text-xl font-bold text-ink'>{career.averageSalary}</p>
           </div>
-          <div className="bg-surface-raised border border-border p-6 rounded-xl shadow-sm">
-            <div className="flex items-center gap-2 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-ink-subtle w-4 h-4">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          <div className='bg-surface-raised border border-border p-6 rounded-xl shadow-sm'>
+            <div className='flex items-center gap-2 mb-2'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                className='text-ink-subtle w-4 h-4'
+              >
+                <path d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'></path>
+                <path d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'></path>
               </svg>
-              <p className="text-xs font-medium uppercase tracking-wider text-ink-muted">Education</p>
+              <p className='text-xs font-medium uppercase tracking-wider text-ink-muted'>
+                Education
+              </p>
             </div>
-            <p className="text-lg font-bold text-ink">{career.educationRequired}</p>
+            <p className='text-lg font-bold text-ink'>
+              {career.educationRequired}
+            </p>
           </div>
-          <div className="bg-surface-raised border border-border p-6 rounded-xl shadow-sm">
-            <div className="flex items-center gap-2 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-ink-subtle w-4 h-4">
-                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                <polyline points="16 7 22 7 22 13"></polyline>
+          <div className='bg-surface-raised border border-border p-6 rounded-xl shadow-sm'>
+            <div className='flex items-center gap-2 mb-2'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                className='text-ink-subtle w-4 h-4'
+              >
+                <polyline points='22 7 13.5 15.5 8.5 10.5 2 17'></polyline>
+                <polyline points='16 7 22 7 22 13'></polyline>
               </svg>
-              <p className="text-xs font-medium uppercase tracking-wider text-ink-muted">Growth</p>
+              <p className='text-xs font-medium uppercase tracking-wider text-ink-muted'>
+                Growth
+              </p>
             </div>
-            <p className="text-lg font-bold text-ink">{career.growthOutlook}</p>
+            <p className='text-lg font-bold text-ink'>{career.growthOutlook}</p>
           </div>
-          <div className="bg-surface-raised border border-border p-6 rounded-xl shadow-sm">
-            <div className="flex items-center gap-2 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-ink-subtle w-4 h-4">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          <div className='bg-surface-raised border border-border p-6 rounded-xl shadow-sm'>
+            <div className='flex items-center gap-2 mb-2'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                className='text-ink-subtle w-4 h-4'
+              >
+                <rect x='2' y='7' width='20' height='14' rx='2' ry='2'></rect>
+                <path d='M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16'></path>
               </svg>
-              <p className="text-xs font-medium uppercase tracking-wider text-ink-muted">Environment</p>
+              <p className='text-xs font-medium uppercase tracking-wider text-ink-muted'>
+                Environment
+              </p>
             </div>
-            <p className="text-lg font-bold text-ink">{career.workEnvironment}</p>
+            <p className='text-lg font-bold text-ink'>
+              {career.workEnvironment}
+            </p>
           </div>
         </div>
 
         {/* Skills Section */}
-        <div className="bg-surface-raised border border-border p-8 rounded-xl shadow-sm">
-          <h2 className="text-xl font-bold text-ink mb-6">Required Skills</h2>
-          <div className="flex flex-wrap gap-3">
-            {career.requiredSkills.map((skill) => (
-              <span key={skill} className="px-4 py-2 rounded-full bg-surface-inset border border-border text-sm font-medium text-ink-muted">
+        <div className='bg-surface-raised border border-border p-8 rounded-xl shadow-sm'>
+          <h2 className='text-xl font-bold text-ink mb-6'>Required Skills</h2>
+          <div className='flex flex-wrap gap-3'>
+            {career.requiredSkills.map(skill => (
+              <span
+                key={skill}
+                className='px-4 py-2 rounded-full bg-surface-inset border border-border text-sm font-medium text-ink-muted'
+              >
                 {skill}
               </span>
             ))}
@@ -163,7 +243,7 @@ function CareerDetailPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CareerDetailPage
+export default CareerDetailPage;
