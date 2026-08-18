@@ -9,9 +9,14 @@ import type {
   SavedCareerRecord,
 } from './types'
 
-export const API_BASE = import.meta.env.VITE_API_URL || 'https://skill-hive-digital.onrender.com/api'
+const rawBase = import.meta.env.VITE_API_URL || 'https://skill-hive-digital.onrender.com'
 
-// 
+function ensureApiBase(base: string) {
+  const trimmed = base.replace(/\/+$/, '')
+  return trimmed.endsWith('/api') ? trimmed : `${trimmed}/api`
+}
+
+export const API_BASE = ensureApiBase(rawBase)
 
 const api = axios.create({
   baseURL: API_BASE,

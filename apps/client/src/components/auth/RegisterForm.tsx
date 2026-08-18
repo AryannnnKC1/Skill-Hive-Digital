@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AuthHero from './AuthHero';
-import { API_BASE } from '../../api';
+import api, { API_BASE } from '../../api';
 
 const passwordPolicy = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
 
@@ -101,7 +101,7 @@ function RegisterForm() {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(`${API_BASE}/auth/register`, {
+      const response = await api.post(`/auth/register`, {
         fullName: formData.name.trim(),
         email: formData.email.trim(),
         password: formData.password,
@@ -110,7 +110,7 @@ function RegisterForm() {
       const token = response.data.token;
       if (token) {
         localStorage.setItem('token', token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       }
 
       setServerMessage(response.data.message || 'Account created successfully!');

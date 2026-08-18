@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AuthHero from './AuthHero';
-import { API_BASE } from '../../api';
+import api, { API_BASE } from '../../api';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -72,7 +72,7 @@ function LoginForm() {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(`${API_BASE}/auth/login`, {
+      const response = await api.post(`/auth/login`, {
         email: formData.email.trim(),
         password: formData.password,
       });
@@ -80,7 +80,7 @@ function LoginForm() {
       const token = response.data.token;
       if (token) {
         localStorage.setItem('token', token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       }
 
       if (rememberMe) {
