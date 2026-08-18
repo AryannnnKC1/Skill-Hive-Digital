@@ -113,7 +113,7 @@ function LoginForm() {
   return (
     <div className='min-h-screen flex bg-surface'>
       <section className='flex-1 flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24'>
-        <div className='mx-auto w-full max-w-sm lg:w-96 bg-surface-raised border border-border shadow-sm p-8 rounded-2xl'>
+        <div className='mx-auto w-full max-w-sm lg:w-96 card p-8 transition-all duration-300'>
           <div className='mb-8 flex flex-col items-center sm:items-start'>
             <img
               src='/logo.png'
@@ -126,7 +126,7 @@ function LoginForm() {
             </span>
           </div>
 
-          <h1 className='text-3xl font-bold text-ink mb-2'>Welcome Back</h1>
+          <h1 className='text-3xl font-display text-ink mb-2'>Welcome Back</h1>
           <p className='text-sm text-ink-muted mb-8'>
             Sign in to your account to continue your career journey.
           </p>

@@ -7,8 +7,8 @@
 
   /* Ink (text) */
   --color-ink: #0f172a;
-  --color-ink-muted: #475569;
-  --color-ink-subtle: #94a3b8;
+  --color-ink-muted: #334155;
+  --color-ink-subtle: #64748b;
 
   /* Surfaces */
   --color-surface: #ffffff;
@@ -19,21 +19,25 @@
   --color-border: #e2e8f0;
   --color-border-strong: #cbd5e1;
 
-  /* Accent – Trust Blue */
-  --color-accent: #1e40af;
-  --color-accent-hover: #1d4ed8;
-  --color-accent-light: #3b82f6;
-  --color-accent-surface: #eff6ff;
-  --color-accent-border: #bfdbfe;
+  /* Accent – Deep Teal */
+  --color-accent: #0f766e;
+  --color-accent-hover: #115e59;
+  --color-accent-light: #14b8a6;
+  --color-accent-surface: #f0fdfa;
+  --color-accent-border: #99f6e4;
 
-  /* CTA – Growth Emerald */
+  /* CTA – Emerald Green */
   --color-cta: #059669;
   --color-cta-hover: #047857;
   --color-cta-surface: #ecfdf5;
 
   /* Shadow */
-  --shadow-card: 0 1px 3px 0 rgba(0,0,0,0.07), 0 1px 2px -1px rgba(0,0,0,0.07);
-  --shadow-card-hover: 0 4px 12px 0 rgba(0,0,0,0.10), 0 2px 6px -2px rgba(0,0,0,0.08);
+  --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-card-hover: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.05);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
 }
 
 /* ─── Dark Mode Tokens ────────────────────────────────────────── */
@@ -41,39 +45,44 @@
   color-scheme: dark;
 
   /* Ink */
-  --color-ink: #f1f5f9;
-  --color-ink-muted: #94a3b8;
-  --color-ink-subtle: #64748b;
+  --color-ink: #f8fafc;
+  --color-ink-muted: #cbd5e1;
+  --color-ink-subtle: #94a3b8;
 
   /* Surfaces */
-  --color-surface: #0f172a;
-  --color-surface-raised: #1e293b;
-  --color-surface-inset: #162032;
+  --color-surface: #020617;
+  --color-surface-raised: #0f172a;
+  --color-surface-inset: #1e293b;
 
   /* Borders */
   --color-border: #1e293b;
   --color-border-strong: #334155;
 
-  /* Accent – Trust Blue (dark-adjusted) */
-  --color-accent: #60a5fa;
-  --color-accent-hover: #93c5fd;
-  --color-accent-light: #3b82f6;
-  --color-accent-surface: rgba(59, 130, 246, 0.12);
-  --color-accent-border: rgba(59, 130, 246, 0.25);
+  /* Accent – Deep Teal (dark-adjusted) */
+  --color-accent: #2dd4bf;
+  --color-accent-hover: #5eead4;
+  --color-accent-light: #14b8a6;
+  --color-accent-surface: rgba(20, 184, 166, 0.12);
+  --color-accent-border: rgba(20, 184, 166, 0.25);
 
-  /* CTA – Growth Emerald (dark-adjusted) */
+  /* CTA – Emerald Green (dark-adjusted) */
   --color-cta: #34d399;
   --color-cta-hover: #6ee7b7;
   --color-cta-surface: rgba(52, 211, 153, 0.12);
 
   /* Shadow */
-  --shadow-card: 0 1px 3px 0 rgba(0,0,0,0.3), 0 1px 2px -1px rgba(0,0,0,0.25);
-  --shadow-card-hover: 0 4px 14px 0 rgba(0,0,0,0.4), 0 2px 8px -2px rgba(0,0,0,0.3);
+  --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.25);
+  --shadow-card-hover: 0 10px 15px -3px rgba(0,0,0,0.4), 0 4px 6px -4px rgba(0,0,0,0.3);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(15, 23, 42, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
 }
 
 /* ─── Tailwind Theme ──────────────────────────────────────────── */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Black Ops One", ui-sans-serif, system-ui, sans-serif;
 
   /* Map CSS vars as Tailwind theme tokens */
   --color-ink: var(--color-ink);
@@ -118,18 +127,41 @@
   }
 
   body {
-    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans);
     background-color: var(--color-surface);
     color: var(--color-ink);
     line-height: 1.6;
+    background-image: 
+      linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at top right, var(--color-accent-surface) 0%, transparent 40%),
+                radial-gradient(circle at bottom left, var(--color-cta-surface) 0%, transparent 40%),
+                transparent;
+    z-index: -1;
+    pointer-events: none;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans);
     font-weight: 700;
     letter-spacing: -0.025em;
     line-height: 1.15;
     color: var(--color-ink);
+  }
+
+  h1, .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
   /* Reset mark element – neutralise browser default yellow */
@@ -197,9 +229,9 @@
 /* ─── Utilities ───────────────────────────────────────────────── */
 @layer utilities {
   .section-label {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-accent);
   }
@@ -222,14 +254,24 @@
 
   /* Card component with semantic variables */
   .card {
-    background-color: var(--color-surface-raised);
-    border: 1px solid var(--color-border);
-    border-radius: 0.75rem;
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
     box-shadow: var(--shadow-card);
   }
 
   .card:hover {
     box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-accent-border);
+  }
+
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
   }
 
   /* Theme switcher dropdown animation */

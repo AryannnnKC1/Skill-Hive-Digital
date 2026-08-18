@@ -146,7 +146,7 @@ export default function CareerSearch() {
 
       <div className='max-w-6xl mx-auto px-4 py-8'>
         <div className="mb-10 text-center">
-          <h1 className='text-4xl md:text-5xl font-bold text-ink mb-4'>
+          <h1 className='ext-3xl sm:text-4xl font-display text-transparent bg-clip-text bg-linear-to-r from-accent to-cta mb-4'>
             Explore Careers
           </h1>
           <p className='text-lg text-ink-muted max-w-2xl mx-auto'>

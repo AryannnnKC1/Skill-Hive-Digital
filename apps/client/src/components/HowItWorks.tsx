@@ -5,10 +5,10 @@ const HowItWorks: React.FC = () => {
     <section id="how-it-works" className="py-24 lg:py-32 bg-surface">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         <div className="text-center">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-accent mb-4">
+          <h2 className="section-label mb-4">
             How It Works
           </h2>
-          <h3 className="text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-4">
+          <h3 className="text-3xl sm:text-4xl font-display text-ink tracking-tight mb-4">
             Three steps to career clarity
           </h3>
           <p className="text-lg text-ink-muted max-w-2xl mx-auto mb-16">

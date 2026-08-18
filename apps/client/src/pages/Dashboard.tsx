@@ -147,7 +147,7 @@ export default function Dashboard() {
     <main className='min-h-screen bg-surface-inset text-ink' spellCheck={false}>
       <div className='mx-auto max-w-7xl px-4 py-8 md:px-8 lg:py-12'>
         {/* Header / Hero */}
-        <header className='mb-8 flex flex-col justify-between gap-6 bg-surface-raised border border-border p-8 rounded-2xl shadow-sm md:flex-row md:items-center'>
+        <header className='mb-8 flex flex-col justify-between gap-6 card p-8 md:flex-row md:items-center'>
           <div>
             <div className='flex items-center gap-3 mb-2'>
               <img
@@ -161,7 +161,7 @@ export default function Dashboard() {
               </p>
             </div>
 
-            <h1 className='mt-2 text-3xl font-bold text-ink sm:text-4xl'>
+            <h1 className='mt-2 text-3xl font-display text-ink sm:text-4xl'>
               Welcome Back, {userName}
             </h1>
 
@@ -253,7 +253,7 @@ export default function Dashboard() {
           {metrics.map(metric => (
             <article
               key={metric.label}
-              className='flex flex-col justify-between bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'
+              className='flex flex-col justify-between card p-6 transition-all duration-300'
             >
               <div className='flex items-center justify-between'>
                 <div className='flex h-10 w-10 items-center justify-center rounded-lg bg-surface-inset'>
@@ -283,7 +283,7 @@ export default function Dashboard() {
           {/* Main Content */}
           <div className='lg:col-span-2 space-y-8'>
             {/* Progress Panel */}
-            <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 md:p-8'>
+            <article className='card p-6 md:p-8 transition-all duration-300'>
               <div className='flex items-center justify-between'>
                 <div>
                   <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
@@ -323,7 +323,7 @@ export default function Dashboard() {
             </article>
 
             {/* Recommended Careers Panel */}
-            <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 md:p-8'>
+            <article className='card p-6 md:p-8 transition-all duration-300'>
               <div className='flex items-center justify-between mb-6'>
                 <div>
                   <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
@@ -415,7 +415,7 @@ export default function Dashboard() {
           {/* Sidebar */}
           <div className='space-y-8'>
             {/* My Profile Card */}
-            <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'>
+            <article className='card p-6 transition-all duration-300'>
               <h3 className='text-lg font-bold text-ink mb-4 flex items-center gap-2'>
                 <svg
                   className='w-5 h-5 text-accent'
@@ -466,7 +466,7 @@ export default function Dashboard() {
             />
 
             {/* Tasks Panel */}
-            <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'>
+            <article className='card p-6 transition-all duration-300'>
               <div className='mb-6'>
                 <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
                   Upcoming tasks
@@ -529,7 +529,7 @@ export default function Dashboard() {
             </article>
 
             {/* Recent Activity Panel */}
-            <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'>
+            <article className='card p-6 transition-all duration-300'>
               <div className='mb-6'>
                 <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
                   Recent activity

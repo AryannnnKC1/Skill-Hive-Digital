@@ -5,7 +5,7 @@ const CTA: React.FC = () => {
   return (
     <section className="bg-surface py-24 lg:py-32">
       <div className="max-w-3xl mx-auto px-6 sm:px-8 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-4">
+        <h2 className="text-3xl sm:text-4xl font-display text-ink tracking-tight mb-4">
           Ready to find your career path?
         </h2>
         <p className="text-lg text-ink-muted mb-8">

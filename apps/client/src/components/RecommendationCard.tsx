@@ -10,7 +10,7 @@ export function RecommendationCard({ result, rank }: RecommendationCardProps) {
   const { career, matchPercentage } = result;
 
   return (
-    <article className='group flex flex-col justify-between rounded-xl bg-surface-raised border border-border p-6 shadow-sm transition-shadow duration-200 hover:shadow-md'>
+    <article className='group flex flex-col justify-between card p-6 transition-all duration-300'>
       <div className='w-full flex-grow flex flex-col'>
         <div className='flex items-start justify-between gap-4 mb-4'>
           <div className='flex items-center gap-3'>

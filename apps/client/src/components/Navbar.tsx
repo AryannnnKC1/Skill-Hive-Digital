@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeSwitcher } from './ThemeSwitcher';
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -26,16 +25,16 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-surface/95 backdrop-blur-sm border-b border-border shadow-sm'
+            ? 'glass shadow-[0_1px_0_var(--color-border)]'
             : 'bg-transparent'
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 font-bold text-lg text-ink cursor-pointer">
+            <Link to="/" className="flex items-center gap-2 font-display text-lg text-ink cursor-pointer">
               <img src="/logo.png" alt="Career Counselling Application Logo" className="h-8 w-auto object-contain" />
               SkillHive
             </Link>
@@ -45,48 +44,46 @@ const Navbar: React.FC = () => {
               <a
                 href="#how-it-works"
                 onClick={(e) => handleNavClick(e, 'how-it-works')}
-                className="text-ink-muted hover:text-ink transition-colors duration-200 font-medium cursor-pointer text-sm"
+                className="text-ink-subtle hover:text-accent transition-colors duration-200 font-medium cursor-pointer text-sm"
               >
                 How It Works
               </a>
               <a
                 href="#features"
                 onClick={(e) => handleNavClick(e, 'features')}
-                className="text-ink-muted hover:text-ink transition-colors duration-200 font-medium cursor-pointer text-sm"
+                className="text-ink-subtle hover:text-accent transition-colors duration-200 font-medium cursor-pointer text-sm"
               >
                 Features
               </a>
               <a
                 href="#careers"
                 onClick={(e) => handleNavClick(e, 'careers')}
-                className="text-ink-muted hover:text-ink transition-colors duration-200 font-medium cursor-pointer text-sm"
+                className="text-ink-subtle hover:text-accent transition-colors duration-200 font-medium cursor-pointer text-sm"
               >
                 Careers
               </a>
             </div>
 
-            {/* Desktop Right side CTA + Theme Switcher */}
+            {/* Desktop Right side CTA */}
             <div className="hidden md:flex items-center gap-3">
-              <ThemeSwitcher />
               <Link
                 to="/login"
-                className="text-ink-muted hover:text-ink transition-colors duration-200 font-medium cursor-pointer text-sm"
+                className="text-ink-subtle hover:text-ink transition-colors duration-200 font-medium cursor-pointer text-sm"
               >
                 Log in
               </Link>
               <Link
                 to="/register"
-                className="bg-ink text-surface px-5 py-2 rounded-lg hover:opacity-90 transition-all duration-200 font-medium cursor-pointer text-sm"
+                className="bg-accent text-white px-5 py-2 rounded-lg hover:bg-accent-hover transition-all duration-200 font-semibold cursor-pointer text-sm shadow-sm"
               >
                 Get Started
               </Link>
             </div>
 
-            {/* Mobile right: theme switcher + hamburger */}
+            {/* Mobile right: hamburger */}
             <div className="md:hidden flex items-center gap-2">
-              <ThemeSwitcher />
               <button
-                className="p-2 text-ink-muted hover:text-ink focus:outline-none cursor-pointer"
+                className="p-2 text-ink-subtle hover:text-ink focus:outline-none cursor-pointer"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle menu"
               >
@@ -120,21 +117,21 @@ const Navbar: React.FC = () => {
             <a
               href="#how-it-works"
               onClick={(e) => handleNavClick(e, 'how-it-works')}
-              className="text-2xl font-semibold text-ink hover:text-ink-muted transition-colors duration-200 cursor-pointer"
+              className="text-2xl font-semibold text-ink hover:text-accent transition-colors duration-200 cursor-pointer"
             >
               How It Works
             </a>
             <a
               href="#features"
               onClick={(e) => handleNavClick(e, 'features')}
-              className="text-2xl font-semibold text-ink hover:text-ink-muted transition-colors duration-200 cursor-pointer"
+              className="text-2xl font-semibold text-ink hover:text-accent transition-colors duration-200 cursor-pointer"
             >
               Features
             </a>
             <a
               href="#careers"
               onClick={(e) => handleNavClick(e, 'careers')}
-              className="text-2xl font-semibold text-ink hover:text-ink-muted transition-colors duration-200 cursor-pointer"
+              className="text-2xl font-semibold text-ink hover:text-accent transition-colors duration-200 cursor-pointer"
             >
               Careers
             </a>
@@ -142,14 +139,14 @@ const Navbar: React.FC = () => {
             <Link
               to="/login"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-xl font-medium text-ink-muted hover:text-ink transition-colors duration-200 cursor-pointer"
+              className="text-xl font-medium text-ink-subtle hover:text-ink transition-colors duration-200 cursor-pointer"
             >
               Log in
             </Link>
             <Link
               to="/register"
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-4 bg-ink text-surface px-6 py-3 rounded-xl text-lg font-medium hover:opacity-90 transition-all duration-200 cursor-pointer"
+              className="mt-4 bg-accent text-white px-6 py-3 rounded-xl text-lg font-semibold hover:bg-accent-hover transition-all duration-200 cursor-pointer"
             >
               Get Started
             </Link>

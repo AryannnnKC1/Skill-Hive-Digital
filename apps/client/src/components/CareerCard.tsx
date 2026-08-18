@@ -10,7 +10,7 @@ type CareerCardProps = {
 
 export function CareerCard({ career, isSaved, onToggleSave }: CareerCardProps) {
   return (
-    <article className="bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
+    <article className="card p-6 flex flex-col h-full transition-all duration-300">
       <div className="mb-4 flex items-start justify-between gap-3">
         <div>
           <p className="text-xs font-medium uppercase tracking-wider text-ink-subtle mb-1">{career.category}</p>

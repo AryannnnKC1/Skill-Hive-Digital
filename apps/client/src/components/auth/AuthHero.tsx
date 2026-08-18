@@ -13,7 +13,7 @@ const AuthHero: React.FC = () => {
       />
 
       <div className="relative z-10 max-w-lg">
-        <h2 className="text-3xl font-bold text-ink mb-6">
+        <h2 className="text-3xl font-display text-ink mb-6">
           Navigate Your Professional Path
         </h2>
         <p className="text-lg text-ink-muted mb-10 leading-relaxed">
