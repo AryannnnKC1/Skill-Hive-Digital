@@ -7,8 +7,10 @@ import Profile from './pages/Profile';
 import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
 import CareerDetail from './pages/CareerDetail';
+import CareerRoadmap from './pages/CareerRoadmap';
 import Assessment from './pages/Assessment';
 import Recommendations from './pages/Recommendations';
+import Resources from './pages/Resources';
 
 function App() {
   return ( 
@@ -19,6 +21,8 @@ function App() {
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/careers' element={<CareerSearch />} />
       <Route path='/careers/:id' element={<CareerDetail />} />
+      <Route path='/careers/:id/roadmap' element={<CareerRoadmap />} />
+      <Route path='/resources' element={<Resources />} />
       <Route path='/saved-careers' element={<SavedCareers />} />
       <Route path='/profile' element={<Profile />} />
       <Route path='/assessment' element={<Assessment />} />

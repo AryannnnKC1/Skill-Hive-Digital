@@ -1,5 +1,7 @@
-import 'dotenv/config';
+import dotenv from "dotenv";
 import mongoose from 'mongoose';
+
+dotenv.config({ path: "../../.env" });
 import CareerAssessment from './models/CareerAssessment';
 
 const assessment = {
