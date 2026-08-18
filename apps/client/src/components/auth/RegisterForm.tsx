@@ -114,6 +114,7 @@ function RegisterForm() {
       const token = response.data.token;
       if (token) {
         localStorage.setItem('token', token);
+        localStorage.setItem('userName', response.data.user.name);
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       }
 

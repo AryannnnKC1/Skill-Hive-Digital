@@ -3,16 +3,20 @@ import { DashboardSavedCareersWidget } from '../components/DashboardSavedCareers
 import { SaveCareerButton } from '../components/SaveCareerButton';
 import { useSavedCareers } from '../hooks/useSavedCareers';
 import { useRecommendations } from '../hooks/useRecommendations';
+import { useProfile } from '../hooks/useProfile';
 
 export default function Dashboard() {
   const location = useLocation();
-  const userName = location.state?.userName ?? 'there';
+  const storedUserName = localStorage.getItem('userName');
+  const userName = location.state?.userName ?? storedUserName ?? 'there';
+
   const {
     savedCareers,
     loading: loadingSaved,
     isSaved,
     toggleSave,
   } = useSavedCareers();
+
   const {
     recommendations,
     loading: loadingRecs,
@@ -20,9 +24,25 @@ export default function Dashboard() {
     submittedAt,
   } = useRecommendations();
 
-  if (!location.state?.userName) {
+  const { profile } = useProfile();
+  const hasSession = Boolean(
+    location.state?.userName || storedUserName || localStorage.getItem('token')
+  );
+
+  if (!hasSession) {
     return <Navigate to='/register' replace />;
   }
+
+  // Generate initials from full name
+  const getInitials = (name: string) => {
+    return name
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(part => part.charAt(0).toUpperCase())
+      .join('');
+  };
 
   // Derive dynamic metrics
   const assessmentScoreStr = hasTakenAssessment ? '100%' : '0%';
@@ -135,25 +155,31 @@ export default function Dashboard() {
                 alt='Career Counselling Application Logo'
                 className='h-8 w-auto object-contain'
               />
+
               <p className='text-sm font-semibold tracking-wide text-ink-subtle uppercase'>
                 SkillHive Digital
               </p>
             </div>
+
             <h1 className='mt-2 text-3xl font-bold text-ink sm:text-4xl'>
               Welcome Back, {userName}
             </h1>
+
             <p className='mt-2 text-lg text-ink-muted'>
               Continue building your future today.
             </p>
           </div>
+
           <div className='flex items-center gap-4'>
+            {/* Export Button */}
             <button
               onClick={async () => {
                 try {
                   const mod = (await import('../utils/exportPdf')) as any;
-                  // support named export, default export, or module itself
+
                   const generate = (mod &&
                     (mod.generatePdf ?? mod.default ?? mod)) as any;
+
                   if (typeof generate === 'function') {
                     generate(
                       userName,
@@ -166,7 +192,7 @@ export default function Dashboard() {
                       'exportPdf module does not export a function',
                       mod
                     );
-                    // give quick user feedback
+
                     alert(
                       'Export failed: export function not found. See console for details.'
                     );
@@ -197,33 +223,9 @@ export default function Dashboard() {
               Export
             </button>
 
-            <button
-              className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-lg font-bold text-ink-muted transition hover:bg-border cursor-pointer'
-              aria-label='Profile'
-            >
-              {userName.slice(0, 1).toUpperCase()}
-            </button>
-
-            <button
-              className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-ink-muted transition hover:bg-border cursor-pointer'
-              aria-label='Highlights'
-            >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='20'
-                height='20'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-              >
-                <polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'></polygon>
-              </svg>
-            </button>
-
-            <button
+            {/* Settings Button */}
+            <Link
+              to='/profile'
               className='flex h-12 w-12 items-center justify-center rounded-full bg-surface-inset text-ink-muted transition hover:bg-border cursor-pointer'
               aria-label='Settings'
             >
@@ -239,9 +241,10 @@ export default function Dashboard() {
                 strokeLinejoin='round'
               >
                 <circle cx='12' cy='12' r='3'></circle>
+
                 <path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z'></path>
               </svg>
-            </button>
+            </Link>
           </div>
         </header>
 
@@ -256,14 +259,17 @@ export default function Dashboard() {
                 <div className='flex h-10 w-10 items-center justify-center rounded-lg bg-surface-inset'>
                   {metric.icon}
                 </div>
+
                 <span className='text-xs font-medium text-ink-muted bg-surface-inset px-2 py-1 rounded-md border border-border'>
                   {metric.trend}
                 </span>
               </div>
+
               <div className='mt-6'>
                 <p className='text-sm font-medium text-ink-muted'>
                   {metric.label}
                 </p>
+
                 <p className='mt-1 text-3xl font-bold text-ink'>
                   {metric.value}
                 </p>
@@ -274,6 +280,7 @@ export default function Dashboard() {
 
         {/* Main Grid */}
         <div className='grid gap-8 lg:grid-cols-3'>
+          {/* Main Content */}
           <div className='lg:col-span-2 space-y-8'>
             {/* Progress Panel */}
             <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 md:p-8'>
@@ -282,25 +289,32 @@ export default function Dashboard() {
                   <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
                     Career Progress
                   </p>
+
                   <h2 className='mt-1 text-xl font-bold text-ink'>
                     Career Readiness
                   </h2>
                 </div>
+
                 <span className='inline-flex items-center rounded-full bg-surface-inset px-3 py-1 text-sm font-medium text-ink-muted border border-border'>
                   {hasTakenAssessment ? '100% Complete' : '50% Complete'}
                 </span>
               </div>
+
               <p className='mt-4 text-sm text-ink-muted leading-relaxed max-w-2xl'>
                 {hasTakenAssessment
                   ? 'Your profile is fully ready! Explore your tailored recommendations below.'
                   : 'Your profile is nearly ready. Finish the assessment to unlock stronger recommendations.'}
               </p>
+
               <div className='mt-6'>
                 <div className='h-3 w-full overflow-hidden rounded-full bg-surface-inset'>
                   <div
-                    className={`h-full rounded-full bg-cta transition-all duration-1000 ${hasTakenAssessment ? 'w-full' : 'w-1/2'}`}
+                    className={`h-full rounded-full bg-cta transition-all duration-1000 ${
+                      hasTakenAssessment ? 'w-full' : 'w-1/2'
+                    }`}
                   />
                 </div>
+
                 <div className='mt-2 flex justify-between text-xs font-medium text-ink-muted'>
                   <span>Profile readiness</span>
                   <span>{hasTakenAssessment ? '100%' : '50%'}</span>
@@ -315,10 +329,12 @@ export default function Dashboard() {
                   <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
                     Recommended Careers
                   </p>
+
                   <h2 className='mt-1 text-xl font-bold text-ink'>
                     Matches for your journey
                   </h2>
                 </div>
+
                 <Link
                   to='/recommendations'
                   className='text-sm font-medium text-accent hover:text-accent-hover transition-colors'
@@ -340,12 +356,15 @@ export default function Dashboard() {
                         <p className='text-xs font-medium text-ink-muted'>
                           {career.category}
                         </p>
+
                         <h3 className='text-lg font-bold text-ink transition-colors group-hover:text-accent'>
                           {career.title}
                         </h3>
+
                         <p className='mt-1 text-sm text-ink-muted line-clamp-2'>
                           {career.description}
                         </p>
+
                         <div className='mt-3 flex flex-wrap gap-2'>
                           {career.requiredSkills.slice(0, 3).map(skill => (
                             <span
@@ -357,6 +376,7 @@ export default function Dashboard() {
                           ))}
                         </div>
                       </div>
+
                       <div className='flex items-center gap-3 sm:flex-col sm:items-end'>
                         <Link
                           to={`/careers/${career._id}`}
@@ -364,6 +384,7 @@ export default function Dashboard() {
                         >
                           View path
                         </Link>
+
                         <SaveCareerButton
                           career={career}
                           isSaved={isSaved(career._id)}
@@ -378,6 +399,7 @@ export default function Dashboard() {
                       Take the assessment to see your personalized
                       recommendations.
                     </p>
+
                     <Link
                       to='/assessment'
                       className='inline-flex items-center justify-center rounded-lg bg-cta px-4 py-2 text-sm font-medium text-white transition hover:bg-cta-hover'
@@ -390,7 +412,52 @@ export default function Dashboard() {
             </article>
           </div>
 
+          {/* Sidebar */}
           <div className='space-y-8'>
+            {/* My Profile Card */}
+            <article className='bg-surface-raised border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200'>
+              <h3 className='text-lg font-bold text-ink mb-4 flex items-center gap-2'>
+                <svg
+                  className='w-5 h-5 text-accent'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                  />
+                </svg>
+                My Profile
+              </h3>
+
+              <div className='flex items-center gap-4'>
+                <div className='flex h-16 w-16 items-center justify-center rounded-full bg-surface-inset text-3xl font-bold text-ink-muted border-2 border-border'>
+                  {profile?.fullName ? getInitials(profile.fullName) : '??'}
+                </div>
+
+                <div>
+                  <p className='text-ink font-medium'>
+                    {profile?.fullName || 'Complete your profile'}
+                  </p>
+
+                  <p className='text-ink-muted text-sm mt-1'>
+                    {profile?.institution || 'Add your education details'}
+                  </p>
+                </div>
+              </div>
+
+              <Link
+                to='/profile'
+                className='mt-4 inline-block text-sm font-medium text-accent hover:text-accent-hover'
+              >
+                Edit Profile →
+              </Link>
+            </article>
+
+            {/* Saved Careers */}
             <DashboardSavedCareersWidget
               savedCareers={savedCareers}
               loading={loadingSaved}
@@ -404,23 +471,28 @@ export default function Dashboard() {
                 <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
                   Upcoming tasks
                 </p>
+
                 <h2 className='mt-1 text-lg font-bold text-ink'>
                   Keep momentum going
                 </h2>
               </div>
+
               <div className='space-y-4'>
                 {!hasTakenAssessment && (
                   <div className='flex items-start gap-4'>
                     <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-inset text-xs font-bold text-ink-muted'>
                       01
                     </div>
+
                     <div>
                       <h3 className='text-sm font-bold text-ink'>
                         Complete Assessment
                       </h3>
+
                       <p className='mt-1 text-xs text-ink-muted'>
                         Unlock a sharper career match score.
                       </p>
+
                       <Link
                         to='/assessment'
                         className='mt-2 inline-block text-xs font-medium text-accent hover:text-accent-hover'
@@ -430,17 +502,21 @@ export default function Dashboard() {
                     </div>
                   </div>
                 )}
+
                 <div className='flex items-start gap-4'>
                   <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-surface-inset text-xs font-bold text-ink-muted'>
                     02
                   </div>
+
                   <div>
                     <h3 className='text-sm font-bold text-ink'>
                       Explore Careers
                     </h3>
+
                     <p className='mt-1 text-xs text-ink-muted'>
                       Review paths aligned to your strengths.
                     </p>
+
                     <Link
                       to='/careers'
                       className='mt-2 inline-block text-xs font-medium text-accent hover:text-accent-hover'
@@ -458,10 +534,12 @@ export default function Dashboard() {
                 <p className='text-xs font-semibold uppercase tracking-wider text-ink-subtle'>
                   Recent activity
                 </p>
+
                 <h2 className='mt-1 text-lg font-bold text-ink'>
                   Latest progress
                 </h2>
               </div>
+
               <div className='space-y-6'>
                 {[
                   {
@@ -469,6 +547,7 @@ export default function Dashboard() {
                     note: 'New dynamic layout loaded',
                     time: 'Just now',
                   },
+
                   hasTakenAssessment
                     ? {
                         title: 'Assessment Completed',
@@ -478,6 +557,7 @@ export default function Dashboard() {
                           : 'Recently',
                       }
                     : null,
+
                   {
                     title: 'Profile Created',
                     note: 'Welcome to SkillHive Digital',
@@ -490,16 +570,20 @@ export default function Dashboard() {
                       {idx !== arr.length - 1 && (
                         <div className='absolute left-3 top-6 h-full w-[1px] bg-border' />
                       )}
+
                       <div className='relative mt-1 h-6 w-6 shrink-0 rounded-full bg-surface-inset flex items-center justify-center border border-border'>
                         <div className='h-2 w-2 rounded-full bg-ink-subtle' />
                       </div>
+
                       <div>
                         <h3 className='text-sm font-bold text-ink'>
                           {item!.title}
                         </h3>
+
                         <p className='mt-0.5 text-xs text-ink-muted'>
                           {item!.note}
                         </p>
+
                         <span className='mt-1 block text-xs font-medium text-ink-subtle'>
                           {item!.time}
                         </span>
