@@ -46,7 +46,7 @@ function LoginForm() {
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
       valid = false;
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(formData.email.trim())) {
       newErrors.email = 'Please enter a valid email address';
       valid = false;
     }
