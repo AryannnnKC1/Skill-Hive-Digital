@@ -50,7 +50,30 @@ export const updateProfile = async (
 ): Promise<void> => {
   try {
     const userId = req.user!.userId;
-    const updates = req.body;
+    const payload = req.body as Record<string, unknown>;
+    const allowedFields = [
+      'fullName',
+      'phone',
+      'dateOfBirth',
+      'gender',
+      'avatar',
+      'bio',
+      'educationLevel',
+      'institution',
+      'major',
+      'graduationYear',
+      'skills',
+      'careerGoal',
+      'preferredIndustry',
+    ] as const;
+    const updates: Record<string, string> = {};
+
+    for (const field of allowedFields) {
+      const value = payload[field];
+      if (typeof value === 'string') {
+        updates[field] = value.trim();
+      }
+    }
 
     // --- Server-side validation ---
     const errors: Record<string, string> = {};
@@ -75,11 +98,6 @@ export const updateProfile = async (
       res.status(400).json({ message: 'Validation failed', errors });
       return;
     }
-
-    // Prevent changing email or userId via the profile endpoint
-    delete updates.email;
-    delete updates.userId;
-    delete updates._id;
 
     let profile = await StudentProfile.findOneAndUpdate(
       { userId },
