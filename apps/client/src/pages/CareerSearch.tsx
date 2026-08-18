@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import axios from 'axios';
+
 import type { Career } from '../types';
 import { useSavedCareers } from '../hooks/useSavedCareers';
 import { SaveCareerButton } from '../components/SaveCareerButton';
-import { API_BASE as API } from '../api';
+import api from '../api';
 import { Link } from 'react-router-dom';
 
 interface Suggestion {
@@ -36,8 +36,8 @@ export default function CareerSearch() {
   const { isSaved, toggleSave, statusMessage, clearStatus } = useSavedCareers();
 
   useEffect(() => {
-    axios
-      .get<{ categories: string[] }>(`${API}/careers/categories`)
+    api
+      .get<{ categories: string[] }>('/careers/categories')
       .then(res => setCategories(res.data.categories))
       .catch(() => {});
   }, []);
@@ -67,10 +67,10 @@ export default function CareerSearch() {
         };
         params.sort = sortMap[searchSort] || 'name_asc';
 
-        const res = await axios.get<{
+        const res = await api.get<{
           careers: Career[];
           pagination: Pagination;
-        }>(`${API}/careers/search`, { params });
+        }>('/careers/search', { params });
         setCareers(res.data.careers);
         setPagination(res.data.pagination);
       } catch {
@@ -96,8 +96,8 @@ export default function CareerSearch() {
     if (value.trim().length >= 1) {
       debounceRef.current = setTimeout(async () => {
         try {
-          const res = await axios.get<{ suggestions: Suggestion[] }>(
-            `${API}/careers/suggestions`,
+          const res = await api.get<{ suggestions: Suggestion[] }>(
+            '/careers/suggestions',
             { params: { q: value } }
           );
           setSuggestions(res.data.suggestions);

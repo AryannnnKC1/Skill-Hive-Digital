@@ -9,7 +9,8 @@ import type {
   SavedCareerRecord,
 } from './types'
 
-export const API_BASE = import.meta.env.VITE_API_URL || 'https://skill-hive-digital.onrender.com/api'
+const rawBaseUrl = import.meta.env.VITE_API_URL || 'https://skill-hive-digital.onrender.com/api'
+export const API_BASE = rawBaseUrl.replace(/\/+$/, '')
 
 // 
 
