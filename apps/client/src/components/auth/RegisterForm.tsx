@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import AuthHero from './AuthHero';
 import { API_BASE } from '../../api';
 
@@ -325,9 +325,9 @@ function RegisterForm() {
 
           <p className="mt-8 text-center text-sm text-ink-muted">
             Already have an account?{' '}
-            <a href="/login" className="font-medium text-accent hover:text-accent-hover transition-colors duration-200">
+            <Link to="/login" className="font-medium text-accent hover:text-accent-hover transition-colors duration-200">
               Login
-            </a>
+            </Link>
           </p>
         </div>
       </section>
