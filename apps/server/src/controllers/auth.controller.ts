@@ -8,7 +8,12 @@ export const registerController = async (
   res: Response
 ): Promise<Response | void> => {
   try {
-    const { fullName, email, password } = req.body;
+    const rawBody = req.body ?? {};
+    const fullName = String(rawBody.fullName ?? rawBody.name ?? '').trim();
+    const email = String(rawBody.email ?? '')
+      .trim()
+      .toLowerCase();
+    const password = String(rawBody.password ?? '');
 
     if (!fullName || !email || !password) {
       return res.status(400).json({ message: 'All fields are required' });
