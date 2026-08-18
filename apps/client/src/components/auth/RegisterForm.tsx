@@ -56,15 +56,19 @@ function RegisterForm() {
 
     let valid = true;
 
-    if (!formData.name.trim()) {
+    const trimmedName = formData.name.trim();
+    if (!trimmedName) {
       newErrors.name = 'Full name is required';
+      valid = false;
+    } else if (!/^[A-Za-z\s]+$/.test(trimmedName)) {
+      newErrors.name = 'Full name can only contain letters and spaces';
       valid = false;
     }
 
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
       valid = false;
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(formData.email.trim())) {
       newErrors.email = 'Please enter a valid email address';
       valid = false;
     }
@@ -110,6 +114,7 @@ function RegisterForm() {
       const token = response.data.token;
       if (token) {
         localStorage.setItem('token', token);
+        localStorage.setItem('userName', response.data.user.name);
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       }
 

@@ -11,24 +11,27 @@ import CareerRoadmap from './pages/CareerRoadmap';
 import Assessment from './pages/Assessment';
 import Recommendations from './pages/Recommendations';
 import Resources from './pages/Resources';
+import { ChatBotProvider } from './context/ChatBotProvider';
 
 function App() {
-  return ( 
-    <Routes>
-      <Route path='/' element={<LandingPage />} />
-      <Route path='/register' element={<Register />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/dashboard' element={<Dashboard />} />
-      <Route path='/careers' element={<CareerSearch />} />
-      <Route path='/careers/:id' element={<CareerDetail />} />
-      <Route path='/careers/:id/roadmap' element={<CareerRoadmap />} />
-      <Route path='/resources' element={<Resources />} />
-      <Route path='/saved-careers' element={<SavedCareers />} />
-      <Route path='/profile' element={<Profile />} />
-      <Route path='/assessment' element={<Assessment />} />
-      <Route path='/recommendations' element={<Recommendations />} />
-      <Route path='*' element={<Navigate to='/' replace />} />
-    </Routes>
+  return (
+    <ChatBotProvider>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/careers' element={<CareerSearch />} />
+        <Route path='/careers/:id' element={<CareerDetail />} />
+        <Route path='/careers/:id/roadmap' element={<CareerRoadmap />} />
+        <Route path='/resources' element={<Resources />} />
+        <Route path='/saved-careers' element={<SavedCareers />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/assessment' element={<Assessment />} />
+        <Route path='/recommendations' element={<Recommendations />} />
+        <Route path='*' element={<Navigate to='/' replace />} />
+      </Routes>
+    </ChatBotProvider>
   );
 }
 

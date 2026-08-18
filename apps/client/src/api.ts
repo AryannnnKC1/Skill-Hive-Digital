@@ -122,4 +122,37 @@ export async function fetchAssessmentStatus(): Promise<{
   return response.data;
 }
 
+// ── Profile ──────────────────────────────────────────────────────────
+
+export interface ProfileData {
+  _id?: string;
+  userId?: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  dateOfBirth: string;
+  gender: string;
+  avatar: string;
+  bio: string;
+  educationLevel: string;
+  institution: string;
+  major: string;
+  graduationYear: string;
+  skills: string;
+  careerGoal: string;
+  preferredIndustry: string;
+}
+
+export async function fetchProfile(): Promise<ProfileData> {
+  const response = await api.get<{ profile: ProfileData }>('/profile');
+  return response.data.profile;
+}
+
+export async function updateProfile(
+  data: Partial<ProfileData>
+): Promise<ProfileData> {
+  const response = await api.put<{ profile: ProfileData }>('/profile', data);
+  return response.data.profile;
+}
+
 export default api;

@@ -19,6 +19,28 @@ export const registerController = async (
       return res.status(400).json({ message: 'All fields are required' });
     }
 
+    // Validate fullName: letters and spaces only
+    if (!/^[A-Za-z\s]+$/.test(fullName)) {
+      return res.status(400).json({
+        message: 'Full name can only contain letters and spaces',
+      });
+    }
+
+    // Validate email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      return res.status(400).json({
+        message: 'Please enter a valid email address',
+      });
+    }
+
+    // Validate password policy: min 8 chars, 1 uppercase, 1 digit, 1 special char
+    if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/.test(password)) {
+      return res.status(400).json({
+        message:
+          'Password must be at least 8 characters and include 1 uppercase letter, 1 number, and 1 special character (@#$%^&+=!)',
+      });
+    }
+
     // check if user already exists
 
     const existingUser = await User.findOne({ email });
