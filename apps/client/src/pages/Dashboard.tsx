@@ -1,4 +1,4 @@
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { DashboardSavedCareersWidget } from '../components/DashboardSavedCareersWidget';
 import { SaveCareerButton } from '../components/SaveCareerButton';
 import { useSavedCareers } from '../hooks/useSavedCareers';
@@ -6,10 +6,6 @@ import { useRecommendations } from '../hooks/useRecommendations';
 import { useProfile } from '../hooks/useProfile';
 
 export default function Dashboard() {
-  const location = useLocation();
-  const storedUserName = localStorage.getItem('userName');
-  const userName = location.state?.userName ?? storedUserName ?? 'there';
-
   const {
     savedCareers,
     loading: loadingSaved,
@@ -24,14 +20,17 @@ export default function Dashboard() {
     submittedAt,
   } = useRecommendations();
 
-  const { profile } = useProfile();
-  const hasSession = Boolean(
-    location.state?.userName || storedUserName || localStorage.getItem('token')
-  );
+  const { profile, loading: profileLoading } = useProfile();
 
-  if (!hasSession) {
-    return <Navigate to='/register' replace />;
+  if (profileLoading) {
+    return <main className='min-h-screen bg-surface-inset' />;
   }
+
+  if (!profile.userId) {
+    return <Navigate to='/login' replace />;
+  }
+
+  const userName = profile.fullName || 'there';
 
   // Generate initials from full name
   const getInitials = (name: string) => {

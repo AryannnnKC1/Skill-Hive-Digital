@@ -4,13 +4,22 @@ import type { RecommendationResult } from '../types';
 type RecommendationCardProps = {
   result: RecommendationResult;
   rank: number;
+  featured?: boolean;
 };
 
-export function RecommendationCard({ result, rank }: RecommendationCardProps) {
-  const { career, matchPercentage } = result;
+export function RecommendationCard({
+  result,
+  rank,
+  featured = false,
+}: RecommendationCardProps) {
+  const { career, matchPercentage, score, maxScore } = result;
 
   return (
-    <article className='group flex flex-col justify-between card p-6 transition-all duration-300'>
+    <article
+      className={`group flex flex-col justify-between card p-6 transition-all duration-300 ${
+        featured ? 'ring-1 ring-accent-border' : ''
+      }`}
+    >
       <div className='w-full flex-grow flex flex-col'>
         <div className='flex items-start justify-between gap-4 mb-4'>
           <div className='flex items-center gap-3'>
@@ -28,10 +37,9 @@ export function RecommendationCard({ result, rank }: RecommendationCardProps) {
           </div>
         </div>
         
-        {/* Match progress bar */}
         <div className="mb-4">
           <div className="flex justify-between text-sm mb-1.5">
-            <span className="font-medium text-ink-muted">Match Score</span>
+            <span className="font-medium text-ink-muted">Compatibility</span>
             <span className="font-bold text-ink">{matchPercentage}%</span>
           </div>
           <div className="h-2 w-full rounded-full bg-surface-inset overflow-hidden">
@@ -40,6 +48,9 @@ export function RecommendationCard({ result, rank }: RecommendationCardProps) {
               style={{ width: `${matchPercentage}%` }}
             />
           </div>
+          <p className='mt-2 text-xs text-ink-subtle'>
+            {score}/{maxScore} field points from your answers
+          </p>
         </div>
 
         <p className='mb-6 line-clamp-3 text-sm text-ink-muted flex-grow'>

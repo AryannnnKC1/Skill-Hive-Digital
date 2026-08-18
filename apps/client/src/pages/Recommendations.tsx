@@ -20,6 +20,8 @@ function BackButton() {
 export default function RecommendationsPage() {
   const {
     recommendations,
+    topRecommendations,
+    rankedCategoryResults,
     submittedAt,
     topCategories,
     loading,
@@ -27,12 +29,15 @@ export default function RecommendationsPage() {
     hasTakenAssessment,
   } = useRecommendations();
 
+  const topMatch = recommendations[0] ?? null;
+
   return (
     <div className='min-h-screen bg-surface-inset text-ink-muted'>
       <div className='mx-auto max-w-5xl px-4 py-8 md:px-6 lg:py-12'>
         <div className='mb-6'>
           <BackButton />
         </div>
+
         <div className='mb-10 rounded-xl bg-surface-raised border border-border p-8 shadow-sm md:p-10'>
           <div className='flex flex-col gap-6 md:flex-row md:items-end md:justify-between'>
             <div className='max-w-2xl'>
@@ -40,9 +45,9 @@ export default function RecommendationsPage() {
                 Your Personalized Recommendations
               </h1>
               <p className='mt-3 text-base text-ink-muted'>
-                Based on your assessment, we've identified the strongest career
-                paths for you. Review your matches and explore the details of
-                each role.
+                Based on your assessment responses, we calculated how closely
+                your answers align with each career field and ranked the best
+                matches for you.
               </p>
             </div>
             <div className='shrink-0'>
@@ -56,7 +61,6 @@ export default function RecommendationsPage() {
           </div>
         </div>
 
-        {/* Content Section */}
         {loading ? (
           <div className='grid gap-6 sm:grid-cols-2'>
             {Array.from({ length: 4 }).map((_, index) => (
@@ -133,8 +137,53 @@ export default function RecommendationsPage() {
             </Link>
           </div>
         ) : (
-          <div className='space-y-6'>
-            <div className='rounded-xl bg-surface-raised border border-border p-6 shadow-sm md:p-8'>
+          <div className='space-y-8'>
+            {topMatch && (
+              <section className='rounded-2xl border border-accent-border bg-accent-surface p-6 shadow-sm md:p-8'>
+                <div className='flex flex-col gap-6 md:flex-row md:items-center md:justify-between'>
+                  <div className='max-w-2xl'>
+                    <p className='text-xs font-semibold uppercase tracking-wider text-accent'>
+                      Top Career Match
+                    </p>
+                    <h2 className='mt-2 text-3xl font-bold text-ink'>
+                      {topMatch.career.title}
+                    </h2>
+                    <p className='mt-3 text-sm leading-relaxed text-ink-muted'>
+                      {topMatch.career.description}
+                    </p>
+                    <p className='mt-4 text-sm text-ink-muted'>
+                      Compatibility is based on how your selected answers
+                      matched the scoring profile for{' '}
+                      <span className='font-medium text-ink'>
+                        {topMatch.category}
+                      </span>
+                      . You scored{' '}
+                      <span className='font-medium text-ink'>
+                        {topMatch.score} out of {topMatch.maxScore}
+                      </span>{' '}
+                      points across the assessment.
+                    </p>
+                  </div>
+
+                  <div className='shrink-0 rounded-2xl border border-accent-border bg-surface px-6 py-5 text-center'>
+                    <p className='text-sm font-medium text-ink-muted'>
+                      Compatibility
+                    </p>
+                    <p className='mt-1 text-5xl font-bold text-accent'>
+                      {topMatch.matchPercentage}%
+                    </p>
+                    <Link
+                      to={`/careers/${topMatch.career._id}`}
+                      className='mt-4 inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition hover:bg-accent-hover'
+                    >
+                      View Career Details
+                    </Link>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            <section className='rounded-xl bg-surface-raised border border-border p-6 shadow-sm md:p-8'>
               <div className='flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between'>
                 <div>
                   <h2 className='text-xl font-bold text-ink'>
@@ -142,21 +191,11 @@ export default function RecommendationsPage() {
                   </h2>
                   <p className='mt-2 max-w-3xl text-sm text-ink-muted'>
                     {topCategories.length
-                      ? `Your responses show the strongest alignment with ${topCategories.join(' and ')}.`
-                      : 'Your responses did not strongly favor a single field, so the list below keeps the options broader.'}{' '}
-                    {recommendations.length > 0 && (
-                      <span className='block mt-1'>
-                        Your top match is{' '}
-                        <span className='font-medium text-ink'>
-                          {recommendations[0].career.title}
-                        </span>{' '}
-                        at{' '}
-                        <span className='font-medium text-accent'>
-                          {recommendations[0].matchPercentage}%
-                        </span>
-                        .
-                      </span>
-                    )}
+                      ? `Your strongest field alignment is with ${topCategories.join(' and ')}.`
+                      : 'Your responses did not strongly favor a single field.'}{' '}
+                    Each percentage compares your total score in a field against
+                    the maximum score you could have earned from the assessment
+                    questions.
                   </p>
                 </div>
                 {submittedAt && (
@@ -172,7 +211,30 @@ export default function RecommendationsPage() {
                   </div>
                 )}
               </div>
-            </div>
+
+              {rankedCategoryResults.length > 0 && (
+                <div className='mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3'>
+                  {rankedCategoryResults.slice(0, 6).map(result => (
+                    <div
+                      key={result.category}
+                      className='rounded-lg border border-border bg-surface px-4 py-3'
+                    >
+                      <div className='flex items-center justify-between gap-3'>
+                        <p className='text-sm font-medium text-ink'>
+                          {result.category}
+                        </p>
+                        <span className='text-sm font-bold text-accent'>
+                          {result.percentage}%
+                        </span>
+                      </div>
+                      <p className='mt-1 text-xs text-ink-muted'>
+                        {result.score}/{result.maxScore} points
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
 
             {recommendations.length === 0 ? (
               <div className='rounded-xl border border-border bg-surface-raised p-12 text-center shadow-sm'>
@@ -193,15 +255,52 @@ export default function RecommendationsPage() {
                 </div>
               </div>
             ) : (
-              <div className='grid gap-6 md:grid-cols-2'>
-                {recommendations.map((result, index) => (
-                  <RecommendationCard
-                    key={result.career._id}
-                    result={result}
-                    rank={index + 1}
-                  />
-                ))}
-              </div>
+              <>
+                <section>
+                  <div className='mb-4'>
+                    <h2 className='text-xl font-bold text-ink'>
+                      Top 3 Career Matches
+                    </h2>
+                    <p className='mt-1 text-sm text-ink-muted'>
+                      These careers belong to the fields that best matched your
+                      assessment responses.
+                    </p>
+                  </div>
+                  <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
+                    {topRecommendations.map(result => (
+                      <RecommendationCard
+                        key={result.career._id}
+                        result={result}
+                        rank={result.rank}
+                        featured={result.rank === 1}
+                      />
+                    ))}
+                  </div>
+                </section>
+
+                {recommendations.length > 3 && (
+                  <section>
+                    <div className='mb-4'>
+                      <h2 className='text-xl font-bold text-ink'>
+                        More Matches
+                      </h2>
+                      <p className='mt-1 text-sm text-ink-muted'>
+                        Additional careers ranked by compatibility with your
+                        responses.
+                      </p>
+                    </div>
+                    <div className='grid gap-6 md:grid-cols-2'>
+                      {recommendations.slice(3).map(result => (
+                        <RecommendationCard
+                          key={result.career._id}
+                          result={result}
+                          rank={result.rank}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                )}
+              </>
             )}
           </div>
         )}

@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { fetchLatestRecommendations } from "../api";
-import type { RecommendationResult } from "../types";
+import type { CategoryResult, RecommendationResult } from "../types";
 
 export function useRecommendations() {
   const [recommendations, setRecommendations] = useState<RecommendationResult[]>([]);
+  const [rankedCategoryResults, setRankedCategoryResults] = useState<CategoryResult[]>([]);
   const [submittedAt, setSubmittedAt] = useState<string | null>(null);
   const [categoryScores, setCategoryScores] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
@@ -15,6 +16,7 @@ export function useRecommendations() {
   const refresh = useCallback(async () => {
     if (!token) {
       setRecommendations([]);
+      setRankedCategoryResults([]);
       setSubmittedAt(null);
       setLoading(false);
       return;
@@ -26,6 +28,7 @@ export function useRecommendations() {
     try {
       const data = await fetchLatestRecommendations();
       setRecommendations(data.recommendations);
+      setRankedCategoryResults(data.rankedCategoryResults);
       setSubmittedAt(data.submittedAt);
       setCategoryScores(data.categoryScores);
     } catch (err) {
@@ -41,13 +44,16 @@ export function useRecommendations() {
     void refresh();
   }, [refresh]);
 
-  const topCategories = Object.entries(categoryScores)
-    .sort((a, b) => b[1] - a[1])
+  const topCategories = rankedCategoryResults
     .slice(0, 2)
-    .map(([category]) => category);
+    .map((result) => result.category);
+
+  const topRecommendations = recommendations.slice(0, 3);
 
   return {
     recommendations,
+    topRecommendations,
+    rankedCategoryResults,
     submittedAt,
     categoryScores,
     topCategories,

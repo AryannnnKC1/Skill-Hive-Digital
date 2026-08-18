@@ -72,12 +72,26 @@ export type AssessmentAnswer = {
 export type RecommendationResult = {
   career: Career;
   matchPercentage: number;
+  score: number;
+  maxScore: number;
+  rank: number;
+  category: string;
+};
+
+export type CategoryResult = {
+  category: string;
+  score: number;
+  maxScore: number;
+  percentage: number;
+  rank: number;
 };
 
 export type RecommendationsResponse = {
   submittedAt: string | null;
   recommendations: RecommendationResult[];
+  rankedCategoryResults: CategoryResult[];
   categoryScores: Record<string, number>;
+  maxCategoryScores: Record<string, number>;
   skillScores: Record<string, number>;
 };
 
