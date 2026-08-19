@@ -80,8 +80,6 @@ function WarningIcon({ className = 'w-5 h-5' }: { className?: string }) {
   );
 }
 
-
-/* ── Confirmation screen ─────────────────────────────────────── */
 function ConfirmationScreen({
   onViewResults,
   onGoToDashboard,
