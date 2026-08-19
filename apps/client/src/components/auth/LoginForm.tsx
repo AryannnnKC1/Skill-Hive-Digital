@@ -116,13 +116,11 @@ function LoginForm() {
         <div className='mx-auto w-full max-w-sm lg:w-96 card p-8 transition-all duration-300'>
           <div className='mb-8 flex flex-col items-center sm:items-start'>
             <img
-              src='/logo.png'
+              src='/logogsh.png'
               alt='Career Counselling Application Logo'
-              className='h-10 w-auto object-contain mb-4'
+              className='h-40 w-auto object-contain -mb-8 -ml-10'
             />
             <span className='text-sm font-semibold tracking-wide text-accent uppercase flex items-center gap-2'>
-              SkillHive Digital
-              <span className='h-1.5 w-1.5 rounded-full bg-accent' />
             </span>
           </div>
 

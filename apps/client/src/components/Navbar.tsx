@@ -35,8 +35,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 font-display text-lg text-ink cursor-pointer">
-              <img src="/logo.png" alt="Career Counselling Application Logo" className="h-8 w-auto object-contain" />
-              SkillHive
+              <img src="/logogsh.png" alt="Career Counselling Application Logo" className="h-25 w-auto object-contain" />
             </Link>
 
             {/* Desktop Navigation Links */}

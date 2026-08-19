@@ -150,14 +150,11 @@ export default function Dashboard() {
           <div>
             <div className='flex items-center gap-3 mb-2'>
               <img
-                src='/logo.png'
+                src='/logogsh.png'
                 alt='Career Counselling Application Logo'
-                className='h-8 w-auto object-contain'
+                className='h-30 w-auto object-contain -ml-8 -mb-6 -mt-4'
               />
 
-              <p className='text-sm font-semibold tracking-wide text-ink-subtle uppercase'>
-                SkillHive Digital
-              </p>
             </div>
 
             <h1 className='mt-2 text-3xl font-display text-ink sm:text-4xl'>
