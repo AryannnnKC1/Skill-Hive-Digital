@@ -44,7 +44,7 @@ export function Sidebar() {
       <div className="flex h-16 shrink-0 items-center px-6 border-b border-gray-200">
         <div className="flex items-center gap-2 font-bold text-xl tracking-tight text-teal-700">
           <div className="bg-teal-600 rounded-md p-1.5">
-            <LayoutDashboard className="w-5 h-5 text-white" />
+            {/* <LayoutDashboard className="w-5 h-5 text-white" /> */}
           </div>
           CareerAdmin
         </div>
